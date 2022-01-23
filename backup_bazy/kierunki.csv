@@ -1,0 +1,62 @@
+1;Wydzia≥ Architektury;Architektura;225;W1;ARCH
+2;Wydzia≥ Architektury;Gospodarka Przestrzenna;75;W1;GP
+3;Wydzia≥ Budownictwa Lπdowego i Wodnego;Budownictwo;540;W2;BUD
+4;Wydzia≥ Chemiczny;Biotechnologia;220;W3;BT
+5;Wydzia≥ Chemiczny;Chemia i Analityka Przemys≥owa;100;W3;CHA
+6;Wydzia≥ Chemiczny;Chemia i Inøynieria Materia≥Ûw;100;W3;CIM
+7;Wydzia≥ Chemiczny;Inøynieria Chemiczna i Procesowa;100;W3;ICH
+8;Wydzia≥ Chemiczny;Technologia Chemiczna;150;W3;TCH
+9;Wydzia≥ Informatyki i Telekomunikacji;CyberbezpieczeÒstwo;180;W4;CBE
+10;Wydzia≥ Informatyki i Telekomunikacji;Informatyka Algorytmiczna;80;W4;INA
+11;Wydzia≥ Informatyki i Telekomunikacji;Informatyka Stosowana;150;W4;IST
+12;Wydzia≥ Informatyki i Telekomunikacji;Informatyka Stosowana w j.Angielskim;30;W4;ISTAN
+13;Wydzia≥ Informatyki i Telekomunikacji;Informatyka Techniczna;220;W4;ITE
+14;Wydzia≥ Informatyki i Telekomunikacji;Informatyczne Systemy Automatyki;140;W4;ISA
+15;Wydzia≥ Informatyki i Telekomunikacji;Inøynieria SystemÛw;90;W4;INS
+16;Wydzia≥ Informatyki i Telekomunikacji;Teleinformatyka;120;W4;TIN
+17;Wydzia≥ Informatyki i Telekomunikacji;Telekomunikacja;130;W4;TEL
+18;Wydzia≥ Elektryczny;Elektrotechnika;135;W5;ETK
+19;Wydzia≥ Elektryczny;Automatyka Przemys≥owa;135;W5;APR
+20;Wydzia≥ Elektryczny;ElektromobilnoúÊ;90;W5;EMB
+21;Wydzia≥ Elektryczny;Elektromechatronika;60;W5;EMR
+22;Wydzia≥ Geoinøynierii, GÛrnictwa i Geologii;Geodezja i Kartografia;80;W6;GiK
+23;Wydzia≥ Geoinøynierii, GÛrnictwa i Geologii;GÛrnictwo i Geologia;125;W6;GiG
+24;Wydzia≥ Geoinøynierii, GÛrnictwa i Geologii;Geoinformatyka;60;W6;GIT
+25;Wydzia≥ Inøynierii årodowiska;Inøynieria årodowiska;210;W7;ISS
+26;Wydzia≥ Inøynierii årodowiska;Technologie Ochrony årodowiska;120;W7;TOS
+27;Wydzia≥ Zarzπdzania;Zarzπdzanie;120;W8;ZZZ
+28;Wydzia≥ Zarzπdzania;Zarzπdzanie w j.Angielskim;30;W8;ZZZAN
+29;Wydzia≥ Zarzπdzania;Inøynieria Zarzπdzania;120;W8;IZ
+30;Wydzia≥ Mechaniczno-Energetyczny;Energetyka;120;W9;ENG
+31;Wydzia≥ Mechaniczno-Energetyczny;Lotnictwo i Kosmonautyka;90;W9;LiK
+32;Wydzia≥ Mechaniczno-Energetyczny;Mechanika i Budowa Maszyn Energetycznych;120;W9;MBE
+33;Wydzia≥ Mechaniczno-Energetyczny;Odnawialne èrÛd≥a Energii;120;W9;OZE
+34;Wydzia≥ Mechaniczny;Biomechanika Inøynierska;90;W10;BMI
+35;Wydzia≥ Mechaniczny;Mechanika i Budowa Maszyn;300;W10;MBM
+36;Wydzia≥ Mechaniczny;Mechanika i Budowa Maszyn w j.Angielskim;20;W10;MBMAN
+37;Wydzia≥ Mechaniczny;Mechatronika;180;W10;MTR
+38;Wydzia≥ Mechaniczny;Robotyka i Automatyzacja ProcesÛw;150;W10;RAP
+39;Wydzia≥ Mechaniczny;Transport;120;W10;TRN
+40;Wydzia≥ Mechaniczny;Zarzπdzanie i Inøynieria Produkcji;180;W10;ZIP
+41;Wydzia≥ Podstawowych ProblemÛw Techniki;Fizyka Techniczna;60;W11;FTE
+42;Wydzia≥ Podstawowych ProblemÛw Techniki;Inøynieria Biomedyczna;165;W11;IB
+43;Wydzia≥ Podstawowych ProblemÛw Techniki;Inøynieria Kwantowa;60;W11;IKW
+44;Wydzia≥ Podstawowych ProblemÛw Techniki;Optyka;100;W11;OPA
+45;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;Elektronika i Telekomunikacja;180;W12;EiT
+46;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;Inteligentna Elektronika;70;W12;IA
+47;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;Inøynieria MikrosystemÛw Mechatronicznych;100;W12;IMM
+48;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;"Inøynieria Elektroniczna i Komputerowa w j.Angielskim";45;W12;EACAN
+49;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;Automatyka i Robotyka;165;W12;AiR
+50;Wydzia≥ Elektroniki, Fotoniki i MikrosystemÛw;Elektronika;198;W12;ELA
+51;Wydzia≥ Matematyki;Matematyka;100;W13;MAT
+52;Wydzia≥ Matematyki;Matematyka Stosowana;100;W13;MST
+53;Filia w Legnicy;Automatyka Przemys≥owa;45;W14;APR
+54;Filia w Legnicy;GÛrnictwo i Geologia;30;W14;GiG
+55;Filia w Legnicy;Mechanika i Budowa Maszyn;45;W14;MBM
+56;Filia w Legnicy;Odnawialne èrÛd≥a Energii;60;W14;OZE
+57;Filia w Jeleniej GÛrze;Elektrotechnika;45;W15;ETK
+58;Filia w Jeleniej GÛrze;Informatyka Techniczna;60;W15;ITE
+59;Filia w Jeleniej GÛrze;Mechanika i Budowa Maszyn;45;W15;MBM
+60;Filia w Wa≥brzychu;Informatyka Techniczna;60;W16;ITE
+61;Filia w Wa≥brzychu;Mechanika i Budowa Maszyn;45;W16;MBM
+62;Filia w Wa≥brzychu;Zarzπdzanie i Inøynieria Produkcji;45;W16;ZIP
