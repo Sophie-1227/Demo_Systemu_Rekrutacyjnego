@@ -157,9 +157,12 @@ create table Wskaznik
 create unique index Wskaznik_IdKandydata_uindex
              	on Wskaznik (IdKandydata);
 
+alter table wskaznik
+  add constraint `wskaznikfk_1` foreign key (`IdKandydata`) references `kandydaci`(`NrRejestracyjny`);
+
 
 ALTER TABLE boolwskaznikikierunki
-ADD FOREIGN KEY (IdKierunku) REFERENCES kierunki(IdKierunku);
+ADD constraint `boolwskaznikikierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES kierunki(IdKierunku);
 
 ALTER TABLE kierunki
-ADD FOREIGN KEY (IdKierunku) REFERENCES boolwskaznikikierunki(IdKierunku);
+ADD constraint `kierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES boolwskaznikikierunki(IdKierunku);

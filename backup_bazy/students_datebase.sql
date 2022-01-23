@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Czas generowania: 23 Sty 2022, 20:39
+-- Czas generowania: 23 Sty 2022, 21:01
 -- Wersja serwera: 10.4.21-MariaDB
 -- Wersja PHP: 8.0.11
 
@@ -1773,13 +1773,20 @@ ALTER TABLE `pracownicy`
 --
 ALTER TABLE `boolwskaznikikierunki`
   ADD CONSTRAINT `boolwskaznikikierunki_ibfk_1` FOREIGN KEY (`IdKierunku`) REFERENCES `kierunki` (`IdKierunku`),
-  ADD CONSTRAINT `boolwskaznikikierunki_ibfk_2` FOREIGN KEY (`IdKierunku`) REFERENCES `kierunki` (`IdKierunku`);
+  ADD CONSTRAINT `boolwskaznikikierunki_ibfk_2` FOREIGN KEY (`IdKierunku`) REFERENCES `kierunki` (`IdKierunku`),
+  ADD CONSTRAINT `boolwskaznikikierunkifk1` FOREIGN KEY (`IdKierunku`) REFERENCES `kierunki` (`IdKierunku`);
 
 --
 -- Ograniczenia dla tabeli `kandydaci`
 --
 ALTER TABLE `kandydaci`
   ADD CONSTRAINT `kandydaci_ibfk_1` FOREIGN KEY (`Ewidencja`) REFERENCES `pracownicy` (`IdPracownika`);
+
+--
+-- Ograniczenia dla tabeli `kierunki`
+--
+ALTER TABLE `kierunki`
+  ADD CONSTRAINT `kierunkifk1` FOREIGN KEY (`IdKierunku`) REFERENCES `boolwskaznikikierunki` (`IdKierunku`);
 
 --
 -- Ograniczenia dla tabeli `preferencjekandydata`
@@ -1792,6 +1799,12 @@ ALTER TABLE `preferencjekandydata`
   ADD CONSTRAINT `preferencjekandydata_ibfk_5` FOREIGN KEY (`Preferencja4`) REFERENCES `kierunki` (`IdKierunku`),
   ADD CONSTRAINT `preferencjekandydata_ibfk_6` FOREIGN KEY (`Preferencja5`) REFERENCES `kierunki` (`IdKierunku`),
   ADD CONSTRAINT `preferencjekandydata_ibfk_7` FOREIGN KEY (`Preferencja6`) REFERENCES `kierunki` (`IdKierunku`);
+
+--
+-- Ograniczenia dla tabeli `wskaznik`
+--
+ALTER TABLE `wskaznik`
+  ADD CONSTRAINT `wskaznikfk_1` FOREIGN KEY (`IdKandydata`) REFERENCES `kandydaci` (`NrRejestracyjny`);
 
 --
 -- Ograniczenia dla tabeli `wynikimatur`
