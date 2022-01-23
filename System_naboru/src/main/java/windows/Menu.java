@@ -66,7 +66,7 @@ public class Menu {
         gbc.gridy = 0;
         gbc.gridheight = 20;
         JButton kandydat = new JButton(new ImageIcon("kandydat.png"));
-        kandydat.setPreferredSize(new Dimension(100, 100));
+        kandydat.setPreferredSize(new Dimension(110, 110));
         panel.add(kandydat, gbc);
         //panel.add(new Button("KANDYDAT"),gbc);
 
@@ -74,7 +74,7 @@ public class Menu {
         gbc.gridy = 0;
         gbc.gridheight = 2;
         JButton pracownik = new JButton(new ImageIcon("pracownik.png"));
-        pracownik.setPreferredSize(new Dimension(100, 100));
+        pracownik.setPreferredSize(new Dimension(110, 110));
         panel.add(pracownik, gbc);
         //panel.add(new Button("PRACOWNIK"),gbc);
 
@@ -84,7 +84,7 @@ public class Menu {
         gbc.gridy = 0;
         gbc.gridheight = 2;
         JButton admin = new JButton(new ImageIcon("adminn.png"));
-        admin.setPreferredSize(new Dimension(100, 100));
+        admin.setPreferredSize(new Dimension(110, 110));
         panel.add(admin, gbc);
         //panel.add(new Button("ADMINISTRATOR"),gbc);
 
