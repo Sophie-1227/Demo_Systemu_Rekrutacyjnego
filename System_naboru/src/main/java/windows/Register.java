@@ -1,4 +1,4 @@
-package main.java;
+package windows;
 
 public class Register {
 }
