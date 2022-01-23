@@ -47,15 +47,12 @@ create table Kierunki
              	NazwaKierunku varchar(60) not null,
              	LimitMiejsc int not null,
              	KodWydzialu varchar(3) not null,
-             	KodKierunku varchar(10) not null
+             	KodKierunku varchar(10) not null,
+             	primary key (IdKierunku)
 );
 
 create unique index Kierunki_IdKierunku_uindex
              	on Kierunki (IdKierunku);
-
-alter table Kierunki
-             	add constraint Kierunki_pk
-                              	primary key (IdKierunku);
 
 alter table Kierunki modify IdKierunku int auto_increment;
 

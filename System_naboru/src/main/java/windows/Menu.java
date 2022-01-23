@@ -1,4 +1,4 @@
-package windows;
+package main.java;
 
 import javax.swing.*;
 import java.awt.*;
@@ -10,9 +10,7 @@ import static java.awt.Font.ITALIC;
 public class Menu {
     private Frame mainFrame;
     private Label headerLabel;
-    private Label statusLabel;
     private Panel controlPanel;
-    private Label msglabel;
 
     public Menu(){
         prepareGUI();
@@ -36,17 +34,12 @@ public class Menu {
         headerLabel = new Label();
         headerLabel.setAlignment(Label.CENTER);
         headerLabel.setFont(font);
-        //headerLabel.setForeground(Color.WHITE);
-        statusLabel = new Label();
-        statusLabel.setAlignment(Label.CENTER);
-        statusLabel.setSize(350,100);
 
         controlPanel = new Panel();
         controlPanel.setLayout(new FlowLayout());
 
         mainFrame.add(headerLabel);
         mainFrame.add(controlPanel);
-        mainFrame.add(statusLabel);
         mainFrame.setVisible(true);
     }
 
@@ -65,6 +58,7 @@ public class Menu {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 20;
+
         JButton kandydat = new JButton(new ImageIcon("kandydat.png"));
         kandydat.setPreferredSize(new Dimension(110, 110));
         panel.add(kandydat, gbc);
@@ -73,6 +67,7 @@ public class Menu {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 2;
+
         JButton pracownik = new JButton(new ImageIcon("pracownik.png"));
         pracownik.setPreferredSize(new Dimension(110, 110));
         panel.add(pracownik, gbc);
@@ -93,6 +88,9 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania kandydata
+                        KandydatLog kandydat = new KandydatLog();
+                        kandydat.setGridBagLayout();
+                        mainFrame.setVisible(false);
                     }
                 }
         );
@@ -102,6 +100,9 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania pracownika
+                       AdminLog pracownik = new AdminLog();
+                        pracownik.setGridBagLayout();
+                        mainFrame.setVisible(false);
                     }
                 }
         );
@@ -111,6 +112,9 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania admina
+                        AdminLog admin = new AdminLog();
+                        admin.setGridBagLayout();
+                        mainFrame.setVisible(false);
                     }
                 }
         );
