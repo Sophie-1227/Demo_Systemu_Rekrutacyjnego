@@ -2,8 +2,11 @@ package windows;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.GregorianCalendar;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
@@ -68,6 +71,17 @@ public class KandydatLog {
         gbc.gridx = 0;
         gbc.gridy = 2;
         JButton register = new JButton("Rejestracja");
+        register.addActionListener(
+                new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                //Otwieranie okna do logowania pracownika
+                Register register1 = new Register();
+                register1.setGridBagLayout();
+                kandydatLogPanel.setVisible(false);
+            }
+        }
+        );
         panel.add(register, gbc);
 
         kandydatLogPanel.add(panel);

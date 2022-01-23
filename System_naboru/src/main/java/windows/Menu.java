@@ -100,7 +100,7 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania pracownika
-                       AdminLog pracownik = new AdminLog();
+                       PracownikLog pracownik = new PracownikLog();
                         pracownik.setGridBagLayout();
                         mainFrame.setVisible(false);
                     }
