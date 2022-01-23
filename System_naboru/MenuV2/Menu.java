@@ -86,7 +86,7 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania kandydata
-                        Kandydat kandydat = new Kandydat();
+                        Log kandydat = new Log();
                         kandydat.setGridBagLayout();
                         mainFrame.setVisible(false);
                     }
@@ -98,6 +98,9 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania pracownika
+                        Log pracownik = new Log();
+                        pracownik.setGridBagLayout();
+                        mainFrame.setVisible(false);
                     }
                 }
         );
@@ -107,6 +110,9 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania admina
+                        Log admin = new Log();
+                        admin.setGridBagLayout();
+                        mainFrame.setVisible(false);
                     }
                 }
         );
