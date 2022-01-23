@@ -8,39 +8,39 @@ import java.awt.event.WindowEvent;
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
-public class Kandydat {
-    private Frame kandydatFrame;
-    private Label headerLabelKandydat;
-    private Panel kandydatPanel;
+public class Log {
+    private Frame LogFrame;
+    private Label headerLabelLog;
+    private Panel LogPanel;
 
-    public Kandydat(){
-        prepareKandydatGUI();
+    public Log(){
+        prepareLogGUI();
     }
 
-    private void prepareKandydatGUI(){
-        kandydatFrame = new Frame("Okno logowania Kandydata");
-        kandydatFrame.setSize(700, 500);
-        kandydatFrame.setLayout(new GridLayout(3, 1));
-        kandydatFrame.addWindowListener(new WindowAdapter() {
+    private void prepareLogGUI(){
+        LogFrame = new Frame("Okno logowania");
+        LogFrame.setSize(700, 500);
+        LogFrame.setLayout(new GridLayout(3, 1));
+        LogFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
             }
         });
         Font font = new Font("Modern Love", BOLD & ITALIC, 30);
-        headerLabelKandydat = new Label();
-        headerLabelKandydat.setAlignment(Label.CENTER);
-        headerLabelKandydat.setFont(font);
+        headerLabelLog = new Label();
+        headerLabelLog.setAlignment(Label.CENTER);
+        headerLabelLog.setFont(font);
 
-        kandydatPanel = new Panel();
-        kandydatPanel.setLayout(new FlowLayout());
+        LogPanel = new Panel();
+        LogPanel.setLayout(new FlowLayout());
 
-        kandydatFrame.add(headerLabelKandydat);
-        kandydatFrame.add(kandydatPanel);
-        kandydatFrame.setVisible(true);
+        LogFrame.add(headerLabelLog);
+        LogFrame.add(LogPanel);
+        LogFrame.setVisible(true);
     }
 
     public void setGridBagLayout(){
-        headerLabelKandydat.setText("Podaj login i hasło");
+        headerLabelLog.setText("Podaj login i hasło");
 
         Panel panel = new Panel();
         panel.setSize(500, 300);
@@ -63,8 +63,8 @@ public class Kandydat {
         JTextField pass = new JTextField("Password");
         panel.add(pass, gbc);
 
-        kandydatPanel.add(panel);
-        kandydatFrame.setVisible(true);
+        LogPanel.add(panel);
+        LogFrame.setVisible(true);
 
 
     }
