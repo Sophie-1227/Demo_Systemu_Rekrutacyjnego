@@ -70,6 +70,21 @@ public class KandydatLog {
         gbc.ipady = 20;
         gbc.gridx = 0;
         gbc.gridy = 2;
+        JButton log = new JButton("Zaloguj");
+        log.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        //Panel z panelami do wpisania danych szczegółowych
+                        kandydatLogFrame.setVisible(false);
+                    }
+                }
+        );
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
         JButton register = new JButton("Rejestracja");
         register.addActionListener(
                 new ActionListener() {
@@ -78,7 +93,7 @@ public class KandydatLog {
                 //Otwieranie okna do logowania pracownika
                 Register register1 = new Register();
                 register1.setGridBagLayout();
-                kandydatLogPanel.setVisible(false);
+                kandydatLogFrame.setVisible(false);
             }
         }
         );
