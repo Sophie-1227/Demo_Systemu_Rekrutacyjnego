@@ -7,9 +7,10 @@ CREATE TRIGGER NewStudentToPreferencje
             INSERT INTO preferencjekandydata (IdKandydata) VALUES (new.NrRejestracyjny);
         end if ;
     end ;
-DELIMITER $$
+DELIMITER ;
 
 DELIMITER $$
+drop trigger if exists NewStudentToMatury;
 CREATE TRIGGER NewStudentToMatury
     BEFORE INSERT ON kandydaci
     FOR EACH ROW
@@ -18,9 +19,33 @@ CREATE TRIGGER NewStudentToMatury
             INSERT INTO wynikimatur (IdKandydata) VALUES (new.NrRejestracyjny);
         end if ;
     end ;
-DELIMITER $$
+DELIMITER ;
+
+delimiter $$
+drop trigger if exists NewStudent
+create trigger NewStudent
+  before insert on kandydaci
+  for each row
+  begin
+	  insert into wynikimatur (IdKandydata) value (new.NrRejestracyjny);
+	  insert into preferencjekandydata (IdKandydata) value (new.NrRejestracyjny);
+  end;
+DELIMITER ;
 
 DELIMITER $$
+drop trigger if exists DeleteStudent;
+create trigger DeleteStudent
+  before delete On kandydaci
+  for each row
+  BEGIN
+    set foreign_key_checks = 0;
+		delete from preferencjekandydata where IdKandydata = old.NrRejestracyjny;
+		delete from wynikimatur where IdKandydata = old.NrRejestracyjny;
+    set foreign_key_checks = 1;
+	end;
+DELIMITER ;
+
+delimiter $$
 CREATE TRIGGER CzyZadanaMatura
     BEFORE INSERT ON wynikimatur
     FOR EACH ROW
@@ -39,4 +64,4 @@ CREATE TRIGGER CzyZadanaMatura
             WHERE NrRejestracyjny = new.IdKandydata;
         end if ;
     end ;
-DELIMITER $$
+DELIMITER ;
