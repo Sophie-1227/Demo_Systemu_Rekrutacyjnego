@@ -34,6 +34,21 @@ create trigger NewStudent
   end;
 DELIMITER ;
 
+/*
+#kurde, tak się zastanawiam, bo jest tutaj problem, że nie można za bardzo w triggerze edytować tabeli, dla której został wywołany
+delimiter $$
+drop trigger if exists CheckStudent;
+create trigger CheckStudent
+  after insert on kandydaci
+  for each row
+  begin
+		if length(new.PESEL) != 11 or new.Nazwisko is null or new.Imie is null then
+			delete from kandydaci where NrRejestracyjny = new.NrRejestracyjny;
+		end if ;
+  end $$
+delimiter ;
+*/
+
 DELIMITER $$
 drop trigger if exists DeleteStudent;
 create trigger DeleteStudent
@@ -58,7 +73,7 @@ CREATE TRIGGER CzyZdanaMatura
             SET status = 'odrzucony'
             WHERE NrRejestracyjny = new.IdKandydata;
         end if ;
-    end ;
+    end $$
 DELIMITER ;
 #tylko tutaj, jeśli ktoś wpisze i zatwierdzi coś poniżej 30 procent
 # a potem mu się "przypomni", że jednak zdał, to trzeba będzie ręcznie mu przywrócić odpowiedni status
