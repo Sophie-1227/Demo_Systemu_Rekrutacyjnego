@@ -1,4 +1,5 @@
 DELIMITER $$
+drop trigger if exists NewStudentToPreferencje;
 CREATE TRIGGER NewStudentToPreferencje
     BEFORE INSERT ON kandydaci
     FOR EACH ROW
@@ -22,7 +23,7 @@ CREATE TRIGGER NewStudentToMatury
 DELIMITER ;
 
 delimiter $$
-drop trigger if exists NewStudent
+drop trigger if exists NewStudent;
 create trigger NewStudent
   before insert on kandydaci
   for each row
