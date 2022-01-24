@@ -4,6 +4,7 @@ set foreign_key_checks = 0;
 CREATE PROCEDURE FillPreferencje()
 BEGIN
 	DECLARE i INT DEFAULT 1;
+	set foreign_key_checks = 0;
 	WHILE i<401 DO
             BEGIN
                 DECLARE p1 INT DEFAULT NULL;
@@ -52,6 +53,7 @@ BEGIN
                 end;
         	end;
 end while;
+	set foreign_key_checks = 1;
 end $$
 DELIMITER ;
 
@@ -67,14 +69,14 @@ BEGIN
             BEGIN
                 DECLARE pp INT DEFAULT 0;
                 DECLARE mp INT DEFAULT 0;
-                DECLARE mr INT DEFAULT NULL;
+                DECLARE mr INT DEFAULT 0;
                 DECLARE jp INT DEFAULT 0;
-                DECLARE jr INT DEFAULT NULL;
-                DECLARE f INT DEFAULT NULL;
-                DECLARE c INT DEFAULT NULL;
-                DECLARE b INT DEFAULT NULL;
-                DECLARE g INT DEFAULT NULL;
-                DECLARE inf INT DEFAULT NULL;
+                DECLARE jr INT DEFAULT 0;
+                DECLARE f INT DEFAULT 0;
+                DECLARE c INT DEFAULT 0;
+                DECLARE b INT DEFAULT 0;
+                DECLARE g INT DEFAULT 0;
+                DECLARE inf INT DEFAULT 0;
                 DECLARE n INT DEFAULT 1;
                 SET n = RAND()*12 + 0;
                 BEGIN

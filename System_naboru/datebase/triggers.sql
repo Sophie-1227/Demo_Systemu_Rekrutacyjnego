@@ -1,3 +1,4 @@
+/*
 DELIMITER $$
 drop trigger if exists NewStudentToPreferencje;
 CREATE TRIGGER NewStudentToPreferencje
@@ -21,14 +22,14 @@ CREATE TRIGGER NewStudentToMatury
         end if ;
     end ;
 DELIMITER ;
-
+*/
 delimiter $$
 drop trigger if exists NewStudent;
 create trigger NewStudent
   before insert on kandydaci
   for each row
   begin
-	  insert into wynikimatur (IdKandydata) value (new.NrRejestracyjny);
+	  insert into wynikimatur (IdKandydata) values (new.NrRejestracyjny);
 	  insert into preferencjekandydata (IdKandydata) value (new.NrRejestracyjny);
   end;
 DELIMITER ;
@@ -47,22 +48,17 @@ create trigger DeleteStudent
 DELIMITER ;
 
 delimiter $$
-CREATE TRIGGER CzyZadanaMatura
-    BEFORE INSERT ON wynikimatur
+drop trigger if exists  CzyZdanaMatura;
+CREATE TRIGGER CzyZdanaMatura
+    BEFORE update ON wynikimatur
     FOR EACH ROW
     BEGIN
-        IF new.PolskiPodstawa<30 THEN
-            UPDATE kandydaci
-            SET status = 'odrzucony'
-            WHERE NrRejestracyjny = new.IdKandydata;
-        ELSEIF new.MatematykaPodstawa<30 THEN
-            UPDATE kandydaci
-            SET status = 'odrzucony'
-            WHERE NrRejestracyjny = new.IdKandydata;
-        ELSEIF new.JezykObcyNowozytnyPodstawa<30 THEN
+        IF new.PolskiPodstawa<30 or new.MatematykaPodstawa<30 or new.JezykObcyNowozytnyPodstawa<30 THEN
             UPDATE kandydaci
             SET status = 'odrzucony'
             WHERE NrRejestracyjny = new.IdKandydata;
         end if ;
     end ;
 DELIMITER ;
+#tylko tutaj, jeśli ktoś wpisze i zatwierdzi coś poniżej 30 procent
+# a potem mu się "przypomni", że jednak zdał, to trzeba będzie ręcznie mu przywrócić odpowiedni status

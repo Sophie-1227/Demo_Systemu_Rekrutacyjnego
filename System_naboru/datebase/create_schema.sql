@@ -59,17 +59,17 @@ alter table Kierunki modify IdKierunku int auto_increment;
 create table WynikiMatur
 (
              	IdKandydata int not null,
-             	PolskiPodstawa int not null,
-             	MatematykaPodstawa int not null,
-             	MatematykaRozszerzenie int null,
-             	JezykObcyNowozytnyPodstawa int not null,
-             	JezykObcyNowozytnyRozszerzenie int null,
-             	FizykaRozszerzenie int null,
-             	ChemiaRozszezrenie int null,
-             	BiologiaRozszezrenie int null,
-             	InformatykaRozszerzenie int null,
-             	GeografiaRozszerzenie int null,
-             	EgzaminZRysunku int null,
+             	PolskiPodstawa int not null default 0,
+             	MatematykaPodstawa int not null default 0,
+             	MatematykaRozszerzenie int null default 0,
+             	JezykObcyNowozytnyPodstawa int not null default 0,
+             	JezykObcyNowozytnyRozszerzenie int null default 0,
+             	FizykaRozszerzenie int null default 0,
+             	ChemiaRozszezrenie int null default 0,
+             	BiologiaRozszezrenie int null default 0,
+             	InformatykaRozszerzenie int null default 0,
+             	GeografiaRozszerzenie int null default 0,
+             	EgzaminZRysunku int null default 0,
              	check ( PolskiPodstawa>=0 ),
              	check ( PolskiPodstawa <= 100 ),
              	check ( MatematykaPodstawa>=0),
@@ -123,7 +123,7 @@ create unique index BoolWskaznikiKierunki_IdKierunku_uindex
 create table PreferencjeKandydata
 (
              	IdKandydata int not null,
-             	Preferencja1 int not null,
+             	Preferencja1 int null,
              	Preferencja2 int null,
              	Preferencja3 int null,
              	Preferencja4 int null,
@@ -145,7 +145,7 @@ create unique index PreferencjeKandydata_IdKandydata_uindex
 create table Wskaznik
 (
              	IdKandydata int not null,
-             	WskaznikPref1 float default 0 not null,
+             	WskaznikPref1 float  null,
              	WskaznikPref2 float null,
              	WskaznikPref3 float null,
              	WskaznikPref4 float null,
