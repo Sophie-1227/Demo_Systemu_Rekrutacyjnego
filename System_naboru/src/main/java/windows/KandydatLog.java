@@ -76,6 +76,7 @@ public class KandydatLog {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Panel z panelami do wpisania danych szczegółowych
+                        PreferencjeKandydata pref = new PreferencjeKandydata();
                         kandydatLogFrame.setVisible(false);
                     }
                 }
