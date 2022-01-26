@@ -78,7 +78,7 @@ public class PreferencjeKandydata {
 
     public void setGridBagPreferencjeLayout(){
         //Wybór preferencji kandydata
-        headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
+        headerLabelPreferencjekandydata.setText("Wybierz kierunki, którymi jesteś zainteresowany");
 
         Panel panel = new Panel();
         panel.setSize(500, 300);
@@ -99,7 +99,7 @@ public class PreferencjeKandydata {
 
     public void setGridBagMaturyLayout(){
         //Uzupełnienie wyników matur
-        headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
+        headerLabelPreferencjekandydata.setText("Uzupełnij wyniki matur");
 
         Panel panel = new Panel();
         panel.setSize(500, 300);
