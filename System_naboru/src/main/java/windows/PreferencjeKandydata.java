@@ -9,9 +9,9 @@ public class PreferencjeKandydata {
     private Frame preferencjeKandydatFrame;
     private Label headerLabelPreferencjekandydata;
     private JTabbedPane preferencjeKandydataPane;
-    private JComponent Preferencje;
-    private JComponent Dane;
-    private JComponent Matura;
+    private Panel Preferencje; //ewentualna zmiana na component w zaleznosci od reakcji javy
+    private Panel Dane;
+    private Panel Matura;
 
     public PreferencjeKandydata(){
         prepareGUI();
