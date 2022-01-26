@@ -26,9 +26,10 @@ DELIMITER ;
 delimiter $$
 drop trigger if exists NewStudent;
 create trigger NewStudent
-  before insert on kandydaci
+  before insert on userslog
   for each row
   begin
+
 	  insert into wynikimatur (IdKandydata) values (new.NrRejestracyjny);
 	  insert into preferencjekandydata (IdKandydata) value (new.NrRejestracyjny);
   end;

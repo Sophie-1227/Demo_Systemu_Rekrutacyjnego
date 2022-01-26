@@ -166,3 +166,10 @@ ADD constraint `boolwskaznikikierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES ki
 
 ALTER TABLE kierunki
 ADD constraint `kierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES boolwskaznikikierunki(IdKierunku);
+
+create table usersLog (
+  login char(30) not null,
+  passwd char(60) not null,
+  access_level enum('worker', 'admin', 'candidate'),
+  primary key (login)
+);
