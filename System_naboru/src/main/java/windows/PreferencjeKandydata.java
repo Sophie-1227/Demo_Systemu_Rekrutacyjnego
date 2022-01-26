@@ -47,6 +47,7 @@ public class PreferencjeKandydata {
     }
 
     public void setGridBagDaneLayout(){
+        //Wyświetlanie danych z wykorzystaniem prepared statment
         headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
 
         Panel panel = new Panel();
@@ -71,6 +72,48 @@ public class PreferencjeKandydata {
         panel.add(pass, gbc);
 
         Dane.add(panel);
+        preferencjeKandydatFrame.setVisible(true);
+
+    }
+
+    public void setGridBagPreferencjeLayout(){
+        //Wybór preferencji kandydata
+        headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
+
+        Panel panel = new Panel();
+        panel.setSize(500, 300);
+        GridBagLayout layout = new GridBagLayout();
+
+        panel.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        //Do dodania Jlist dual http://www.java2s.com/Tutorials/Java/Swing/JList/Create_a_dual_JList_component_in_Java.htm
+
+        Preferencje.add(panel);
+        preferencjeKandydatFrame.setVisible(true);
+
+    }
+
+    public void setGridBagMaturyLayout(){
+        //Uzupełnienie wyników matur
+        headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
+
+        Panel panel = new Panel();
+        panel.setSize(500, 300);
+        GridBagLayout layout = new GridBagLayout();
+
+        panel.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        //Do dodania pola tekstowe + label do każdego przedmiotu
+
+        Matura.add(panel);
         preferencjeKandydatFrame.setVisible(true);
 
     }
