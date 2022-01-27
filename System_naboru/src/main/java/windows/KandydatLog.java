@@ -81,6 +81,7 @@ public class KandydatLog {
                     }
                 }
         );
+        panel.add(log, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;

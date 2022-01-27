@@ -11,8 +11,8 @@ public class ConcreteDatebase implements DatebaseInterface {
     final String pass = "";
     Connection dbConnection;
         //connecting to a database
-    try{
-       Connection dbConnection = DriverManager.getConnection(dbUrl, user, pass);
+    //try{
+       //Connection dbConnection = DriverManager.getConnection(dbUrl, user, pass);
 
-    }
+    //}
 }
