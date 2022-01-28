@@ -80,6 +80,9 @@ public class KandydatLog {
 
                         //Panel z panelami do wpisania danych szczegółowych
                         PreferencjeKandydata pref = new PreferencjeKandydata();
+                        pref.setGridBagDaneLayout();
+                        pref.setGridBagMaturyLayout();
+                        pref.setGridBagPreferencjeLayout();
                         kandydatLogFrame.setVisible(false);
                     }
                 }
