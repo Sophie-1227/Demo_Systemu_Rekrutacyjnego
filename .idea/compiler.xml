@@ -10,7 +10,7 @@
       </profile>
     </annotationProcessing>
     <bytecodeTargetLevel>
-      <module name="System_naboru" target="1.7" />
+      <module name="System_naboru" target="16" />
     </bytecodeTargetLevel>
   </component>
 </project>

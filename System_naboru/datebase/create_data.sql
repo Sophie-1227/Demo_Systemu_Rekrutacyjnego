@@ -161,4 +161,57 @@ DELIMITER ;
 
 CALL FillMatury();
 
+SET FOREIGN_KEY_CHECKS = 0;
+DELIMITER $$
+CREATE PROCEDURE FillKanLog()
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   DECLARE l INT DEFAULT 264506;
+   DECLARE h INT DEFAULT 0122;
+   WHILE i<401 DO
+       INSERT INTO students_datebase.logkandydaci values (i, CONCAT('pwr', l), CONCAT('password', h));
+       SET i = i+1;
+       SET l = l+1;
+       SET h = h+1;
+       end while ;
+end ;
+DELIMITER ;
 
+call FillKanLog();
+
+SET FOREIGN_KEY_CHECKS = 0;
+DELIMITER $$
+CREATE PROCEDURE FillPracLog()
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   DECLARE name varchar(30);
+   DECLARE sname varchar(30);
+   DECLARE dzial varchar(30);
+   DECLARE p INT DEFAULT 2778;
+   WHILE i<30 DO
+       SET name = (SELECT Imie FROM pracownicy WHERE IdPracownika=i);
+       SET sname = (SELECT Nazwisko FROM pracownicy WHERE IdPracownika=i);
+       SET dzial = (SELECT Jednostka FROM pracownicy WHERE IdPracownika=i);
+       INSERT INTO students_datebase.pracownicylogi values (i, CONCAT(CONCAT(name,sname),dzial), CONCAT('Rekrutacja', p));
+       SET p = p+1;
+       SET i = i+1;
+       end while ;
+end ;
+DELIMITER ;
+call FillPracLog();
+
+SET FOREIGN_KEY_CHECKS = 0;
+DELIMITER $$
+CREATE PROCEDURE SecurePracownicy()
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   WHILE i<30 DO
+       UPDATE pracownicylogi
+       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
+       WHERE IdPracownika = i;
+       SET i = i+1;
+       end while ;
+end ;
+DELIMITER $$
+
+call SecurePracownicy();

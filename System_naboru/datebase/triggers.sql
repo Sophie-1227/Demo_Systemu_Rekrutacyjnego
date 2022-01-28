@@ -78,3 +78,25 @@ CREATE TRIGGER CzyZdanaMatura
 DELIMITER ;
 #tylko tutaj, jeśli ktoś wpisze i zatwierdzi coś poniżej 30 procent
 # a potem mu się "przypomni", że jednak zdał, to trzeba będzie ręcznie mu przywrócić odpowiedni status
+
+DELIMITER $$
+CREATE TRIGGER passSecureKandydat
+   AFTER INSERT ON logkandydaci
+   FOR EACH ROW
+   BEGIN
+       UPDATE logkandydaci
+       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
+       WHERE IdKandydata = new.IdKandydata;
+   end ;
+DELIMITER ;
+
+DELIMITER $$
+CREATE TRIGGER passSecurePracownik
+   AFTER INSERT ON pracownicylogi
+   FOR EACH ROW
+   BEGIN
+       UPDATE pracownicylogi
+       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
+       WHERE IdPracownika = new.IdPracownika;
+   end ;
+DELIMITER ;

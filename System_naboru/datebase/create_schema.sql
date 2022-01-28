@@ -167,9 +167,45 @@ ADD constraint `boolwskaznikikierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES ki
 ALTER TABLE kierunki
 ADD constraint `kierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES boolwskaznikikierunki(IdKierunku);
 
-create table usersLog (
-  login char(30) not null,
-  passwd char(60) not null,
-  access_level enum('worker', 'admin', 'candidate'),
-  primary key (login)
+create table logKandydaci
+(
+  IdKandydata int not null,
+  Login varchar(60) not null,
+  Haslo varchar(60) null,
+  primary key (IdKandydata)
+)
+comment 'Tabela loginów i haseł kandydatów przypisanych do IdKandydata';
+
+create unique index logKandydaci_IdKandydata_uindex
+  on logKandydaci (IdKandydata);
+
+create unique index logKandydaci_Login_uindex
+  on logKandydaci (Login);
+
+alter table logkandydaci
+  add securePass varbinary(8000) not null default 0x30;
+
+ALTER TABLE logkandydaci
+ADD CONSTRAINT logiKanId
+FOREIGN KEY (IdKandydata) REFERENCES kandydaci(NrRejestracyjny);
+
+create table PracownicyLogi
+(
+  IdPracownika int not null,
+  Login varchar(60) not null,
+  Haslo varchar(60) null,
+	primary key (IdPracownika)
 );
+
+create unique index PracownicyLogi_IdPracownika_uindex
+  on PracownicyLogi (IdPracownika);
+
+create unique index PracownicyLogi_Login_uindex
+  on PracownicyLogi (Login);
+
+alter table pracownicylogi
+  add securePass varbinary(8000) not null default 0x30;
+
+ALTER TABLE pracownicylogi
+ADD CONSTRAINT pracLogId
+FOREIGN KEY (IdPracownika) REFERENCES pracownicy(IdPracownika);

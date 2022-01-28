@@ -1,18 +1,25 @@
 package windows;
 
+import datebase.ConcreteDatebase;
+import datebase.DatebaseInterface;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.*;
+import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Menu {
     private Frame mainFrame;
     private Label headerLabel;
     private Panel controlPanel;
+    DatebaseInterface database;
 
     public Menu(){
+        database = new ConcreteDatebase();
         prepareGUI();
     }
 
@@ -88,6 +95,11 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania kandydata
+                        try {
+                            database.startConnection("candidate");
+                        } catch (SQLException ex) {
+                            showMessageDialog(mainFrame, "Nie udało się zalogować");
+                        }
                         KandydatLog kandydat = new KandydatLog();
                         kandydat.setGridBagLayout();
                         mainFrame.setVisible(false);
