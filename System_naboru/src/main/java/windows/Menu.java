@@ -112,6 +112,11 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania pracownika
+                        try {
+                            database.startConnection("worker");
+                        } catch (SQLException ex) {
+                            showMessageDialog(mainFrame, "Nie udało się zalogować");
+                        }
                        PracownikLog pracownik = new PracownikLog();
                         pracownik.setGridBagLayout();
                         mainFrame.setVisible(false);
@@ -124,6 +129,11 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania admina
+                        try {
+                            database.startConnection("root");
+                        } catch (SQLException ex) {
+                            showMessageDialog(mainFrame, "Nie udało się zalogować");
+                        }
                         AdminLog admin = new AdminLog();
                         admin.setGridBagLayout();
                         mainFrame.setVisible(false);
