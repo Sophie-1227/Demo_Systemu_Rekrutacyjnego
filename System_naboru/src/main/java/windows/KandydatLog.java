@@ -105,6 +105,7 @@ public class KandydatLog {
                             pref.setGridBagDaneLayout();
                             pref.setGridBagMaturyLayout();
                             pref.setGridBagPreferencjeLayout();
+                            pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
                             kandydatLogFrame.setVisible(false);
                         } else {
                             showMessageDialog(kandydatLogFrame, "Niepoprawne dane logowania");
