@@ -6,6 +6,65 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.util.*;
+
+class SortedListModel extends AbstractListModel {
+    SortedSet<Object> model;
+
+    public SortedListModel() {
+        model = new TreeSet<Object>();
+    }
+
+    public int getSize() {
+        return model.size();
+    }
+
+    public Object getElementAt(int index) {
+        return model.toArray()[index];
+    }
+
+    public void add(Object element) {
+        if (model.add(element)) {
+            fireContentsChanged(this, 0, getSize());
+        }
+    }
+
+    public void addAll(Object elements[]) {
+        Collection<Object> c = Arrays.asList(elements);
+        model.addAll(c);
+        fireContentsChanged(this, 0, getSize());
+    }
+
+    public void clear() {
+        model.clear();
+        fireContentsChanged(this, 0, getSize());
+    }
+
+    public boolean contains(Object element) {
+        return model.contains(element);
+    }
+
+    public Object firstElement() {
+        return model.first();
+    }
+
+    public Iterator iterator() {
+        return model.iterator();
+    }
+
+    public Object lastElement() {
+        return model.last();
+    }
+
+    public boolean removeElement(Object element) {
+        boolean removed = model.remove(element);
+        if (removed) {
+            fireContentsChanged(this, 0, getSize());
+        }
+        return removed;
+    }
+}
+
 
 public class PreferencjeKandydata {
     private Frame preferencjeKandydatFrame;
@@ -14,6 +73,13 @@ public class PreferencjeKandydata {
     private Panel Preferencje; //ewentualna zmiana na component w zaleznosci od reakcji javy
     private Panel Dane;
     private Panel Matura;
+    private JList listaKierunkow; //lista kierunków dostepnych, z ktorych mozemy wybierac
+    private JList listaPreferencji; //lista preferencji konkretnego kandydata, czyli kierunki, ktore wybral
+    private SortedListModel listakierunkowModel;
+    private SortedListModel listaPreferencjiModel;
+
+
+
 
     public PreferencjeKandydata(){
         prepareGUI();
@@ -95,6 +161,19 @@ public class PreferencjeKandydata {
         gbc.gridx = 0;
         gbc.gridy = 0;
         //Do dodania Jlist dual http://www.java2s.com/Tutorials/Java/Swing/JList/Create_a_dual_JList_component_in_Java.htm
+        JPanel leftPanel = new JPanel();
+        leftPanel.add(new JLabel("Dostepne kierunki: "), BorderLayout.NORTH);
+        leftPanel.add(new JScrollPane(listaKierunkow), BorderLayout.CENTER);
+        JButton addButton = new JButton();
+        leftPanel.add(addButton, BorderLayout.SOUTH);
+        panel.add(leftPanel, gbc);
+
+        JPanel rightPanel = new JPanel();
+        rightPanel.add(new JLabel("Wybrane kierunki: "), BorderLayout.NORTH);
+        rightPanel.add(new JScrollPane(listaPreferencji), BorderLayout.CENTER);
+        JButton removeButton = new JButton();
+        rightPanel.add(removeButton, BorderLayout.SOUTH);
+        panel.add(rightPanel, gbc);
 
         Preferencje.add(panel);
         preferencjeKandydatFrame.setVisible(true);
