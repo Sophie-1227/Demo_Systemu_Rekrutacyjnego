@@ -73,6 +73,8 @@ public class PreferencjeKandydata {
     private Panel Preferencje; //ewentualna zmiana na component w zaleznosci od reakcji javy
     private Panel Dane;
     private Panel Matura;
+    JButton addButton;
+    JButton removeButton;
     private JList listaKierunkow; //lista kierunków dostepnych, z ktorych mozemy wybierac
     private JList listaPreferencji; //lista preferencji konkretnego kandydata, czyli kierunki, ktore wybral
     private SortedListModel listaKierunkowModel;
@@ -223,14 +225,34 @@ public class PreferencjeKandydata {
         JPanel leftPanel = new JPanel();
         leftPanel.add(new JLabel("Dostepne kierunki: "), BorderLayout.NORTH);
         leftPanel.add(new JScrollPane(listaKierunkow), BorderLayout.CENTER);
-        JButton addButton = new JButton();
+        addButton = new JButton();
+        addButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        Object selected[] = (Object[]) listaKierunkow.getSelectedValue();
+                        addDestinationElements(selected);
+                        clearSourceSelected();
+                    }
+                }
+        );
         leftPanel.add(addButton, BorderLayout.SOUTH);
         panel.add(leftPanel, gbc);
 
         JPanel rightPanel = new JPanel();
         rightPanel.add(new JLabel("Wybrane kierunki: "), BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(listaPreferencji), BorderLayout.CENTER);
-        JButton removeButton = new JButton();
+        removeButton = new JButton();
+        removeButton.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        Object selected[] = listaPreferencji.getSelectedValues();
+                        addSourceElements(selected);
+                        clearDestinationSelected();
+                    }
+                }
+        );
         rightPanel.add(removeButton, BorderLayout.SOUTH);
         panel.add(rightPanel, gbc);
 
