@@ -208,6 +208,7 @@ set foreign_key_checks = 1;
 call FillPracLog();
 
 #funkcja pomocnicza - szyfuje niezaszyfrowane hasła użytkowników
+drop procedure if exists SecurePracownicy;
 SET FOREIGN_KEY_CHECKS = 0;
 DELIMITER $$
 CREATE PROCEDURE SecurePracownicy()

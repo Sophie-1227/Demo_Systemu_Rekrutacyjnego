@@ -24,8 +24,7 @@ delete from kandydaci where NrRejestracyjny = 1;
 insert into kandydaci values (1, 'Joanna', 'Kraśko', 01270847214, 'Oczekuje na oplate', 0, 1);
 insert into kandydaci values (402, 'Chłopa', 'Porąbało', 2137, 'Oczekuje na oplate', 0 , 0);
 delete from kandydaci where NrRejestracyjny = 402;
-
-SELECT * FROM pracownicylogi WHERE pracownicylogi.Login = 'dupaBlada\n';
+SELECT * FROM pracownicylogi WHERE pracownicylogi.Login = 'EdytaPotockaDDR';
 select * FROM pracownicylogi WHERE IdPracownika = 29;
 SELECT * FROM pracownicylogi WHERE pracownicylogi.IdPracownika = 4;
 SELECT * FROM pracownicylogi WHERE pracownicylogi.Login Like 'KlaraMazurekW4\n';
@@ -35,3 +34,5 @@ insert into pracownicylogi value (30, 'dupaBlada', 'rozkurwiator3000', 0x30);
 insert into pracownicylogi values (31, 'dupaBlada2', 'rozkurwiator3000', 0x30);
 delete from pracownicylogi where IdPracownika = 30 or IdPracownika = 31;
 delete from pracownicylogi;
+
+select * from pracownicy where Imie = 'Ada';

@@ -14,6 +14,9 @@ public interface DatebaseInterface {
     void startConnection(String user) throws SQLException;
     void startConnection(String user, String pass) throws SQLException;
     void closeConnection() throws SQLException;
+    void scroll();
+    void setAutoscroll(boolean on);
+    boolean isResultNull();
 
 
 }

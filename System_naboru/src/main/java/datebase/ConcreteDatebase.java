@@ -1,6 +1,7 @@
 package datebase;
 
 import java.sql.*;
+import java.util.Arrays;
 
 public class ConcreteDatebase implements DatebaseInterface {
 
@@ -56,7 +57,6 @@ public class ConcreteDatebase implements DatebaseInterface {
             System.out.println("Result is empty");
             return null;
         }
-
     }
 
     @Override
@@ -130,6 +130,11 @@ public class ConcreteDatebase implements DatebaseInterface {
 
     public void setAutoscroll(boolean on){
         autoscroll = on;
+    }
+
+    @Override
+    public boolean isResultNull() {
+        return currentResult == null;
     }
 
 

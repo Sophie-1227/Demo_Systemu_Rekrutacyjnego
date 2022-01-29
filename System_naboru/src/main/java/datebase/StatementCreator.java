@@ -27,12 +27,13 @@ public class StatementCreator {
         try {
             statement.setString(1, userName);
             datebase.executeQuery(statement);
+            if(datebase.isResultNull() )
+            datebase.scroll();
             answer = datebase.receiveRow(4);
         } catch (SQLException e) {
             return false;
         }
-
-        return (answer == null);
+        return false;
     }
 
 
