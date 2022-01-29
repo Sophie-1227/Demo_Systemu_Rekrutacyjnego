@@ -75,10 +75,69 @@ public class PreferencjeKandydata {
     private Panel Matura;
     private JList listaKierunkow; //lista kierunków dostepnych, z ktorych mozemy wybierac
     private JList listaPreferencji; //lista preferencji konkretnego kandydata, czyli kierunki, ktore wybral
-    private SortedListModel listakierunkowModel;
+    private SortedListModel listaKierunkowModel;
     private SortedListModel listaPreferencjiModel;
 
+    public void clearlistaKierunkowModel() {
+        listaKierunkowModel.clear();
+    }
 
+    public void clearlistaPreferencjiModel() {
+        listaPreferencjiModel.clear();
+    }
+
+    public void addSourceElements(ListModel newValue) {
+        fillListModel(listaKierunkowModel, newValue);
+    }
+
+    public void setSourceElements(ListModel newValue) {
+        clearlistaKierunkowModel();
+        addSourceElements(newValue);
+    }
+
+    public void addDestinationElements(ListModel newValue) {
+        fillListModel(listaPreferencjiModel, newValue);
+    }
+
+    private void fillListModel(SortedListModel model, ListModel newValues) {
+        int size = newValues.getSize();
+        for (int i = 0; i < size; i++) {
+            model.add(newValues.getElementAt(i));
+        }
+    }
+
+    public void addSourceElements(Object newValue[]) {
+        fillListModel(listaKierunkowModel, newValue);
+    }
+
+    public void setSourceElements(Object newValue[]) {
+        clearlistaKierunkowModel();
+        addSourceElements(newValue);
+    }
+
+    public void addDestinationElements(Object newValue[]) {
+        fillListModel(listaPreferencjiModel, newValue);
+    }
+
+    private void fillListModel(SortedListModel model, Object newValues[]) {
+        model.addAll(newValues);
+    }
+
+    private void clearSourceSelected() {
+        Object selected[] = listaKierunkow.getSelectedValues();
+        for (int i = selected.length - 1; i >= 0; --i) {
+            listaKierunkowModel.removeElement(selected[i]);
+        }
+        listaKierunkow.getSelectionModel().clearSelection();
+    }
+
+    private void clearDestinationSelected() {
+        Object selected[] = listaPreferencji.getSelectedValues();
+        for (int i = selected.length - 1; i >= 0; --i) {
+            listaPreferencjiModel.removeElement(selected[i]);
+        }
+        listaPreferencji.getSelectionModel().clearSelection();
+    }
 
 
     public PreferencjeKandydata(){
