@@ -79,6 +79,8 @@ DELIMITER ;
 #tylko tutaj, jeśli ktoś wpisze i zatwierdzi coś poniżej 30 procent
 # a potem mu się "przypomni", że jednak zdał, to trzeba będzie ręcznie mu przywrócić odpowiedni status
 
+
+drop trigger if exists passSecureKandydat;
 DELIMITER $$
 CREATE TRIGGER passSecureKandydat
    AFTER INSERT ON logkandydaci
@@ -90,6 +92,8 @@ CREATE TRIGGER passSecureKandydat
    end ;
 DELIMITER ;
 
+
+drop trigger if exists passSecurePracownik;
 DELIMITER $$
 CREATE TRIGGER passSecurePracownik
    AFTER INSERT ON pracownicylogi

@@ -1,22 +1,39 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class AdminLog {
     private Frame adminLogFrame;
     private Label headerLabelAdminLog;
     private Panel adminLogPanel;
+    DatebaseInterface datebase;
+    StatementCreator creator;
 
-    public AdminLog(){
+    public AdminLog(DatebaseInterface datebase){
         prepareLogGUI();
+        this.datebase = datebase;
+
+        try {
+            datebase.startConnection("login");
+            creator = new StatementCreator(datebase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showMessageDialog(adminLogFrame, "Couldn't access database");
+
+        }
     }
 
     private void prepareLogGUI(){
@@ -76,9 +93,24 @@ public class AdminLog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        AdminChoice ac = new AdminChoice();
-                        ac.setGridBagLayout();
-                        adminLogFrame.setVisible(false);
+                        if( creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.WORKER) ){
+                            try {
+                                datebase.closeConnection();
+                                datebase.startConnection("root");
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                                showMessageDialog(adminLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako admin");
+                            }
+                            AdminChoice ac = new AdminChoice();
+                            ac.setGridBagLayout();
+                            adminLogFrame.setVisible(false);
+                        } else {
+                            showMessageDialog(adminLogFrame, "Niepoprawne dane logowania");
+                            login.setText("");
+                            pass.setText("");
+                        }
+
+
                     }
                 }
         );

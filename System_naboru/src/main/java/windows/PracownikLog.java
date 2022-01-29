@@ -1,5 +1,8 @@
 package windows;
 
+import datebase.ConcreteDatebase;
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
 import main.java.SearchEnginePracownika;
 
 import javax.swing.*;
@@ -8,17 +11,31 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+import java.util.Date;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class PracownikLog {
     private Frame pracownikLogFrame;
     private Label headerLabelPracownikLog;
     private Panel pracownikLogPanel;
+    DatebaseInterface datebase;
+    StatementCreator creator;
 
-    public PracownikLog(){
+    public PracownikLog(DatebaseInterface datebase){
         prepareLogGUI();
+        this.datebase = datebase;
+        try {
+            datebase.startConnection("login");
+            creator = new StatementCreator(datebase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showMessageDialog(pracownikLogFrame, "Couldn't access database");
+
+        }
     }
 
     private void prepareLogGUI(){
@@ -78,9 +95,22 @@ public class PracownikLog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SearchEnginePracownika sep = new SearchEnginePracownika();
-                        sep.setGridBagLayout();
-                        pracownikLogFrame.setVisible(false);
+                        if(creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.WORKER)){
+                            try {
+                                datebase.closeConnection();
+                                datebase.startConnection("worker");
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                                showMessageDialog(pracownikLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako pracownik");
+                            }
+                            SearchEnginePracownika sep = new SearchEnginePracownika();
+                            sep.setGridBagLayout();
+                            pracownikLogFrame.setVisible(false);
+                        } else {
+                            showMessageDialog(pracownikLogFrame, "Niepoprawne dane logowania");
+                            login.setText("");
+                            pass.setText("");
+                        }
                     }
                 }
         );

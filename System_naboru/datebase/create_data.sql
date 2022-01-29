@@ -162,6 +162,7 @@ DELIMITER ;
 CALL FillMatury();
 
 SET FOREIGN_KEY_CHECKS = 0;
+drop procedure if exists FillKanLog;
 DELIMITER $$
 CREATE PROCEDURE FillKanLog()
 BEGIN
@@ -169,18 +170,20 @@ BEGIN
    DECLARE l INT DEFAULT 264506;
    DECLARE h INT DEFAULT 0122;
    WHILE i<401 DO
-       INSERT INTO students_datebase.logkandydaci values (i, CONCAT('pwr', l), CONCAT('password', h));
+       INSERT INTO students_datebase.logkandydaci values (i, CONCAT('pwr', l), CONCAT('password', h), 0x30);
        SET i = i+1;
        SET l = l+1;
        SET h = h+1;
        end while ;
 end ;
 DELIMITER ;
+set foreign_key_checks = 1;
 
 call FillKanLog();
 
 SET FOREIGN_KEY_CHECKS = 0;
 DELIMITER $$
+drop procedure if exists FillPracLog;
 CREATE PROCEDURE FillPracLog()
 BEGIN
    DECLARE i INT DEFAULT 1;
@@ -192,12 +195,14 @@ BEGIN
        SET name = (SELECT Imie FROM pracownicy WHERE IdPracownika=i);
        SET sname = (SELECT Nazwisko FROM pracownicy WHERE IdPracownika=i);
        SET dzial = (SELECT Jednostka FROM pracownicy WHERE IdPracownika=i);
-       INSERT INTO students_datebase.pracownicylogi values (i, CONCAT(CONCAT(name,sname),dzial), CONCAT('Rekrutacja', p));
+       INSERT INTO students_datebase.pracownicylogi values (i, CONCAT(CONCAT(name,sname),dzial), CONCAT('Rekrutacja', p), 0x30);
        SET p = p+1;
        SET i = i+1;
        end while ;
 end ;
 DELIMITER ;
+set foreign_key_checks = 1;
+
 call FillPracLog();
 
 SET FOREIGN_KEY_CHECKS = 0;
@@ -213,5 +218,6 @@ BEGIN
        end while ;
 end ;
 DELIMITER $$
+set foreign_key_checks = 1;
 
 call SecurePracownicy();

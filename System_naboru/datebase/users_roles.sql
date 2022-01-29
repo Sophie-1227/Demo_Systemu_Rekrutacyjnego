@@ -47,3 +47,9 @@ drop user if exists Worker@localhost;
 create user Worker@localhost;
 set password for Worker@localhost = password('TylkoJednoWGlowieMam');
 grant appWorker to Worker@localhost;
+
+drop user if exists LogCheck@localhost;
+create user LogCheck@localhost;
+set password for LogCheck@localhost = password('kardynal');
+grant select on pracownicylogi to LogCheck@localhost;
+grant select on logkandydaci to LogCheck@localhost;

@@ -95,12 +95,7 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania kandydata
-                        try {
-                            database.startConnection("candidate");
-                        } catch (SQLException ex) {
-                            showMessageDialog(mainFrame, "Nie udało się zalogować");
-                        }
-                        KandydatLog kandydat = new KandydatLog();
+                        KandydatLog kandydat = new KandydatLog(database);
                         kandydat.setGridBagLayout();
                         mainFrame.setVisible(false);
                     }
@@ -112,12 +107,7 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania pracownika
-                        try {
-                            database.startConnection("worker");
-                        } catch (SQLException ex) {
-                            showMessageDialog(mainFrame, "Nie udało się zalogować");
-                        }
-                       PracownikLog pracownik = new PracownikLog();
+                       PracownikLog pracownik = new PracownikLog(database);
                         pracownik.setGridBagLayout();
                         mainFrame.setVisible(false);
                     }
@@ -129,12 +119,7 @@ public class Menu {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Otwieranie okna do logowania admina
-                        try {
-                            database.startConnection("root");
-                        } catch (SQLException ex) {
-                            showMessageDialog(mainFrame, "Nie udało się zalogować");
-                        }
-                        AdminLog admin = new AdminLog();
+                        AdminLog admin = new AdminLog(database);
                         admin.setGridBagLayout();
                         mainFrame.setVisible(false);
                     }
@@ -142,7 +127,6 @@ public class Menu {
         );
 
         controlPanel.add(panel);
-
         mainFrame.setVisible(true);
     }
 }

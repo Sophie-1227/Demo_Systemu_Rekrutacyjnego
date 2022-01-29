@@ -1,23 +1,39 @@
 package windows;
 
+import datebase.ConcreteDatebase;
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.GregorianCalendar;
+import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 public class KandydatLog {
     private Frame kandydatLogFrame;
     private Label headerLabelKandydatLog;
     private Panel kandydatLogPanel;
+    DatebaseInterface datebase;
+    StatementCreator creator;
 
-    public KandydatLog(){
+    public KandydatLog(DatebaseInterface datebase){
         prepareLogGUI();
+        this.datebase = datebase;
+        try {
+            datebase.startConnection("login");
+            creator = new StatementCreator(datebase);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            showMessageDialog(kandydatLogFrame, "Couldn't access database");
+
+        }
     }
 
     private void prepareLogGUI(){
@@ -75,15 +91,26 @@ public class KandydatLog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-
-
-
                         //Panel z panelami do wpisania danych szczegółowych
-                        PreferencjeKandydata pref = new PreferencjeKandydata();
-                        pref.setGridBagDaneLayout();
-                        pref.setGridBagMaturyLayout();
-                        pref.setGridBagPreferencjeLayout();
-                        kandydatLogFrame.setVisible(false);
+                        if(creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.CANDIDATE)){
+
+                            try {
+                                datebase.closeConnection();
+                                datebase.startConnection("candidate");
+                            } catch (SQLException ex) {
+                                ex.printStackTrace();
+                                showMessageDialog(kandydatLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako kandydat");
+                            }
+                            PreferencjeKandydata pref = new PreferencjeKandydata();
+                            pref.setGridBagDaneLayout();
+                            pref.setGridBagMaturyLayout();
+                            pref.setGridBagPreferencjeLayout();
+                            kandydatLogFrame.setVisible(false);
+                        } else {
+                            showMessageDialog(kandydatLogFrame, "Niepoprawne dane logowania");
+                            login.setText("");
+                            pass.setText("");
+                        }
                     }
                 }
         );

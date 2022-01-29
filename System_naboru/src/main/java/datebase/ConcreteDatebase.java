@@ -6,7 +6,7 @@ public class ConcreteDatebase implements DatebaseInterface {
 
 
 
-    final String dbUrl = "jdbc:mysql://localhost:3306/lista_3_db";
+    final String dbUrl = "jdbc:mysql://localhost:3306/students_datebase";
     Connection dbConnection;
     ResultSet currentResult;
     boolean autoscroll = true;
@@ -14,6 +14,7 @@ public class ConcreteDatebase implements DatebaseInterface {
 
     @Override
     public PreparedStatement prepareQuery(String query) {
+        System.out.println("Preparing query");
         PreparedStatement statement = null;
         try {
             statement = dbConnection.prepareStatement(query);
@@ -25,9 +26,9 @@ public class ConcreteDatebase implements DatebaseInterface {
 
     @Override
     public boolean executeQuery(PreparedStatement query) {
+        System.out.println("Trying to execute query:\n " +query.toString());
         try {
             currentResult = query.executeQuery();
-            query.close();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
@@ -52,7 +53,7 @@ public class ConcreteDatebase implements DatebaseInterface {
         try {
             return receiveCol(currentResult.findColumn(colName));
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Result is empty");
             return null;
         }
 
@@ -60,13 +61,14 @@ public class ConcreteDatebase implements DatebaseInterface {
 
     @Override
     public String[] receiveRow(int colNo){
+
         StringBuilder rowStr = new StringBuilder();
         for(int i=1; i<=colNo; i++){
             try {
                 rowStr.append(currentResult.getString(i));
                 rowStr.append(";;");
             } catch (SQLException e) {
-                e.printStackTrace();
+                System.out.println("Result is empty");
             }
         }
         if(autoscroll){
@@ -80,6 +82,16 @@ public class ConcreteDatebase implements DatebaseInterface {
             }
         }
         return rowStr.toString().split(";;");
+    }
+
+    @Override
+    public void closeQuery(PreparedStatement query) {
+        try {
+            query.close();
+        } catch (SQLException e) {
+            e.printStackTrace();
+            System.out.println("Could not close query");
+        }
     }
 
     @Override
@@ -97,11 +109,13 @@ public class ConcreteDatebase implements DatebaseInterface {
             currentResult.close();
             currentResult = null;
         } catch (SQLException e) {
-            e.printStackTrace();
+            System.out.println("Result is empty");
             return null;
         }
         return colStr.toString().split(";;");
     }
+
+
 
     public void scroll(){
         try {
@@ -129,20 +143,21 @@ public class ConcreteDatebase implements DatebaseInterface {
             case "root" -> User.root;
             case "worker" -> User.worker;
             case "candidate" -> User.candidate;
+            case "login" -> User.logCheck;
             default -> null;
         };
         dbConnection = DriverManager.getConnection(dbUrl, u.getName(), u.getPass());
     }
 
     public void closeConnection() throws SQLException {
-
         if(dbConnection != null) dbConnection.close();
     }
 
     private static class User{
         final static User root = new User("root", "");
-        final static User candidate = new User("Candidate", "PinkiePieIsTheBest");
+        final static User candidate = new User("Candidate", "PinkiePIeIsTheBest");
         final static User worker = new User("Worker", "TylkoJednoWGlowieMam");
+        final static User logCheck = new User("LogCheck", "kardynal");
 
         String name;
         String pass;
