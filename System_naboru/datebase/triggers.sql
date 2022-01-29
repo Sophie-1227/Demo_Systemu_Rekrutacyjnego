@@ -83,12 +83,12 @@ DELIMITER ;
 drop trigger if exists passSecureKandydat;
 DELIMITER $$
 CREATE TRIGGER passSecureKandydat
-   AFTER INSERT ON logkandydaci
+   before INSERT ON logkandydaci
    FOR EACH ROW
    BEGIN
-       UPDATE logkandydaci
-       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
-       WHERE IdKandydata = new.IdKandydata;
+       #UPDATE logkandydaci
+       SET new.securePass = COMPRESS(AES_ENCRYPT(new.Haslo, 27)), new.Haslo=null;
+       #WHERE IdKandydata = new.IdKandydata;
    end ;
 DELIMITER ;
 
@@ -96,11 +96,11 @@ DELIMITER ;
 drop trigger if exists passSecurePracownik;
 DELIMITER $$
 CREATE TRIGGER passSecurePracownik
-   AFTER INSERT ON pracownicylogi
+   before INSERT ON pracownicylogi
    FOR EACH ROW
    BEGIN
-       UPDATE pracownicylogi
-       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
-       WHERE IdPracownika = new.IdPracownika;
+       #UPDATE pracownicylogi
+       SET new.securePass = COMPRESS(AES_ENCRYPT(new.Haslo, 27)), new.Haslo=null;
+       #WHERE IdPracownika = new.IdPracownika;
    end ;
 DELIMITER ;

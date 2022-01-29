@@ -181,6 +181,8 @@ set foreign_key_checks = 1;
 
 call FillKanLog();
 
+
+#funkcja pomocnicza - wypełnia tabelę pracownicy logi pracownikami z tabeli pracownicy
 SET FOREIGN_KEY_CHECKS = 0;
 DELIMITER $$
 drop procedure if exists FillPracLog;
@@ -195,7 +197,7 @@ BEGIN
        SET name = (SELECT Imie FROM pracownicy WHERE IdPracownika=i);
        SET sname = (SELECT Nazwisko FROM pracownicy WHERE IdPracownika=i);
        SET dzial = (SELECT Jednostka FROM pracownicy WHERE IdPracownika=i);
-       INSERT INTO students_datebase.pracownicylogi values (i, CONCAT(CONCAT(name,sname),dzial), CONCAT('Rekrutacja', p), 0x30);
+       INSERT INTO students_datebase.pracownicylogi value (i, CONCAT(name,sname,dzial), CONCAT('Rekrutacja', p), 0x30);
        SET p = p+1;
        SET i = i+1;
        end while ;
@@ -205,6 +207,7 @@ set foreign_key_checks = 1;
 
 call FillPracLog();
 
+#funkcja pomocnicza - szyfuje niezaszyfrowane hasła użytkowników
 SET FOREIGN_KEY_CHECKS = 0;
 DELIMITER $$
 CREATE PROCEDURE SecurePracownicy()
