@@ -239,6 +239,9 @@ public class PreferencjeKandydata {
         leftPanel.add(addButton, BorderLayout.SOUTH);
         panel.add(leftPanel, gbc);
 
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
         JPanel rightPanel = new JPanel();
         rightPanel.add(new JLabel("Wybrane kierunki: "), BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(listaPreferencji), BorderLayout.CENTER);
