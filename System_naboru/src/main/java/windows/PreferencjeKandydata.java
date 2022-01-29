@@ -36,6 +36,10 @@ public class PreferencjeKandydata {
         preferencjeKandydataPane = new JTabbedPane(SwingConstants.LEFT);
         preferencjeKandydataPane.setLayout(new FlowLayout());
 
+        Dane = new Panel();
+        Preferencje = new Panel();
+        Matura = new Panel();
+
         preferencjeKandydataPane.addTab("Dane Osobowe", Dane);
         preferencjeKandydataPane.addTab("Preferencje", Preferencje);
         preferencjeKandydataPane.addTab("Wyniki Matur", Matura);
