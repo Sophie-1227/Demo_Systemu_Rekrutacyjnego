@@ -136,12 +136,13 @@ public class Register {
                 if(pass.getText().equals(pass2.getText())){
                     if(creator.userRegister(login.getText(), name.getText(), sname.getText(), pass.getText(), pesel.getText(), isOlim) ){
                         showMessageDialog(registerFrame, "Rejestracja przebiegła pomyślnie");
-                        PreferencjeKandydata pref = new PreferencjeKandydata();
-                        pref.setGridBagDaneLayout();
-                        pref.setGridBagMaturyLayout();
-                        pref.setGridBagPreferencjeLayout();
-                        pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
-                        registerFrame.setVisible(false);
+                        try {
+                            datebase.startConnection("candidate");
+                            new PreferencjeKandydata(datebase, creator);
+                            registerFrame.setVisible(false);
+                        } catch (SQLException ex) {
+                            ex.printStackTrace();
+                        }
                     } else {
                         showMessageDialog(registerFrame,"Nie można zarejestrować kandydata");
                     }

@@ -1,5 +1,8 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -67,6 +70,10 @@ class SortedListModel extends AbstractListModel {
 
 
 public class PreferencjeKandydata {
+
+    DatebaseInterface datebase;
+    StatementCreator creator;
+
     private Frame preferencjeKandydatFrame;
     private Label headerLabelPreferencjekandydata;
     private JTabbedPane preferencjeKandydataPane;
@@ -79,6 +86,20 @@ public class PreferencjeKandydata {
     private JList listaPreferencji; //lista preferencji konkretnego kandydata, czyli kierunki, ktore wybral
     private SortedListModel listaKierunkowModel;
     private SortedListModel listaPreferencjiModel;
+
+    public PreferencjeKandydata(DatebaseInterface datebase, StatementCreator creator){
+        this.datebase = datebase;
+        this.creator = creator;
+        listaKierunkowModel = new SortedListModel();
+        listaPreferencjiModel = new SortedListModel();
+        listaKierunkow = new JList(listaKierunkowModel);
+        listaPreferencji = new JList(listaPreferencjiModel);
+        prepareGUI();
+        //setGridBagDaneLayout();
+        //setGridBagMaturyLayout();
+        //setGridBagPreferencjeLayout();
+        //addSourceElements(new String[] {"Tu", "Beda", "Wypisane", "Kierunki"});
+    }
 
     public void clearlistaKierunkowModel() {
         listaKierunkowModel.clear();
@@ -141,11 +162,6 @@ public class PreferencjeKandydata {
         listaPreferencji.getSelectionModel().clearSelection();
     }
 
-
-    public PreferencjeKandydata(){
-        prepareGUI();
-    }
-
     public void prepareGUI(){
         preferencjeKandydatFrame = new Frame("Wybór preferencji");
         preferencjeKandydatFrame.setSize(700, 500);
@@ -161,7 +177,7 @@ public class PreferencjeKandydata {
         headerLabelPreferencjekandydata.setFont(font);
 
         preferencjeKandydataPane = new JTabbedPane(SwingConstants.LEFT);
-        preferencjeKandydataPane.setLayout(new FlowLayout());
+        //preferencjeKandydataPane.setLayout(new FlowLayout());
 
         Dane = new Panel();
         Preferencje = new Panel();

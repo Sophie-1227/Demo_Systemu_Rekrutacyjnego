@@ -29,6 +29,7 @@ public class StatementCreator {
             statement.setString(2, password);
             if(datebase.executeQuery(statement, true) && !datebase.isResultNull()){
                 datebase.scroll();
+                if(datebase.isResultNull()) return false;
                 answer = datebase.receiveRow(4);
                 if(answer != null) return true;
             }

@@ -95,11 +95,7 @@ public class KandydatLog {
                         if(creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.CANDIDATE)){
                             try {
                                 datebase.startConnection("candidate");
-                                PreferencjeKandydata pref = new PreferencjeKandydata();
-                                pref.setGridBagDaneLayout();
-                                pref.setGridBagMaturyLayout();
-                                pref.setGridBagPreferencjeLayout();
-                                pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
+                                new PreferencjeKandydata(datebase, creator);
                                 kandydatLogFrame.setVisible(false);
                             } catch (SQLException ex) {
                                 showMessageDialog(kandydatLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako kandydat");
