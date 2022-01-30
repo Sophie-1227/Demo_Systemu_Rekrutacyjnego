@@ -259,6 +259,18 @@ public class PreferencjeKandydata {
         rightPanel.add(removeButton, BorderLayout.SOUTH);
         panel.add(rightPanel, gbc);
 
+        gbc.fill = GridBagConstraints.SOUTH;
+        JButton confirm = new JButton("Zatwierdz");
+        confirm.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        //Przeslij wprowadzone dane do bazy danych
+                    }
+                }
+        );
+        panel.add(confirm, gbc);
+
         Preferencje.add(panel);
         preferencjeKandydatFrame.setVisible(true);
 
@@ -275,10 +287,157 @@ public class PreferencjeKandydata {
         panel.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
 
+        //Do dodania pola tekstowe + label do każdego przedmiotu
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        //Do dodania pola tekstowe + label do każdego przedmiotu
+        JLabel polski = new JLabel("J.Polski Podstawowy");
+        panel.add(polski, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JTextField polskiWynik = new JTextField();
+        panel.add(polskiWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JLabel matPodstawa = new JLabel("Matematyka Podstawowa");
+        panel.add(matPodstawa, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JTextField matPodstWynik = new JTextField();
+        panel.add(matPodstWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        JLabel matRozszerzenie = new JLabel("Matematyka Rozszerzenie");
+        panel.add(matRozszerzenie, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        JTextField matRozWynik = new JTextField();
+        panel.add(matRozWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        JLabel jezykPodstawa = new JLabel("J.Obcy Podstawowy");
+        panel.add(jezykPodstawa, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        JTextField jezykPodstWynik = new JTextField();
+        panel.add(jezykPodstWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        JLabel jezykRozszerzenie = new JLabel("J.Obcy Rozszerzenie");
+        panel.add(jezykRozszerzenie, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        JTextField jezykRozWynik = new JTextField();
+        panel.add(jezykRozWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        JLabel fizyka = new JLabel("Fizyka");
+        panel.add(fizyka, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        JTextField fizykaWynik = new JTextField();
+        panel.add(fizykaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        JLabel chemia = new JLabel("Chemia");
+        panel.add(chemia, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        JTextField chemiaWynik = new JTextField();
+        panel.add(chemiaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        JLabel biologia = new JLabel("Biologia");
+        panel.add(biologia, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        JTextField biologiaWynik = new JTextField();
+        panel.add(biologiaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        JLabel inf = new JLabel("Informatyka");
+        panel.add(inf, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 8;
+        JTextField infWynik = new JTextField();
+        panel.add(infWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        JLabel geo = new JLabel("Geografia");
+        panel.add(geo, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 10;
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        JTextField geoWynik = new JTextField();
+        panel.add(geoWynik, gbc);
+
+        gbc.fill = GridBagConstraints.SOUTH;
+        JButton confirm = new JButton("Zatwierdz");
+        confirm.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        //Przeslanie wpisanych wartosci do bazy danych
+                    }
+                }
+        );
+        panel.add(confirm, gbc);
+
 
         Matura.add(panel);
         preferencjeKandydatFrame.setVisible(true);
