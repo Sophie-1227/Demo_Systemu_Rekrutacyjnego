@@ -10,7 +10,7 @@ public class ConcreteDatebase implements DatebaseInterface {
     final String dbUrl = "jdbc:mysql://localhost:3306/students_datebase";
     Connection dbConnection;
     ResultSet currentResult;
-    boolean autoscroll = true;
+    boolean autoscroll = false;
 
 
     @Override
@@ -44,6 +44,7 @@ public class ConcreteDatebase implements DatebaseInterface {
         autoscroll = true;
         for(int i=1; i<=colNo; i++){
             table[i] = receiveRow(i);
+            if(table[i] == null) return null;
         }
         autoscroll = temp;
         return table;
@@ -66,9 +67,11 @@ public class ConcreteDatebase implements DatebaseInterface {
         for(int i=1; i<=colNo; i++){
             try {
                 rowStr.append(currentResult.getString(i));
+                System.out.println(currentResult.getString(i));
                 rowStr.append(";;");
             } catch (SQLException e) {
                 System.out.println("Result is empty");
+                return null;
             }
         }
         if(autoscroll){
@@ -76,6 +79,7 @@ public class ConcreteDatebase implements DatebaseInterface {
                 if( !currentResult.next()){
                     currentResult.close();
                     currentResult = null;
+                    System.out.println("Zamknięto odpowiedź, bo jest już pusta");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();
@@ -141,6 +145,7 @@ public class ConcreteDatebase implements DatebaseInterface {
     public void startConnection(String user, String pass) throws SQLException {
         closeConnection();
         dbConnection = DriverManager.getConnection(dbUrl, user, pass);
+        System.out.println("Started connection as user: "+user);
     }
     public void startConnection(String user) throws SQLException {
         closeConnection();
@@ -152,10 +157,12 @@ public class ConcreteDatebase implements DatebaseInterface {
             default -> null;
         };
         dbConnection = DriverManager.getConnection(dbUrl, u.getName(), u.getPass());
+        System.out.println("Started connection as user: "+u.getName());
     }
 
     public void closeConnection() throws SQLException {
         if(dbConnection != null) dbConnection.close();
+        dbConnection = null;
     }
 
     private static class User{

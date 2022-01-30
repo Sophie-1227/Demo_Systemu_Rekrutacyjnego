@@ -36,3 +36,7 @@ delete from pracownicylogi where IdPracownika = 30 or IdPracownika = 31;
 delete from pracownicylogi;
 
 select * from pracownicy where Imie = 'Ada';
+
+show grants for Worker@localhost;
+
+SELECT * FROM pracownicylogi WHERE Login = 'dupaBlada' and AES_DECRYPT(UNCOMPRESS(PracownicyLogi.securePass), 27) = 'rozkurwiator3000';

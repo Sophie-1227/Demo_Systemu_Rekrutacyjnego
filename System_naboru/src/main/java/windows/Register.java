@@ -1,9 +1,16 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
@@ -12,8 +19,12 @@ public class Register {
     private Frame registerFrame;
     private Label headerLabelRegister;
     private Panel registerPanel;
+    DatebaseInterface datebase;
+    StatementCreator creator;
 
-    public Register(){
+    public Register(DatebaseInterface datebase, StatementCreator creator){
+        this.datebase = datebase;
+        this.creator = creator;
         prepareLogGUI();
     }
 
@@ -81,13 +92,20 @@ public class Register {
         gbc.ipady = 20;
         gbc.gridx = 0;
         gbc.gridy = 4;
+        JTextField czyOlim = new JTextField("Wpisz TAK, jeśli jesteś laureatem lub finalistą olimpiady");
+        panel.add(czyOlim, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
         JTextField pass = new JTextField("Hasło");
         panel.add(pass, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 0;
-        gbc.gridy = 5;
+        gbc.gridy = 6;
         JTextField pass2 = new JTextField("Powtórz hasło");
         panel.add(pass2, gbc);
 
@@ -100,6 +118,32 @@ public class Register {
 
         registerPanel.add(panel);
         registerFrame.setVisible(true);
+
+        register.addActionListener(new ActionListener() {
+            int isOlim;
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                if(czyOlim.getText().equals("TAK")) isOlim = 1;
+                else isOlim = 0;
+
+                if(pass.getText().equals(pass2.getText())){
+                    if(creator.userRegister(login.getText(), name.getText(), sname.getText(), pass.getText(), pesel.getText(), isOlim) ){
+                        showMessageDialog(registerFrame, "Rejestracja przebiegła pomyślnie");
+                        PreferencjeKandydata pref = new PreferencjeKandydata();
+                        pref.setGridBagDaneLayout();
+                        pref.setGridBagMaturyLayout();
+                        pref.setGridBagPreferencjeLayout();
+                        pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
+                        registerFrame.setVisible(false);
+                    } else {
+                        showMessageDialog(registerFrame,"Nie można zarejestrować kandydata");
+                    }
+                } else{
+                    showMessageDialog(registerFrame, "Podane hasła nie są jednakowe");
+                }
+
+            }
+        });
 
     }
 

@@ -26,7 +26,7 @@ DELIMITER ;
 delimiter $$
 drop trigger if exists NewStudent;
 create trigger NewStudent
-  before insert on userslog
+  before insert on kandydaci
   for each row
   begin
 

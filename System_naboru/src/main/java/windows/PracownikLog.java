@@ -97,15 +97,14 @@ public class PracownikLog {
                     public void actionPerformed(ActionEvent e) {
                         if(creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.WORKER)){
                             try {
-                                datebase.closeConnection();
                                 datebase.startConnection("worker");
+                                SearchEnginePracownika sep = new SearchEnginePracownika();
+                                sep.setGridBagLayout();
+                                pracownikLogFrame.setVisible(false);
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
                                 showMessageDialog(pracownikLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako pracownik");
                             }
-                            SearchEnginePracownika sep = new SearchEnginePracownika();
-                            sep.setGridBagLayout();
-                            pracownikLogFrame.setVisible(false);
                         } else {
                             showMessageDialog(pracownikLogFrame, "Niepoprawne dane logowania");
                             login.setText("");
@@ -114,7 +113,6 @@ public class PracownikLog {
                     }
                 }
         );
-
         pracownikLogPanel.add(panel);
         pracownikLogFrame.setVisible(true);
 

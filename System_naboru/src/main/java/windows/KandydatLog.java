@@ -93,20 +93,18 @@ public class KandydatLog {
                     public void actionPerformed(ActionEvent e) {
                         //Panel z panelami do wpisania danych szczegółowych
                         if(creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.CANDIDATE)){
-
                             try {
-                                datebase.closeConnection();
                                 datebase.startConnection("candidate");
+                                PreferencjeKandydata pref = new PreferencjeKandydata();
+                                pref.setGridBagDaneLayout();
+                                pref.setGridBagMaturyLayout();
+                                pref.setGridBagPreferencjeLayout();
+                                pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
+                                kandydatLogFrame.setVisible(false);
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
                                 showMessageDialog(kandydatLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako kandydat");
                             }
-                            PreferencjeKandydata pref = new PreferencjeKandydata();
-                            pref.setGridBagDaneLayout();
-                            pref.setGridBagMaturyLayout();
-                            pref.setGridBagPreferencjeLayout();
-                            pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
-                            kandydatLogFrame.setVisible(false);
                         } else {
                             showMessageDialog(kandydatLogFrame, "Niepoprawne dane logowania");
                             login.setText("");
@@ -127,7 +125,7 @@ public class KandydatLog {
             @Override
             public void actionPerformed(ActionEvent e) {
                 //Otwieranie okna do logowania pracownika
-                Register register1 = new Register();
+                Register register1 = new Register(datebase, creator);
                 register1.setGridBagLayout();
                 kandydatLogFrame.setVisible(false);
             }

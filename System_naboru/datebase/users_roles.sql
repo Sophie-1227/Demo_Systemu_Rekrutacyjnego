@@ -31,6 +31,9 @@ grant update on preferencjekandydata to appWorker;
 
 grant insert on kandydaci to appWorker;
 
+#flushing
+flush privileges;
+
 #grant execute on function  to appWorker;
 #doda się jak już będą takie funkcje
 
@@ -53,3 +56,29 @@ create user LogCheck@localhost;
 set password for LogCheck@localhost = password('kardynal');
 grant select on pracownicylogi to LogCheck@localhost;
 grant select on logkandydaci to LogCheck@localhost;
+
+grant select on kandydaci to Worker@localhost;
+grant select on wynikimatur to Worker@localhost;
+grant select on preferencjekandydata to Worker@localhost;
+grant select on kierunki to Worker@localhost;
+grant select on boolwskaznikikierunki to Worker@localhost;
+
+grant update on kandydaci to Worker@localhost;
+grant update on wynikimatur to Worker@localhost;
+grant update on preferencjekandydata to Worker@localhost;
+
+grant insert on kandydaci to Worker@localhost;
+
+grant select on kandydaci to Candidate@localhost;
+grant select on wskaznik to Candidate@localhost;
+grant select on wynikimatur to Candidate@localhost;
+grant select on preferencjekandydata to Candidate@localhost;
+grant select on kierunki to Candidate@localhost;
+
+grant insert on kandydaci to Candidate@localhost;
+grant insert on wynikimatur to Candidate@localhost;
+grant insert on preferencjekandydata to Candidate@localhost;
+
+grant update on preferencjekandydata to Candidate@localhost;
+
+flush privileges;

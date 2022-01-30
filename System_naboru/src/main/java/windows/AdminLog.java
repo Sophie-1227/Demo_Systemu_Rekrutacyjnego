@@ -93,31 +93,17 @@ public class AdminLog {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        if( creator.userCheck(login.getText(), pass.getText(), StatementCreator.UserType.WORKER) ){
-                            try {
-                                datebase.closeConnection();
-                                datebase.startConnection("root");
-                            } catch (SQLException ex) {
-                                ex.printStackTrace();
-                                showMessageDialog(adminLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako admin");
-                            }
-                            AdminChoice ac = new AdminChoice();
-                            ac.setGridBagLayout();
-                            adminLogFrame.setVisible(false);
-                        } else {
-                            showMessageDialog(adminLogFrame, "Niepoprawne dane logowania");
-                            login.setText("");
-                            pass.setText("");
+
+                        try {
+                            datebase.startConnection(login.getText(), pass.getText());
+                            adminLogPanel.add(panel);
+                            adminLogFrame.setVisible(true);
+                        } catch (SQLException ex) {
+                            System.out.println("Nieprawidłowe dane logowania");
                         }
-
-
                     }
                 }
         );
-
-        adminLogPanel.add(panel);
-        adminLogFrame.setVisible(true);
-
     }
 
 }
