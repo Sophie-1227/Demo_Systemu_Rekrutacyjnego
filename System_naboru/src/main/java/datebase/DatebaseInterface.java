@@ -5,7 +5,7 @@ import java.sql.SQLException;
 
 public interface DatebaseInterface {
     PreparedStatement prepareQuery(String query);
-    boolean executeQuery(PreparedStatement query);
+    boolean executeQuery(PreparedStatement query, boolean shouldReturnResult);
     String[][] receiveAnswer(int colNo);
     String[] receiveCol(String colName);
     String[] receiveCol(int colInd);

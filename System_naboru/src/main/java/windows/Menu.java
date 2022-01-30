@@ -125,7 +125,6 @@ public class Menu {
                     }
                 }
         );
-
         controlPanel.add(panel);
         mainFrame.setVisible(true);
     }

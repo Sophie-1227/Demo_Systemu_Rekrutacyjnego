@@ -26,10 +26,11 @@ public class ConcreteDatebase implements DatebaseInterface {
     }
 
     @Override
-    public boolean executeQuery(PreparedStatement query) {
+    public boolean executeQuery(PreparedStatement query, boolean shouldReturnResult) {
         System.out.println("Trying to execute query:\n " +query.toString());
         try {
-            currentResult = query.executeQuery();
+            if(shouldReturnResult) currentResult = query.executeQuery();
+            else return query.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;

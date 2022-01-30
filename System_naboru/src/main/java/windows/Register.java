@@ -10,6 +10,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.sql.SQLException;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import static java.awt.Font.BOLD;
@@ -29,8 +31,13 @@ public class Register {
     }
 
     private void prepareLogGUI(){
+        try {
+            datebase.startConnection("candidate");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
         registerFrame = new Frame("Okno rejestracji");
-        registerFrame.setSize(700, 500);
+        registerFrame.setSize(700, 800);
         registerFrame.setLayout(new GridLayout(2, 1));
         registerFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -112,7 +119,7 @@ public class Register {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 0;
-        gbc.gridy = 6;
+        gbc.gridy = 7;
         JButton register = new JButton("Zatwierdź");
         panel.add(register, gbc);
 

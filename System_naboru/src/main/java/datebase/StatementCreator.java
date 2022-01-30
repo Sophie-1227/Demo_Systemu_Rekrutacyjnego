@@ -20,14 +20,14 @@ public class StatementCreator {
         if(type == UserType.CANDIDATE ) typeStr = "logkandydaci";
         else if (type == UserType.WORKER) typeStr = "pracownicylogi";
         //UWAGA: póki co sprawdza tylko i wyłącznie login, bo nie wiem do końca jak z tymi hasłami zrobić
-        String query = "SELECT * FROM pracownicylogi WHERE Login = ? and AES_DECRYPT(UNCOMPRESS(PracownicyLogi.securePass), 27) = ?;";
+        String query = "SELECT * FROM "+typeStr+" WHERE Login = ? and AES_DECRYPT(UNCOMPRESS(securePass), 27) = ?;";
 
         PreparedStatement statement = datebase.prepareQuery(query);
         String[] answer;
         try {
             statement.setString(1, userName);
             statement.setString(2, password);
-            if(datebase.executeQuery(statement)){
+            if(datebase.executeQuery(statement, true) && !datebase.isResultNull()){
                 datebase.scroll();
                 answer = datebase.receiveRow(4);
                 if(answer != null) return true;
@@ -39,38 +39,41 @@ public class StatementCreator {
     }
 
     public boolean userRegister(String userLogin, String firstName, String lastname, String password, String PESEL, int czyOlimpiada){
-
+        /*
         PreparedStatement statement = datebase.prepareQuery("set foreign_key_checks = 0");
         datebase.executeQuery(statement);
 
-        String query;
-        query = "insert into logkandydaci values ( ,?,?,0x30);";
-        statement = datebase.prepareQuery(query);
-        try{
-            statement.setString(1, userLogin);
-            statement.setString(2, password);
-            datebase.executeQuery(statement);
-        } catch (SQLException e) {
-            e.printStackTrace();
-            return false;
-        }
+         */
 
-        query = "insert into kandydaci values (, ?, ?, ?, 'Oczekuje na oplate', 0 , ?);";
-        statement = datebase.prepareQuery(query);
+        String query;
+        query = "insert into kandydaci (Imie, Nazwisko, PESEL, Status, CzyOlimpijczyk) values (?, ?, ?, 'Oczekuje na oplate', ?);";
+        PreparedStatement statement = datebase.prepareQuery(query);
         try{
             statement.setString(1, firstName);
             statement.setString(2, lastname);
             statement.setString(3, PESEL);
             statement.setInt(4,czyOlimpiada);
-            datebase.executeQuery(statement);
-
+            datebase.executeQuery(statement, false);
+            /*
             statement = datebase.prepareQuery("set foreign_key_checks = 1");
             datebase.executeQuery(statement);
+
+             */
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
         }
-
+        query = "update logkandydaci set Login=?, Haslo=? where IdKandydata = (select NrRejestracyjny from kandydaci k where k.PESEL = ?) ;";
+        statement = datebase.prepareQuery(query);
+        try{
+            statement.setString(1, userLogin);
+            statement.setString(2, password);
+            statement.setString(3, PESEL);
+            datebase.executeQuery(statement, false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
 
         return true;
     }

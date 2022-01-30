@@ -40,10 +40,10 @@ flush privileges;
 drop user if exists Candidate@localhost;
 create user Candidate@localhost;
 set password for Candidate@localhost = password('PinkiePIeIsTheBest');
-alter user Candidate@localhost with
-max_updates_per_hour 5;
-alter user Candidate@localhost with
-max_queries_per_hour 20;
+#alter user Candidate@localhost with
+#max_updates_per_hour 5;
+#alter user Candidate@localhost with
+#max_queries_per_hour 20;
 grant appCandidate to Candidate@localhost;
 
 drop user if exists Worker@localhost;
@@ -74,11 +74,14 @@ grant select on wskaznik to Candidate@localhost;
 grant select on wynikimatur to Candidate@localhost;
 grant select on preferencjekandydata to Candidate@localhost;
 grant select on kierunki to Candidate@localhost;
+grant select on logkandydaci to Candidate@localhost;
 
 grant insert on kandydaci to Candidate@localhost;
 grant insert on wynikimatur to Candidate@localhost;
 grant insert on preferencjekandydata to Candidate@localhost;
 
+grant update on logkandydaci to Candidate@localhost;
 grant update on preferencjekandydata to Candidate@localhost;
+
 
 flush privileges;

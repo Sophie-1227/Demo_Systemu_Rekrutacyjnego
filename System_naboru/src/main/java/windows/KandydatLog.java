@@ -38,7 +38,7 @@ public class KandydatLog {
 
     private void prepareLogGUI(){
         kandydatLogFrame = new Frame("Okno logowania");
-        kandydatLogFrame.setSize(700, 500);
+        kandydatLogFrame.setSize(700, 700);
         kandydatLogFrame.setLayout(new GridLayout(3, 1));
         kandydatLogFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -102,7 +102,6 @@ public class KandydatLog {
                                 pref.addSourceElements(new String[] {"Tu", "Beda", "Wpisane", "Kierunki"});
                                 kandydatLogFrame.setVisible(false);
                             } catch (SQLException ex) {
-                                ex.printStackTrace();
                                 showMessageDialog(kandydatLogFrame, "Nie udało się uzyskać dostępu do bazy danych jako kandydat");
                             }
                         } else {

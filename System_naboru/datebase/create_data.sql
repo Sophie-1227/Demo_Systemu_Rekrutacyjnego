@@ -225,3 +225,21 @@ DELIMITER $$
 set foreign_key_checks = 1;
 
 call SecurePracownicy();
+
+drop procedure if exists SecureKandydaci;
+SET FOREIGN_KEY_CHECKS = 0;
+DELIMITER $$
+CREATE PROCEDURE SecureKandydaci()
+BEGIN
+   DECLARE i INT DEFAULT 1;
+   WHILE i<30 DO
+       UPDATE logkandydaci
+       SET securePass = COMPRESS(AES_ENCRYPT(Haslo, 27)), Haslo=null
+       WHERE IdKandydata = i;
+       SET i = i+1;
+       end while ;
+end ;
+DELIMITER $$
+set foreign_key_checks = 1;
+
+call SecureKandydaci();

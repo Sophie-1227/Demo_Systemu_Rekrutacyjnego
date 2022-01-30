@@ -26,12 +26,13 @@ DELIMITER ;
 delimiter $$
 drop trigger if exists NewStudent;
 create trigger NewStudent
-  before insert on kandydaci
+  after insert on kandydaci
   for each row
   begin
-
+    insert into logkandydaci (IdKandydata) value (new.NrRejestracyjny);
 	  insert into wynikimatur (IdKandydata) values (new.NrRejestracyjny);
 	  insert into preferencjekandydata (IdKandydata) value (new.NrRejestracyjny);
+	  insert into wskaznik (IdKandydata) value (new.NrRejestracyjny);
   end;
 DELIMITER ;
 
@@ -59,6 +60,8 @@ create trigger DeleteStudent
     set foreign_key_checks = 0;
 		delete from preferencjekandydata where IdKandydata = old.NrRejestracyjny;
 		delete from wynikimatur where IdKandydata = old.NrRejestracyjny;
+    delete from logkandydaci where IdKandydata = old.NrRejestracyjny;
+    delete from wskaznik where IdKandydata = old.NrRejestracyjny;
     set foreign_key_checks = 1;
 	end;
 DELIMITER ;
@@ -83,7 +86,7 @@ DELIMITER ;
 drop trigger if exists passSecureKandydat;
 DELIMITER $$
 CREATE TRIGGER passSecureKandydat
-   before INSERT ON logkandydaci
+   before update ON logkandydaci
    FOR EACH ROW
    BEGIN
        #UPDATE logkandydaci

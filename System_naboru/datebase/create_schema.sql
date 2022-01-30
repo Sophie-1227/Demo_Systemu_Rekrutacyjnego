@@ -170,7 +170,7 @@ ADD constraint `kierunkifk1` FOREIGN KEY (IdKierunku) REFERENCES boolwskaznikiki
 create table logKandydaci
 (
   IdKandydata int not null,
-  Login varchar(60) not null,
+  Login varchar(60) null,
   Haslo varchar(60) null,
   primary key (IdKandydata)
 )
@@ -192,7 +192,7 @@ FOREIGN KEY (IdKandydata) REFERENCES kandydaci(NrRejestracyjny);
 create table PracownicyLogi
 (
   IdPracownika int not null,
-  Login varchar(60) not null,
+  Login varchar(60) null,
   Haslo varchar(60) null,
 	primary key (IdPracownika)
 );
