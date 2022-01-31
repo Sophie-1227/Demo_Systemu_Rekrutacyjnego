@@ -138,7 +138,8 @@ public class Register {
                         showMessageDialog(registerFrame, "Rejestracja przebiegła pomyślnie");
                         try {
                             datebase.startConnection("candidate");
-                            new PreferencjeKandydata(datebase, creator);
+                            int idKandyata = creator.getUserId(name.getText(), sname.getText(), pesel.getText());
+                            new PreferencjeKandydata(datebase, creator, idKandyata);
                             registerFrame.setVisible(false);
                         } catch (SQLException ex) {
                             ex.printStackTrace();

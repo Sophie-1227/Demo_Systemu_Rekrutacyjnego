@@ -1,15 +1,13 @@
 package datebase;
 
+import org.w3c.dom.CDATASection;
+
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
 
 public class StatementCreator {
     DatebaseInterface datebase;
 
-    public enum UserType{
-        CANDIDATE,
-        WORKER
-    }
 
     public StatementCreator(DatebaseInterface datebase){
         this.datebase = datebase;
@@ -79,7 +77,54 @@ public class StatementCreator {
         return true;
     }
 
+    public int getUserId(String name, String sname, String pesel) {
 
+        String query = "select NrRejestracyjny from kandydaci where Imie=? and Nazwisko = ? and PESEL = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setString(1, name);
+            statement.setString(2, sname);
+            statement.setString(3, pesel);
+            datebase.executeQuery(statement, true);
+            return Integer.parseInt(datebase.receiveCol(1)[0]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public int getUserId(String login){
+        String query = "select IdKandydata from logkandydaci where Login = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setString(1, login);
+            datebase.executeQuery(statement, true);
+            datebase.scroll();
+            return Integer.parseInt(datebase.receiveCol(1)[0]);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return -1;
+        }
+    }
+
+    public String[] getUserInfo(int Id){
+        String query = "select * from kandydaci where NrRejestracyjny = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setInt(1, Id);
+            datebase.executeQuery(statement, true);
+            datebase.scroll();
+            return datebase.receiveRow(7);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
+        }
+    }
+
+    public enum UserType{
+        CANDIDATE,
+        WORKER
+    }
 
     //public void search(String table, )
 }

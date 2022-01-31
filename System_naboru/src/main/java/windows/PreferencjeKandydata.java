@@ -71,6 +71,10 @@ class SortedListModel extends AbstractListModel {
 
 public class PreferencjeKandydata {
 
+    final int smallPaddingX = 0;
+    final int smallPaddingY = 15;
+    final int idKandydata;
+
     DatebaseInterface datebase;
     StatementCreator creator;
 
@@ -87,7 +91,8 @@ public class PreferencjeKandydata {
     private SortedListModel listaKierunkowModel;
     private SortedListModel listaPreferencjiModel;
 
-    public PreferencjeKandydata(DatebaseInterface datebase, StatementCreator creator){
+    public PreferencjeKandydata(DatebaseInterface datebase, StatementCreator creator, int IdKandydata){
+        this.idKandydata = IdKandydata;
         this.datebase = datebase;
         this.creator = creator;
         listaKierunkowModel = new SortedListModel();
@@ -95,7 +100,7 @@ public class PreferencjeKandydata {
         listaKierunkow = new JList(listaKierunkowModel);
         listaPreferencji = new JList(listaPreferencjiModel);
         prepareGUI();
-        //setGridBagDaneLayout();
+        setGridBagDaneLayout();
         //setGridBagMaturyLayout();
         //setGridBagPreferencjeLayout();
         //addSourceElements(new String[] {"Tu", "Beda", "Wypisane", "Kierunki"});
@@ -165,7 +170,8 @@ public class PreferencjeKandydata {
     public void prepareGUI(){
         preferencjeKandydatFrame = new Frame("Wybór preferencji");
         preferencjeKandydatFrame.setSize(700, 500);
-        preferencjeKandydatFrame.setLayout(new GridLayout(3, 1));
+        //preferencjeKandydatFrame.setLayout(new GridLayout(3, 1));
+        preferencjeKandydatFrame.setLayout(new BorderLayout());
         preferencjeKandydatFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
@@ -175,8 +181,10 @@ public class PreferencjeKandydata {
         headerLabelPreferencjekandydata = new Label();
         headerLabelPreferencjekandydata.setAlignment((int) Label.TOP_ALIGNMENT);
         headerLabelPreferencjekandydata.setFont(font);
+        headerLabelPreferencjekandydata.setSize(700,200);
 
         preferencjeKandydataPane = new JTabbedPane(SwingConstants.LEFT);
+        preferencjeKandydataPane.setSize(700,500);
         //preferencjeKandydataPane.setLayout(new FlowLayout());
 
         Dane = new Panel();
@@ -187,14 +195,16 @@ public class PreferencjeKandydata {
         preferencjeKandydataPane.addTab("Preferencje", Preferencje);
         preferencjeKandydataPane.addTab("Wyniki Matur", Matura);
 
-        preferencjeKandydatFrame.add(headerLabelPreferencjekandydata);
-        preferencjeKandydatFrame.add(preferencjeKandydataPane);
+        preferencjeKandydatFrame.add(headerLabelPreferencjekandydata, BorderLayout.NORTH);
+        preferencjeKandydatFrame.add(preferencjeKandydataPane, BorderLayout.CENTER);
         preferencjeKandydatFrame.setVisible(true);
 
     }
 
     public void setGridBagDaneLayout(){
         //Wyświetlanie danych z wykorzystaniem prepared statment
+        String[] dane = creator.getUserInfo(idKandydata);
+
         headerLabelPreferencjekandydata.setText("Twoje dane osobowe");
 
         Panel panel = new Panel();
@@ -204,19 +214,83 @@ public class PreferencjeKandydata {
         panel.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
 
+        //Imię
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JTextField login = new JTextField("Imię");
-        login.setPreferredSize(new Dimension(300, 40));
-        panel.add(login, gbc);
+        JLabel name = new JLabel("Imię:");
+        name.setPreferredSize(new Dimension(100, 40));
+        panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipadx = smallPaddingX;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JLabel nameData = new JLabel(dane[1]);
+        nameData.setPreferredSize(new Dimension(100, 40));
+        panel.add(nameData, gbc);
+
+        //Nazwisko
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JTextField pass = new JTextField("Nazwisko");
-        panel.add(pass, gbc);
+        JLabel sname = new JLabel("Nazwisko:");
+        panel.add(sname, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipadx = smallPaddingX;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JLabel snameData = new JLabel(dane[2]);
+        panel.add(snameData, gbc);
+
+        //PESEL
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        JLabel pesel = new JLabel("PESEL:");
+        panel.add(pesel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipadx = smallPaddingX;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        JLabel peselData = new JLabel(dane[3]);
+        panel.add(peselData, gbc);
+
+        //Status
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        JLabel status = new JLabel("Status:");
+        panel.add(status, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipadx = smallPaddingX;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        JLabel statusData = new JLabel(dane[4]);
+        panel.add(statusData, gbc);
+
+        //CzyOlimpijczyk
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        JLabel olimp = new JLabel("Czy olimpijczyk:");
+        panel.add(olimp, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipadx = smallPaddingX;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        JLabel olimpData = new JLabel();
+        if(dane[6].equals("0")) olimpData.setText("Nie");
+        else olimpData.setText("Tak");
+        panel.add(olimpData, gbc);
 
         Dane.add(panel);
         preferencjeKandydatFrame.setVisible(true);
@@ -317,132 +391,133 @@ public class PreferencjeKandydata {
         panel.add(polskiWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 1;
         JLabel matPodstawa = new JLabel("Matematyka Podstawowa");
         panel.add(matPodstawa, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 1;
         JTextField matPodstWynik = new JTextField();
         panel.add(matPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 2;
         JLabel matRozszerzenie = new JLabel("Matematyka Rozszerzenie");
         panel.add(matRozszerzenie, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 2;
         JTextField matRozWynik = new JTextField();
         panel.add(matRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 3;
         JLabel jezykPodstawa = new JLabel("J.Obcy Podstawowy");
         panel.add(jezykPodstawa, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 3;
         JTextField jezykPodstWynik = new JTextField();
         panel.add(jezykPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 4;
         JLabel jezykRozszerzenie = new JLabel("J.Obcy Rozszerzenie");
         panel.add(jezykRozszerzenie, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 4;
         JTextField jezykRozWynik = new JTextField();
         panel.add(jezykRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 5;
         JLabel fizyka = new JLabel("Fizyka");
         panel.add(fizyka, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 5;
         JTextField fizykaWynik = new JTextField();
         panel.add(fizykaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 6;
         JLabel chemia = new JLabel("Chemia");
         panel.add(chemia, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 6;
         JTextField chemiaWynik = new JTextField();
         panel.add(chemiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 7;
         JLabel biologia = new JLabel("Biologia");
         panel.add(biologia, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 7;
         JTextField biologiaWynik = new JTextField();
         panel.add(biologiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 8;
         JLabel inf = new JLabel("Informatyka");
         panel.add(inf, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 8;
         JTextField infWynik = new JTextField();
         panel.add(infWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 9;
         JLabel geo = new JLabel("Geografia");
         panel.add(geo, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 10;
+        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 9;
         JTextField geoWynik = new JTextField();
         panel.add(geoWynik, gbc);
 
         gbc.fill = GridBagConstraints.SOUTH;
+        gbc.ipady = smallPaddingY;
         JButton confirm = new JButton("Zatwierdz");
         confirm.addActionListener(
                 new ActionListener() {
