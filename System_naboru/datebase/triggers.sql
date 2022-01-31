@@ -36,6 +36,18 @@ create trigger NewStudent
   end;
 DELIMITER ;
 
+DELIMITER $$
+drop trigger if exists NewPracownik;
+create trigger NewPracownik
+    after insert on pracownicy
+    for each row
+    begin
+        set foreign_key_checks = 0;
+        insert into pracownicylogi (IdPracownika) values (new.IdPracownika);
+        set foreign_key_checks = 1;
+    end ;
+DELIMITER ;
+
 /*
 #kurde, tak się zastanawiam, bo jest tutaj problem, że nie można za bardzo w triggerze edytować tabeli, dla której został wywołany
 delimiter $$
@@ -64,6 +76,18 @@ create trigger DeleteStudent
     delete from wskaznik where IdKandydata = old.NrRejestracyjny;
     set foreign_key_checks = 1;
 	end;
+DELIMITER ;
+
+DELIMITER $$
+drop trigger if exists DeletePracownik;
+create trigger DeletePracownik
+    before delete on pracownicy
+    for each row
+    begin
+        set foreign_key_checks = 0;
+        delete from pracownicylogi where IdPracownika = old.IdPracownika;
+        set foreign_key_checks = 1;
+    end ;
 DELIMITER ;
 
 delimiter $$
