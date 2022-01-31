@@ -14,6 +14,7 @@ public class SearchEnginePracownika {
     private Frame pracownikSearchFrame;
     private Label headerLabelPracownikSearch;
     private Panel pracownikSearchPanel;
+    public String[] listaKandydatow;
 
     public SearchEnginePracownika(){
         prepareLogGUI();
@@ -22,7 +23,7 @@ public class SearchEnginePracownika {
     private void prepareLogGUI(){
         pracownikSearchFrame = new Frame("Search Engine");
         pracownikSearchFrame.setSize(700, 500);
-        pracownikSearchFrame.setLayout(new GridLayout(2, 1));
+        pracownikSearchFrame.setLayout(new GridLayout(3, 1));
         pracownikSearchFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
                 System.exit(0);
@@ -81,8 +82,8 @@ public class SearchEnginePracownika {
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
-        gbc.gridx = 1;
-        gbc.gridy = 1;
+        gbc.gridx = 4;
+        gbc.gridy = 0;
         JButton exec = new JButton("Wykonaj");
         panel.add(exec, gbc);
 
@@ -99,6 +100,17 @@ public class SearchEnginePracownika {
         pracownikSearchPanel.add(panel);
         pracownikSearchFrame.setVisible(true);
 
+    }
+
+    public void CreateList(){
+        JPanel panel = new JPanel();
+        panel.setSize(500, 300);
+        panel.setLayout(new BorderLayout(1, 1));
+
+        panel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
+        JList list = new JList(listaKandydatow);
+        panel.add(new list, BorderLayout.CENTER);
+        pracownikSearchPanel.add(panel, BorderLayout.CENTER);
     }
 
 }
