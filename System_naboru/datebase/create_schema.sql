@@ -204,7 +204,7 @@ create unique index PracownicyLogi_Login_uindex
   on PracownicyLogi (Login);
 
 alter table pracownicylogi
-  add securePass varbinary(8000) not null default 0x30;
+  add securePass varbinary(8000) default 0x30;
 
 ALTER TABLE pracownicylogi
 ADD CONSTRAINT pracLogId

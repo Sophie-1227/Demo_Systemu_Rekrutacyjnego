@@ -1,4 +1,4 @@
-package main.java;
+package windows;
 
 import datebase.DatebaseInterface;
 import datebase.StatementCreator;
@@ -13,27 +13,29 @@ import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
 public class DataMasterPracownik {
-    private Frame pracownikDataFrame;
+    private JFrame pracownikDataFrame;
     private Label headerLabelPracownikData;
     private Panel pracownikDataPanel;
     DatebaseInterface datebase;
     StatementCreator creator;
+    int idKand;
 
-    public DataMasterPracownik(DatebaseInterface datebase){
-        prepareGUI();
+    public DataMasterPracownik(DatebaseInterface datebase, StatementCreator creator, int idKand){
         this.datebase = datebase;
+        this.creator = creator;
+        this.idKand = idKand;
+        prepareGUI();
+        setGridBagDataLayout();
+        setGridBagMaturyLayout();
+        setGridBagPreferencjeLayout();
     }
 
     private void prepareGUI(){
-        pracownikDataFrame = new Frame("Dane kandydata");
+        pracownikDataFrame = new JFrame("Dane kandydata");
         pracownikDataFrame.setSize(700, 500);
         //pracownikDataFrame.setLayout(new GridLayout(3, 1));
         pracownikDataFrame.setLayout(new BorderLayout());
-        pracownikDataFrame.addWindowListener(new WindowAdapter() {
-            public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
-            }
-        });
+        pracownikDataFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         Font font = new Font("Modern Love", BOLD & ITALIC, 30);
         headerLabelPracownikData = new Label();
         headerLabelPracownikData.setAlignment(Label.CENTER);
@@ -52,6 +54,8 @@ public class DataMasterPracownik {
     public void setGridBagDataLayout(){
         headerLabelPracownikData.setText("Tutaj możesz dokonać zmian w danych kandydata");
 
+        String[] candData = creator.getUserInfo(idKand);
+
         Panel panel = new Panel();
         panel.setSize(700, 100);
         GridBagLayout layout = new GridBagLayout();
@@ -62,14 +66,14 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JTextField name = new JTextField("Imię");
+        JTextField name = new JTextField(candData[1]);
         //name.setPreferredSize(new Dimension(120, 20));
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField sname = new JTextField("Nazwisko");
+        JTextField sname = new JTextField(candData[2]);
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -83,6 +87,7 @@ public class DataMasterPracownik {
         status.add("Nieprzyjety");
         status.add("Wniesiono oplate");
         status.add("Zakwalifikowany do przyjecia");
+        status.select(candData[4]);
         //type.setPreferredSize(new Dimension(70, 40));
         panel.add(status, gbc);
 
@@ -98,6 +103,8 @@ public class DataMasterPracownik {
         Choice olimp = new Choice();
         olimp.add("TAK");
         olimp.add("NIE");
+        if(candData[6].equals("1")) olimp.select("TAK");
+        else olimp.select("NIE");
         panel.add(olimp, gbc);
 
         pracownikDataPanel.add(panel, BorderLayout.NORTH);
@@ -247,5 +254,6 @@ public class DataMasterPracownik {
         JTextField polskiWynik = new JTextField();
         panel.add(polskiWynik, gbc);
     }
+
 
 }

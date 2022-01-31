@@ -33,6 +33,8 @@ public class SearchEnginePracownika implements ListSelectionListener {
     JList<String> list;
     JPanel listPanel;
 
+    int idKand = -1;
+
     public SearchEnginePracownika(DatebaseInterface datebase, StatementCreator creator){
         this.datebase = datebase;
         this.creator = creator;
@@ -179,7 +181,12 @@ public class SearchEnginePracownika implements ListSelectionListener {
     @Override
     public void valueChanged(ListSelectionEvent e) {
         String selected = list.getSelectedValue().toString();
-        int idKand = Integer.parseInt(selected.split(" ")[0]);
-        System.out.println(idKand);
+        int temp = Integer.parseInt(selected.split(" ")[0]);
+        if(idKand != temp) {
+            idKand = temp;
+            new DataMasterPracownik(datebase, creator, idKand);
+        }
+
+        //System.out.println(idKand);
     }
 }

@@ -10,7 +10,6 @@ import java.sql.SQLException;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 public class Menu {
     private Frame mainFrame;
