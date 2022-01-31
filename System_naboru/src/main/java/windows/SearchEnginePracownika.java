@@ -72,7 +72,6 @@ public class SearchEnginePracownika implements ListSelectionListener {
         gbc.ipady = 20;
         gbc.gridx = 0;
         gbc.gridy = 0;
-
         JLabel nrRejLabel = new JLabel("Numer Rejestracyjny: ");
         panel.add(nrRejLabel, gbc);
 
@@ -124,7 +123,6 @@ public class SearchEnginePracownika implements ListSelectionListener {
         gbc.gridx = 3;
         gbc.gridy = 1;
         JTextField pesel = new JTextField();
-
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -153,7 +151,6 @@ public class SearchEnginePracownika implements ListSelectionListener {
         panel = new JPanel();
         panel.setSize(500, 300);
         panel.setLayout(new BorderLayout(1, 1));
-
         panel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
     }
 
