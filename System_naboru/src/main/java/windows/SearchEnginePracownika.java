@@ -19,6 +19,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
     private Frame pracownikSearchFrame;
     private Label headerLabelPracownikSearch;
     private Panel pracownikSearchPanel;
+    private Panel mainListaPanel;
     public String[] listaKandydatow;
     DatebaseInterface datebase;
     StatementCreator creator;
@@ -56,6 +57,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
         pracownikSearchFrame.add(headerLabelPracownikSearch);
         pracownikSearchFrame.add(pracownikSearchPanel);
+        pracownikSearchFrame.add(mainListaPanel);
         pracownikSearchFrame.setVisible(true);
     }
 
@@ -159,8 +161,9 @@ public class SearchEnginePracownika implements ListSelectionListener {
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
         list = new JList(listaKandydatow);
         list.addListSelectionListener(this);
+
         listPanel.add(list, BorderLayout.CENTER);
-        pracownikSearchPanel.add(listPanel, BorderLayout.SOUTH);
+        mainListaPanel.add(listPanel, BorderLayout.CENTER);
         //hackermove
         pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()+1, pracownikSearchFrame.getHeight());
         pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()-1, pracownikSearchFrame.getHeight());
