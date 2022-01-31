@@ -69,37 +69,68 @@ public class SearchEnginePracownika implements ListSelectionListener {
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        nrRej = new JTextField("Numer Rejestracyjny");
+
+        JLabel nrRejLabel = new JLabel("Numer Rejestracyjny: ");
+        panel.add(nrRejLabel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JLabel nameLabel = new JLabel("Imię: ");
+        panel.add(pesel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        JLabel snameLabel = new JLabel("Nazwisko: ");
+        panel.add(snameLabel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        JLabel peselLabel = new JLabel("Numer PESEL: ");
+        panel.add(peselLabel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = 20;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JTextField nrRej = new JTextField();
         nrRej.setPreferredSize(new Dimension(120, 40));
         panel.add(nrRej, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 1;
-        gbc.gridy = 0;
-        name = new JTextField("Imię      ");
+        gbc.gridy = 1;
+        JTextField name = new JTextField();
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 2;
-        gbc.gridy = 0;
-        sname = new JTextField("Nazwisko");
+        gbc.gridy = 1;
+        JTextField sname = new JTextField();
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 3;
-        gbc.gridy = 0;
-        pesel = new JTextField("PESEL");
+        gbc.gridy = 1;
+        JTextField pesel = new JTextField();
+
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 4;
-        gbc.gridy = 0;
+        gbc.gridy = 1;
         JButton exec = new JButton("Wykonaj");
         panel.add(exec, gbc);
 
@@ -124,7 +155,6 @@ public class SearchEnginePracownika implements ListSelectionListener {
         panel.setLayout(new BorderLayout(1, 1));
 
         panel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
-
     }
 
     public void updateList(){
@@ -133,6 +163,8 @@ public class SearchEnginePracownika implements ListSelectionListener {
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
         list = new JList(listaKandydatow);
         panel.add(list, BorderLayout.CENTER);
+        JList list = new JList(listaKandydatow);
+        panel.add( list, BorderLayout.CENTER);
         pracownikSearchPanel.add(panel, BorderLayout.CENTER);
     }
 
