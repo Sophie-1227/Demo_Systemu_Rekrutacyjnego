@@ -12,6 +12,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.util.*;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 class SortedListModel extends AbstractListModel {
     SortedSet<Object> model;
@@ -76,6 +77,7 @@ public class PreferencjeKandydata implements ChangeListener {
     final int smallPaddingX = 0;
     final int smallPaddingY = 15;
     final int idKandydata;
+    final int max_fields_count = 6;
 
     DatebaseInterface datebase;
     StatementCreator creator;
@@ -83,7 +85,7 @@ public class PreferencjeKandydata implements ChangeListener {
     private Frame preferencjeKandydatFrame;
     private Label headerLabelPreferencjekandydata;
     private JTabbedPane preferencjeKandydataPane;
-    private Panel Preferencje; //ewentualna zmiana na component w zaleznosci od reakcji javy
+    private JPanel Preferencje; //ewentualna zmiana na component w zaleznosci od reakcji javy
     private Panel Dane;
     private Panel Matura;
     JButton addButton;
@@ -105,7 +107,20 @@ public class PreferencjeKandydata implements ChangeListener {
         setGridBagDaneLayout();
         //setGridBagMaturyLayout();
         setGridBagPreferencjeLayout();
-        addSourceElements(new String[] {"Tu", "Beda", "Wypisane", "Kierunki"});
+        addSourceElements(getFields());
+    }
+
+    private String[] getFields() {
+        ArrayList<String[]> answerTable = creator.getFieldsInfo();
+        if(answerTable == null){
+            showMessageDialog(preferencjeKandydatFrame, "Nie udało się pobrać danych o kierunkach");
+            return null;
+        }
+        String[] result = new String[answerTable.size()];
+        for(int i = 0; i < answerTable.size(); i++){
+            result[i] = answerTable.get(i)[0] + " - "+ answerTable.get(i)[1];
+        }
+        return result;
     }
 
     public void clearlistaKierunkowModel() {
@@ -125,9 +140,7 @@ public class PreferencjeKandydata implements ChangeListener {
         addSourceElements(newValue);
     }
 
-    public void addDestinationElements(ListModel newValue) {
-        fillListModel(listaPreferencjiModel, newValue);
-    }
+
 
     private void fillListModel(SortedListModel model, ListModel newValues) {
         int size = newValues.getSize();
@@ -137,12 +150,19 @@ public class PreferencjeKandydata implements ChangeListener {
     }
 
     public void addSourceElements(Object newValue[]) {
-        fillListModel(listaKierunkowModel, newValue);
+        if (newValue != null){
+            fillListModel(listaKierunkowModel, newValue);
+
+        }
     }
 
     public void setSourceElements(Object newValue[]) {
         clearlistaKierunkowModel();
         addSourceElements(newValue);
+    }
+
+    public void addDestinationElements(ListModel newValue) {
+        fillListModel(listaPreferencjiModel, newValue);
     }
 
     public void addDestinationElements(Object newValue[]) {
@@ -171,7 +191,7 @@ public class PreferencjeKandydata implements ChangeListener {
 
     public void prepareGUI(){
         preferencjeKandydatFrame = new Frame("Wybór preferencji");
-        preferencjeKandydatFrame.setSize(700, 500);
+        preferencjeKandydatFrame.setSize(900, 500);
         //preferencjeKandydatFrame.setLayout(new GridLayout(3, 1));
         preferencjeKandydatFrame.setLayout(new BorderLayout());
         preferencjeKandydatFrame.addWindowListener(new WindowAdapter() {
@@ -191,7 +211,7 @@ public class PreferencjeKandydata implements ChangeListener {
         //preferencjeKandydataPane.setLayout(new FlowLayout());
 
         Dane = new Panel();
-        Preferencje = new Panel();
+        Preferencje = new JPanel();
         Matura = new Panel();
 
         preferencjeKandydataPane.addTab("Dane Osobowe", Dane);
@@ -304,41 +324,37 @@ public class PreferencjeKandydata implements ChangeListener {
         //Wybór preferencji kandydata
         headerLabelPreferencjekandydata.setText("Wybierz kierunki, którymi jesteś zainteresowany");
 
-        Panel panel = new Panel();
-        panel.setSize(500, 300);
-        GridBagLayout layout = new GridBagLayout();
+        Preferencje.setLayout(new BorderLayout(1,1));
 
-        panel.setLayout(layout);
-        GridBagConstraints gbc = new GridBagConstraints();
-
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 0;
-        gbc.gridy = 0;
         //Do dodania Jlist dual http://www.java2s.com/Tutorials/Java/Swing/JList/Create_a_dual_JList_component_in_Java.htm
         JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(new JLabel("Dostepne kierunki: "), BorderLayout.NORTH);
         leftPanel.add(new JScrollPane(listaKierunkow), BorderLayout.CENTER);
-        addButton = new JButton();
+        addButton = new JButton(">>");
+        addButton.setPreferredSize(new Dimension(370,40));
         addButton.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        Object selected[] = (Object[]) listaKierunkow.getSelectedValue();
-                        addDestinationElements(selected);
+                        Object selected = listaKierunkow.getSelectedValue();
+                        Object[] obj = {selected};
+                        if(listaPreferencjiModel.getSize() < max_fields_count){
+                            addDestinationElements(obj);
+                        } else{
+                            showMessageDialog(preferencjeKandydatFrame, "Przekroczono maksymalną ilość kierunków");
+                        }
                         clearSourceSelected();
                     }
                 }
         );
         leftPanel.add(addButton, BorderLayout.SOUTH);
-        panel.add(leftPanel, gbc);
+        Preferencje.add(leftPanel, BorderLayout.WEST);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
         JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(new JLabel("Wybrane kierunki: "), BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(listaPreferencji), BorderLayout.CENTER);
-        removeButton = new JButton();
+        removeButton = new JButton("<<");
+        removeButton.setPreferredSize(new Dimension(360,40));
         removeButton.addActionListener(
                 new ActionListener() {
                     @Override
@@ -350,21 +366,22 @@ public class PreferencjeKandydata implements ChangeListener {
                 }
         );
         rightPanel.add(removeButton, BorderLayout.SOUTH);
-        panel.add(rightPanel, gbc);
+        Preferencje.add(rightPanel, BorderLayout.EAST);
 
-        gbc.fill = GridBagConstraints.SOUTH;
         JButton confirm = new JButton("Zatwierdz");
         confirm.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        //Przeslij wprowadzone dane do bazy danych
+                        int len = listaPreferencjiModel.getSize();
+                        for(int i=0; i<len; i++){
+
+                        }
                     }
                 }
         );
-        panel.add(confirm, gbc);
+        Preferencje.add(confirm, BorderLayout.SOUTH);
 
-        Preferencje.add(panel);
         preferencjeKandydatFrame.setVisible(true);
 
     }

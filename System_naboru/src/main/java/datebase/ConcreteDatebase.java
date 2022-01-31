@@ -1,6 +1,7 @@
 package datebase;
 
 import java.sql.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class ConcreteDatebase implements DatebaseInterface {
@@ -39,16 +40,17 @@ public class ConcreteDatebase implements DatebaseInterface {
     }
 
     @Override
-    public String[][] receiveAnswer(int colNo) {
-        String[][] table = new String[colNo][];
-        boolean temp = autoscroll;
-        autoscroll = true;
-        for(int i=1; i<=colNo; i++){
-            table[i] = receiveRow(i);
-            if(table[i] == null) return null;
+    public ArrayList<String[]> receiveAnswer(int colNo) {
+        ArrayList<String[]> answerTable = new ArrayList<>();
+        try{
+            while(currentResult.next()){
+                answerTable.add(receiveRow(colNo));
+            }
+            return answerTable;
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return null;
         }
-        autoscroll = temp;
-        return table;
     }
 
     @Override

@@ -2,11 +2,12 @@ package datebase;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public interface DatebaseInterface {
     PreparedStatement prepareQuery(String query);
     boolean executeQuery(PreparedStatement query, boolean shouldReturnResult);
-    String[][] receiveAnswer(int colNo);
+    ArrayList<String[]> receiveAnswer(int colNo);
     String[] receiveCol(String colName);
     String[] receiveCol(int colInd);
     String[] receiveRow(int colNo);

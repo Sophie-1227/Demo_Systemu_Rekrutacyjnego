@@ -4,6 +4,7 @@ import org.w3c.dom.CDATASection;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
+import java.util.ArrayList;
 
 public class StatementCreator {
     DatebaseInterface datebase;
@@ -118,6 +119,31 @@ public class StatementCreator {
         } catch (SQLException e) {
             e.printStackTrace();
             return null;
+        }
+    }
+
+    public ArrayList<String[]> getFieldsInfo(){
+        String query = "select NazwaKierunku, KodWydzialu from kierunki";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        if(datebase.executeQuery(statement, true)){
+            return datebase.receiveAnswer(2);
+        } else{
+            return null;
+        }
+
+    }
+
+    public boolean updatePreferences(int id, int preferenceNumber, int preference){
+        String pref = "Preferencja"+String.valueOf(preferenceNumber);
+        String query = "update preferencje kandydata set "+pref+" = ? where IdKandydata = ?";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setInt(1, preference);
+            statement.setInt(2, id);
+            return datebase.executeQuery(statement, false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
         }
     }
 
