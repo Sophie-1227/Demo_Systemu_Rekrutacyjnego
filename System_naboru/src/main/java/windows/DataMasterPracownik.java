@@ -2,20 +2,15 @@ package windows;
 
 import datebase.DatebaseInterface;
 import datebase.StatementCreator;
-import main.java.SearchEnginePracownika;
+
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.sql.SQLException;
-import java.util.Date;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
-import static javax.swing.JOptionPane.showMessageDialog;
 
 public class DataMasterPracownik {
     private Frame pracownikDataFrame;
@@ -30,7 +25,7 @@ public class DataMasterPracownik {
     }
 
     private void prepareGUI(){
-        pracownikDataFrame = new Frame("Okno logowania");
+        pracownikDataFrame = new Frame("Dane kandydata");
         pracownikDataFrame.setSize(700, 500);
         //pracownikDataFrame.setLayout(new GridLayout(3, 1));
         pracownikDataFrame.setLayout(new BorderLayout());

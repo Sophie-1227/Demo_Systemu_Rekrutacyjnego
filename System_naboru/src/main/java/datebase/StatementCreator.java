@@ -225,6 +225,7 @@ public class StatementCreator {
         return datebase.executeQuery(statement, false);
     }
 
+
     public enum UserType{
         CANDIDATE,
         WORKER

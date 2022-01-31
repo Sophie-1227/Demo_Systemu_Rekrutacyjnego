@@ -1,9 +1,7 @@
 package windows;
 
-import datebase.ConcreteDatebase;
 import datebase.DatebaseInterface;
 import datebase.StatementCreator;
-import main.java.SearchEnginePracownika;
 
 import javax.swing.*;
 import java.awt.*;
@@ -12,7 +10,6 @@ import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 import java.sql.SQLException;
-import java.util.Date;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
@@ -115,7 +112,6 @@ public class PracownikLog {
         );
         pracownikLogPanel.add(panel);
         pracownikLogFrame.setVisible(true);
-
     }
 
 }
