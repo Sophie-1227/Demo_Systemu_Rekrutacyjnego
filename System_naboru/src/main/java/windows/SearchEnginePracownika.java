@@ -26,7 +26,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
     //deklaracje JTextFieldów
     JTextField pesel, name, sname, nrRej;
-    JList list;
+    JScrollPane list;
     JPanel listPanel;
 
     public SearchEnginePracownika(DatebaseInterface datebase, StatementCreator creator){
@@ -160,7 +160,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         System.out.println("Updating list");
         listPanel.removeAll();
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
-        list = new JList(listaKandydatow);
+        list = new JScrollPane(listaKandydatow);
         list.addListSelectionListener(this);
         listPanel.add(list, BorderLayout.CENTER);
         mainListaPanel.add(listPanel, BorderLayout.CENTER);
