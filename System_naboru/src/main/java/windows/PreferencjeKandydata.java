@@ -1,5 +1,6 @@
 package windows;
 
+import dataStoragers.Field;
 import datebase.DatebaseInterface;
 import datebase.StatementCreator;
 
@@ -71,13 +72,12 @@ class SortedListModel extends AbstractListModel {
     }
 }
 
-
 public class PreferencjeKandydata implements ChangeListener {
 
     final int smallPaddingX = 0;
     final int smallPaddingY = 15;
     final int idKandydata;
-    final int max_fields_count = 6;
+    public final static int max_fields_count = 6;
 
     DatebaseInterface datebase;
     StatementCreator creator;
@@ -94,6 +94,8 @@ public class PreferencjeKandydata implements ChangeListener {
     private JList listaPreferencji; //lista preferencji konkretnego kandydata, czyli kierunki, ktore wybral
     private SortedListModel listaKierunkowModel;
     private SortedListModel listaPreferencjiModel;
+    ArrayList<Field> allFields;
+    ArrayList<Integer> prefferedFields;
 
     public PreferencjeKandydata(DatebaseInterface datebase, StatementCreator creator, int IdKandydata){
         this.idKandydata = IdKandydata;
@@ -105,20 +107,34 @@ public class PreferencjeKandydata implements ChangeListener {
         listaPreferencji = new JList(listaPreferencjiModel);
         prepareGUI();
         setGridBagDaneLayout();
-        //setGridBagMaturyLayout();
+        setGridBagMaturyLayout();
         setGridBagPreferencjeLayout();
-        addSourceElements(getFields());
+        prefferedFields = creator.getPrefferedInfo(idKandydata);
+        addSourceElements(getFields() );
+        addDestinationElements(getPrefferedFields());
+    }
+
+    private String[] getPrefferedFields() {
+        String[] tab = new String[prefferedFields.size()];
+        for(int i=0; i<prefferedFields.size(); i++){
+            tab[i] = getFieldWithDBInd(prefferedFields.get(i)).toString();
+        }
+        return tab;
     }
 
     private String[] getFields() {
-        ArrayList<String[]> answerTable = creator.getFieldsInfo();
-        if(answerTable == null){
+        allFields = creator.getFieldsInfo();
+        if(allFields == null){
             showMessageDialog(preferencjeKandydatFrame, "Nie udało się pobrać danych o kierunkach");
             return null;
         }
-        String[] result = new String[answerTable.size()];
-        for(int i = 0; i < answerTable.size(); i++){
-            result[i] = answerTable.get(i)[0] + " - "+ answerTable.get(i)[1];
+        String[] result = new String[allFields.size() - prefferedFields.size()];
+        int j = 0;
+        for (Field f : allFields) {
+            if (!prefferedFields.contains(f.getId())) {
+                result[j] = f.toString();
+                j++;
+            }
         }
         return result;
     }
@@ -191,7 +207,8 @@ public class PreferencjeKandydata implements ChangeListener {
 
     public void prepareGUI(){
         preferencjeKandydatFrame = new Frame("Wybór preferencji");
-        preferencjeKandydatFrame.setSize(900, 500);
+        preferencjeKandydatFrame.setSize(900, 600);
+        preferencjeKandydatFrame.setBackground(new Color(219, 238, 255, 255));
         //preferencjeKandydatFrame.setLayout(new GridLayout(3, 1));
         preferencjeKandydatFrame.setLayout(new BorderLayout());
         preferencjeKandydatFrame.addWindowListener(new WindowAdapter() {
@@ -359,7 +376,7 @@ public class PreferencjeKandydata implements ChangeListener {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        Object selected[] = listaPreferencji.getSelectedValues();
+                        Object[] selected = listaPreferencji.getSelectedValues();
                         addSourceElements(selected);
                         clearDestinationSelected();
                     }
@@ -373,10 +390,23 @@ public class PreferencjeKandydata implements ChangeListener {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        int len = listaPreferencjiModel.getSize();
-                        for(int i=0; i<len; i++){
-
+                        int fieldsCount = listaPreferencjiModel.getSize();
+                        if(fieldsCount == 0) return;
+                        boolean succeeded = true;
+                        for(int i = 1; i<= fieldsCount; i++){
+                            String fieldStr = (String) listaPreferencjiModel.getElementAt(i-1);
+                            for (Field field : allFields) {
+                                if (fieldStr.equals(field.toString())) {
+                                    if(creator.updatePreferences(idKandydata, i, field.getId())){
+                                        break;
+                                    } else {
+                                        succeeded = false;
+                                        showMessageDialog(preferencjeKandydatFrame, "Nie udało się dodać "+field.getNazwa()+ " do listy preferencji");
+                                    }
+                                }
+                            }
                         }
+                        if(succeeded) showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano preferencje kandydata");
                     }
                 }
         );
@@ -396,9 +426,11 @@ public class PreferencjeKandydata implements ChangeListener {
 
         panel.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
+        String[] maturaResults = creator.getMaturaResults(idKandydata, 11);
 
         //Do dodania pola tekstowe + label do każdego przedmiotu
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady=smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel polski = new JLabel("J.Polski Podstawowy");
@@ -407,7 +439,7 @@ public class PreferencjeKandydata implements ChangeListener {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField polskiWynik = new JTextField();
+        JTextField polskiWynik = new JTextField(maturaResults[1]);
         panel.add(polskiWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -418,10 +450,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(matPodstawa, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JTextField matPodstWynik = new JTextField();
+        JTextField matPodstWynik = new JTextField(maturaResults[2]);
         panel.add(matPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -432,10 +463,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(matRozszerzenie, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 2;
-        JTextField matRozWynik = new JTextField();
+        JTextField matRozWynik = new JTextField(maturaResults[3]);
         panel.add(matRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -446,10 +476,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(jezykPodstawa, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 3;
-        JTextField jezykPodstWynik = new JTextField();
+        JTextField jezykPodstWynik = new JTextField(maturaResults[4]);
         panel.add(jezykPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -460,10 +489,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(jezykRozszerzenie, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 4;
-        JTextField jezykRozWynik = new JTextField();
+        JTextField jezykRozWynik = new JTextField(maturaResults[5]);
         panel.add(jezykRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -474,10 +502,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(fizyka, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 5;
-        JTextField fizykaWynik = new JTextField();
+        JTextField fizykaWynik = new JTextField(maturaResults[6]);
         panel.add(fizykaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -488,10 +515,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(chemia, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 6;
-        JTextField chemiaWynik = new JTextField();
+        JTextField chemiaWynik = new JTextField(maturaResults[7]);
         panel.add(chemiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -502,10 +528,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(biologia, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 7;
-        JTextField biologiaWynik = new JTextField();
+        JTextField biologiaWynik = new JTextField(maturaResults[8]);
         panel.add(biologiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -516,10 +541,9 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(inf, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 8;
-        JTextField infWynik = new JTextField();
+        JTextField infWynik = new JTextField(maturaResults[9]);
         panel.add(infWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -530,23 +554,40 @@ public class PreferencjeKandydata implements ChangeListener {
         panel.add(geo, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
         gbc.gridx = 1;
         gbc.gridy = 9;
-        JTextField geoWynik = new JTextField();
+        JTextField geoWynik = new JTextField(maturaResults[10]);
         panel.add(geoWynik, gbc);
 
         gbc.fill = GridBagConstraints.SOUTH;
         gbc.ipady = smallPaddingY;
+        gbc.gridy = 10;
         JButton confirm = new JButton("Zatwierdz");
         confirm.addActionListener(
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         //Przeslanie wpisanych wartosci do bazy danych
+                        int[] results = new int[10];
+                        results[0] = Integer.parseInt(polskiWynik.getText());
+                        results[1] = Integer.parseInt(matPodstWynik.getText());
+                        results[2] = Integer.parseInt(matRozWynik.getText());
+                        results[3] = Integer.parseInt(jezykPodstWynik.getText());
+                        results[4] = Integer.parseInt(jezykRozWynik.getText());
+                        results[5] = Integer.parseInt(fizykaWynik.getText());
+                        results[6] = Integer.parseInt(chemiaWynik.getText());
+                        results[7] = Integer.parseInt(biologiaWynik.getText());
+                        results[8] = Integer.parseInt(infWynik.getText());
+                        results[9] = Integer.parseInt(geoWynik.getText());
+                        if(creator.updateMaturaResults(results, idKandydata)){
+                            showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano wyniki matur");
+                        } else{
+                          showMessageDialog(preferencjeKandydatFrame, "Wystąpił błąd podczas aktualizacji wyników matur");
+                        }
                     }
                 }
         );
+
         panel.add(confirm, gbc);
 
 
@@ -568,5 +609,12 @@ public class PreferencjeKandydata implements ChangeListener {
             case 2 -> "Przejrzyj i/lub uzupełnij wyniki matur";
             default -> "Error 404";
         };
+    }
+
+    public Field getFieldWithDBInd(int dbInd){
+        for(Field f: allFields){
+            if(f.getId() == dbInd) return f;
+        }
+        return null;
     }
 }

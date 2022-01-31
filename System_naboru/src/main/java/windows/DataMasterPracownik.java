@@ -74,7 +74,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField sname data = new JTextField("Nazwisko");
+        JTextField sname = new JTextField("Nazwisko");
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -100,7 +100,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;
         gbc.gridy = 0;
-        Choice olipm = new Choice();
+        Choice olimp = new Choice();
         olimp.add("TAK");
         olimp.add("NIE");
         panel.add(olimp, gbc);

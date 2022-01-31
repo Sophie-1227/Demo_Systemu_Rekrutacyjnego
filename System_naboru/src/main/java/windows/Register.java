@@ -136,14 +136,10 @@ public class Register {
                 if(pass.getText().equals(pass2.getText())){
                     if(creator.userRegister(login.getText(), name.getText(), sname.getText(), pass.getText(), pesel.getText(), isOlim) ){
                         showMessageDialog(registerFrame, "Rejestracja przebiegła pomyślnie");
-                        try {
-                            datebase.startConnection("candidate");
-                            int idKandyata = creator.getUserId(name.getText(), sname.getText(), pesel.getText());
-                            new PreferencjeKandydata(datebase, creator, idKandyata);
-                            registerFrame.setVisible(false);
-                        } catch (SQLException ex) {
-                            ex.printStackTrace();
-                        }
+                        int idKandyata = creator.getUserId(name.getText(), sname.getText(), pesel.getText());
+                        new PreferencjeKandydata(datebase, creator, idKandyata);
+                        registerFrame.setVisible(false);
+
                     } else {
                         showMessageDialog(registerFrame,"Nie można zarejestrować kandydata");
                     }

@@ -54,3 +54,6 @@ update logkandydaci set Login='PinkiePie', Haslo='JohhnyWalker' where IdKandydat
 
 insert into kandydaci (Imie, Nazwisko, PESEL, Status, CzyOlimpijczyk) values ('Imię', 'Nazwisko', 'PESEL', 'Oczekuje na oplate', 0);
 insert into logkandydaci (IdKandydata) value (415);
+select IdKierunku, NazwaKierunku, KodWydzialu from kierunki;
+
+select * from preferencjekandydata where IdKandydata = 422;

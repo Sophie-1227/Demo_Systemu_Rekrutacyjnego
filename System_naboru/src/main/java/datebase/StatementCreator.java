@@ -1,6 +1,7 @@
 package datebase;
 
-import org.w3c.dom.CDATASection;
+import dataStoragers.Field;
+import windows.PreferencjeKandydata;
 
 import java.sql.PreparedStatement;
 import java.sql.SQLException;
@@ -122,20 +123,27 @@ public class StatementCreator {
         }
     }
 
-    public ArrayList<String[]> getFieldsInfo(){
-        String query = "select NazwaKierunku, KodWydzialu from kierunki";
+    public ArrayList<Field> getFieldsInfo(){
+        ArrayList<Field> fieldsArray = new ArrayList<>();
+        String query = "select IdKierunku, NazwaKierunku, KodWydzialu from kierunki;";
         PreparedStatement statement = datebase.prepareQuery(query);
         if(datebase.executeQuery(statement, true)){
-            return datebase.receiveAnswer(2);
+            String[] tempTab;
+            datebase.scroll();
+            datebase.setAutoscroll(true);
+            while( !datebase.isResultNull() && (tempTab = datebase.receiveRow(3)) != null){
+                fieldsArray.add(new Field(Integer.parseInt(tempTab[0]),tempTab[1],tempTab[2]));
+            }
+            datebase.setAutoscroll(false);
+            return fieldsArray;
         } else{
             return null;
         }
-
     }
 
     public boolean updatePreferences(int id, int preferenceNumber, int preference){
-        String pref = "Preferencja"+String.valueOf(preferenceNumber);
-        String query = "update preferencje kandydata set "+pref+" = ? where IdKandydata = ?";
+        String pref = "Preferencja"+preferenceNumber;
+        String query = "update preferencjekandydata set "+pref+" = ? where IdKandydata = ?";
         PreparedStatement statement = datebase.prepareQuery(query);
         try {
             statement.setInt(1, preference);
@@ -145,6 +153,75 @@ public class StatementCreator {
             e.printStackTrace();
             return false;
         }
+    }
+
+    public ArrayList<Integer> getPrefferedInfo(int idKandydata) {
+        ArrayList<Integer> fieldsArray = new ArrayList<>();
+        String query = "select * from preferencjekandydata where IdKandydata = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+
+            statement.setInt(1, idKandydata);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(datebase.executeQuery(statement, true)){
+            String[] tempTab;
+            datebase.scroll();
+            datebase.setAutoscroll(true);
+            if( !datebase.isResultNull() && (tempTab = datebase.receiveRow(7)) != null){
+                for(int i = 1; i<= PreferencjeKandydata.max_fields_count; i++){
+                    if( !tempTab[i].equals("null")) {
+                        //System.out.println("Dodano "+tempTab[i]);
+                        fieldsArray.add(Integer.parseInt(tempTab[i]));
+                    }
+                    else break;
+                }
+            }
+            datebase.setAutoscroll(false);
+            return fieldsArray;
+        } else{
+            return null;
+        }
+    }
+
+    public String[] getMaturaResults(int idKandydata, int maturaCount){
+        String query = "select * from wynikimatur where IdKandydata = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setInt(1, idKandydata);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(datebase.executeQuery(statement, true)){
+            datebase.scroll();
+            return datebase.receiveRow(maturaCount+1);
+        } else return null;
+    }
+
+    public boolean updateMaturaResults(int[] results, int idKandydata ){
+        String query = "update wynikimatur set " +
+                "PolskiPodstawa = ?, "+
+                "MatematykaPodstawa = ?, "+
+                "MatematykaRozszerzenie = ?, "+
+                "JezykObcyNowozytnyPodstawa = ?, "+
+                "JezykObcyNowozytnyRozszerzenie = ?, "+
+                "FizykaRozszerzenie = ?, "+
+                "ChemiaRozszezrenie = ?, "+
+                "BiologiaRozszezrenie = ?, "+
+                "InformatykaRozszerzenie = ?, "+
+                "GeografiaRozszerzenie = ? "+
+                "where IdKandydata = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try{
+            for(int i = 0; i<10; i++){
+                statement.setInt(i+1, results[i]);
+            }
+            statement.setInt(11, idKandydata);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return datebase.executeQuery(statement, false);
     }
 
     public enum UserType{

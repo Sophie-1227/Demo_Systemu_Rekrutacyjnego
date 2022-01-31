@@ -82,6 +82,7 @@ grant insert on preferencjekandydata to Candidate@localhost;
 
 grant update on logkandydaci to Candidate@localhost;
 grant update on preferencjekandydata to Candidate@localhost;
+grant update on wynikimatur to Candidate@localhost;
 
 
 flush privileges;

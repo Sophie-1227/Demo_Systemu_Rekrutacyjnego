@@ -31,7 +31,7 @@ public class ConcreteDatebase implements DatebaseInterface {
         System.out.println("Trying to execute query:\n " +query.toString());
         try {
             if(shouldReturnResult) currentResult = query.executeQuery();
-            else return query.execute();
+            else query.execute();
         } catch (SQLException e) {
             e.printStackTrace();
             return false;
