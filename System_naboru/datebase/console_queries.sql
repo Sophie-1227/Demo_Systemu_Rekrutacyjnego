@@ -60,4 +60,10 @@ select * from preferencjekandydata where IdKandydata = 422;
 select NrRejestracyjny from kandydaci where Imie='Flutter' and Nazwisko like '%' and PESEL = '0215420102';
 update preferencjekandydata set Preferencja3 = 30 where IdKandydata = 428;
 select NrRejestracyjny from kandydaci where Imie like 'Grzeg%' and Nazwisko like 'W%' and PESEL like '%' and NrRejestracyjny like '%';
+select * from kandydaci where Imie like 'Anna%' and Nazwisko like '%' and PESEL like '%' and NrRejestracyjny like '%';
+
+insert into pracownicy (Imie, Nazwisko, Jednostka) value ('Login', 'Password', 'W69');
+insert into pracownicylogi (IdPracownika ,Login, Haslo) value (30, 'Login', 'Password');
+delete from pracownicy where IdPracownika = 29;
+select * from kandydaci where Imie like 'Anna%' and Nazwisko like '%' and PESEL like '%' and NrRejestracyjny like '%';
 

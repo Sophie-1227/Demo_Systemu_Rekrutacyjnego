@@ -238,12 +238,13 @@ public class StatementCreator {
         }
 
         if(datebase.executeQuery(statement, true)){
-            datebase.scroll();
             ArrayList<String[]> DBanswer = datebase.receiveAnswer(7);
+            //System.out.println(DBanswer.size());
             String[] matchingList = new String[DBanswer.size()];
             int i = 0;
             for (String[] tab: DBanswer) {
                 matchingList[i] = tab[0] + " "+tab[1]+" "+tab[2]+" - "+tab[3];
+                //System.out.println(matchingList[i]);
                 i++;
             }
             return matchingList;

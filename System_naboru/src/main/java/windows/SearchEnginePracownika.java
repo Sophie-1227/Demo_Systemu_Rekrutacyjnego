@@ -80,7 +80,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         gbc.gridx = 1;
         gbc.gridy = 0;
         JLabel nameLabel = new JLabel("Imię: ");
-        panel.add(pesel, gbc);
+        panel.add(nameLabel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
@@ -100,7 +100,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         gbc.ipady = 20;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JTextField nrRej = new JTextField();
+        nrRej = new JTextField();
         nrRej.setPreferredSize(new Dimension(120, 40));
         panel.add(nrRej, gbc);
 
@@ -108,21 +108,21 @@ public class SearchEnginePracownika implements ListSelectionListener {
         gbc.ipady = 20;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JTextField name = new JTextField();
+        name = new JTextField();
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 2;
         gbc.gridy = 1;
-        JTextField sname = new JTextField();
+        sname = new JTextField();
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 3;
         gbc.gridy = 1;
-        JTextField pesel = new JTextField();
+        pesel = new JTextField();
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -141,10 +141,8 @@ public class SearchEnginePracownika implements ListSelectionListener {
                     }
                 }
         );
-
         pracownikSearchPanel.add(panel);
         pracownikSearchFrame.setVisible(true);
-
     }
 
     public void createPanelList(){
@@ -159,10 +157,12 @@ public class SearchEnginePracownika implements ListSelectionListener {
         panel.removeAll();
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
         list = new JList(listaKandydatow);
+        list.addListSelectionListener(this);
         panel.add(list, BorderLayout.CENTER);
-        JList list = new JList(listaKandydatow);
-        panel.add( list, BorderLayout.CENTER);
-        pracownikSearchPanel.add(panel, BorderLayout.CENTER);
+        pracownikSearchPanel.add(panel, BorderLayout.SOUTH);
+        //hackermove
+        pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()+1, pracownikSearchFrame.getHeight());
+        pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()-1, pracownikSearchFrame.getHeight());
     }
 
     @Override
