@@ -129,7 +129,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        JTextLabel pref1Data = new JTextLabel(); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
+        JTextField pref1Data = new JTextField(); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
         panel.add(pref1Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -147,7 +147,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 1;
-        JTextLabel pref2Data = new JTextLabel();
+        JTextField pref2Data = new JTextField();
         panel.add(pref2Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -165,7 +165,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 2;
-        JTextLabel pref3Data = new JTextLabel();
+        JTextField pref3Data = new JTextField();
         panel.add(pref3Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -183,7 +183,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        JTextLabel pref4Data = new JTextLabel();
+        JTextField pref4Data = new JTextField();
         panel.add(pref4Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -201,7 +201,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 4;
-        JTextLabel pref5Data = new JTextLabel();
+        JTextField pref5Data = new JTextField();
         panel.add(pref5Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -219,10 +219,10 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 5;
-        JTextLabel pref6Data = new JTextLabel();
+        JTextField pref6Data = new JTextField();
         panel.add(pref6Data, gbc);
 
-        pracownikDataPanel.add(panel, Borderlayout.SOUTH-WEST);
+        pracownikDataPanel.add(panel, BorderLayout.WEST);
         pracownikDataFrame.setVisible(true);
     }
 
@@ -242,7 +242,7 @@ public class DataMasterPracownik {
         JLabel polski = new JLabel("Język Polski: ");
         panel.add(polski, gbc);
 
-        gbc.fill = GridBagConstrains.HORIZONTAL;
+        gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
         JTextField polskiWynik = new JTextField();

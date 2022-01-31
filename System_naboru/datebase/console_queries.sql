@@ -47,8 +47,8 @@ SELECT * FROM pracownicylogi WHERE Login = 'dupaBlada' and AES_DECRYPT(UNCOMPRES
 SELECT * FROM logkandydaci WHERE Login = 'chlop' and AES_DECRYPT(UNCOMPRESS(securePass), 27) = 'przyjazn_to_magia';
 SELECT * FROM logkandydaci WHERE Login = 'chlop' and AES_DECRYPT(UNCOMPRESS(securePass), 27) = 'przyjazn_to_magia';
 
-delete from kandydaci where NrRejestracyjny > 400;
-delete from logkandydaci where IdKandydata > 400;
+delete from kandydaci where NrRejestracyjny > 422;
+delete from logkandydaci where IdKandydata > 422;
 
 update logkandydaci set Login='PinkiePie', Haslo='JohhnyWalker' where IdKandydata = (select NrRejestracyjny from kandydaci k where k.PESEL = '1220612774') ;
 
@@ -58,3 +58,6 @@ select IdKierunku, NazwaKierunku, KodWydzialu from kierunki;
 
 select * from preferencjekandydata where IdKandydata = 422;
 select NrRejestracyjny from kandydaci where Imie='Flutter' and Nazwisko like '%' and PESEL = '0215420102';
+update preferencjekandydata set Preferencja3 = 30 where IdKandydata = 428;
+select NrRejestracyjny from kandydaci where Imie like 'Grzeg%' and Nazwisko like 'W%' and PESEL like '%' and NrRejestracyjny like '%';
+

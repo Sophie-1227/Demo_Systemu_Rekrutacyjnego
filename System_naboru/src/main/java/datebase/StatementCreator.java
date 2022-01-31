@@ -144,7 +144,7 @@ public class StatementCreator {
 
     public boolean updatePreferences(int id, int preferenceNumber, int preference){
         String pref = "Preferencja"+preferenceNumber;
-        String query = "update preferencjekandydata set "+pref+" = ? where IdKandydata = ?";
+        String query = "update preferencjekandydata set "+pref+" = ? where IdKandydata = ?;";
         PreparedStatement statement = datebase.prepareQuery(query);
         try {
             statement.setInt(1, preference);
@@ -224,6 +224,31 @@ public class StatementCreator {
         }
         return datebase.executeQuery(statement, false);
     }
+
+    public String[] getMatchingCandidates(int registrationNumber, String fname, String sname , String PESEL){
+        String query = "select * from kandydaci where Imie like ? and Nazwisko like ? and PESEL like ? and NrRejestracyjny like ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setString(1,fname += "%");
+            statement.setString(2, sname += "%");
+            statement.setString(3, PESEL += "%");
+            statement.setString(4, registrationNumber + "%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+
+        datebase.executeQuery(statement, true);
+        datebase.scroll();
+        ArrayList<String[]> DBanswer = datebase.receiveAnswer(7);
+        String[] matchingList = new String[DBanswer.size()];
+        int i = 0;
+        for (String[] tab: DBanswer) {
+            matchingList[i] = tab[0] + " "+tab[1]+" "+tab[2]+" - "+tab[3];
+            i++;
+        }
+        return matchingList;
+    }
+
 
 
     public enum UserType{

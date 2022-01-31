@@ -114,9 +114,9 @@ set foreign_key_checks =0;
 DELIMITER $$
 CREATE TRIGGER UpdateWskazniki
 AFTER UPDATE ON wynikimatur
-    FOR EACH ROW
+FOR EACH ROW
 BEGIN
-            DECLARE i INT DEFAULT 1;
+          DECLARE i INT DEFAULT 1;
         	DECLARE Id INT DEFAULT 1;
         	DECLARE mp DOUBLE DEFAULT 0;
         	DECLARE pp DOUBLE DEFAULT 0;
@@ -126,7 +126,7 @@ BEGIN
         	DECLARE fiz DOUBLE DEFAULT 0;
         	DECLARE inf DOUBLE DEFAULT 0;
         	DECLARE biol DOUBLE DEFAULT 0;
-  	        DECLARE chem DOUBLE DEFAULT 0;
+  	      DECLARE chem DOUBLE DEFAULT 0;
         	DECLARE geo DOUBLE DEFAULT 0;
         	DECLARE m DOUBLE DEFAULT 0;
         	DECLARE p DOUBLE DEFAULT 0;
@@ -179,7 +179,7 @@ BEGIN
             	IF n=1 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -235,7 +235,7 @@ BEGIN
             	ELSEIF n=2 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja2 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -292,7 +292,7 @@ BEGIN
             	ELSEIF n=3 THEN
                 	BEGIN
         	           SET Id = (SELECT Preferencja3 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -348,7 +348,7 @@ BEGIN
             	ELSEIF n=4 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja4 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -405,7 +405,7 @@ BEGIN
             	ELSEIF n=5 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja5 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
       	                 IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -461,7 +461,7 @@ BEGIN
             	ELSEIF n=6 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja6 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
        	                IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -518,23 +518,27 @@ BEGIN
 	SET n = n+1;
             	end while ;
         	BEGIN
-           	INSERT INTO wskaznik
-                	VALUES (i, w1, w2, w3, w4, w5, w6);
+           	update wskaznik set WskaznikPref1 = w1,
+           	                    WskaznikPref2 = w2,
+           	                    WskaznikPref3 = w3,
+           	                    WskaznikPref4 = w4,
+           	                    WskaznikPref5 = w5,
+           	                    WskaznikPref6 = w6
+           	                where IdKandydata = i;
             	SET i = i+1;
         	end ;
         end ;
 
-DELIMITER $$
+DELIMITER ;
 
 drop trigger if exists UpdateWskazniki2;
 set foreign_key_checks =0;
-
 DELIMITER $$
 CREATE TRIGGER UpdateWskazniki2
 AFTER UPDATE ON preferencjekandydata
-    FOR EACH ROW
+FOR EACH ROW
 BEGIN
-            DECLARE i INT DEFAULT 1;
+          DECLARE i INT DEFAULT 1;
         	DECLARE Id INT DEFAULT 1;
         	DECLARE mp DOUBLE DEFAULT 0;
         	DECLARE pp DOUBLE DEFAULT 0;
@@ -544,7 +548,7 @@ BEGIN
         	DECLARE fiz DOUBLE DEFAULT 0;
         	DECLARE inf DOUBLE DEFAULT 0;
         	DECLARE biol DOUBLE DEFAULT 0;
-  	        DECLARE chem DOUBLE DEFAULT 0;
+  	      DECLARE chem DOUBLE DEFAULT 0;
         	DECLARE geo DOUBLE DEFAULT 0;
         	DECLARE m DOUBLE DEFAULT 0;
         	DECLARE p DOUBLE DEFAULT 0;
@@ -597,7 +601,7 @@ BEGIN
             	IF n=1 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -653,7 +657,7 @@ BEGIN
             	ELSEIF n=2 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja2 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -710,7 +714,7 @@ BEGIN
             	ELSEIF n=3 THEN
                 	BEGIN
         	           SET Id = (SELECT Preferencja3 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -766,7 +770,7 @@ BEGIN
             	ELSEIF n=4 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja4 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -823,7 +827,7 @@ BEGIN
             	ELSEIF n=5 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja5 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
       	                 IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -879,7 +883,7 @@ BEGIN
             	ELSEIF n=6 THEN
                 	BEGIN
                    	SET Id = (SELECT Preferencja6 FROM preferencjekandydata WHERE IdKandydata=i);
-                   	IF(Id != NULL) THEN
+                   	IF(Id IS NOT NULL) THEN
        	                IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
                            	IF fiz>chem THEN
@@ -936,10 +940,15 @@ BEGIN
 	SET n = n+1;
             	end while ;
         	BEGIN
-           	INSERT INTO wskaznik
-                	VALUES (i, w1, w2, w3, w4, w5, w6);
+           	update wskaznik set WskaznikPref1 = w1,
+           	                    WskaznikPref2 = w2,
+           	                    WskaznikPref3 = w3,
+           	                    WskaznikPref4 = w4,
+           	                    WskaznikPref5 = w5,
+           	                    WskaznikPref6 = w6
+           	                where IdKandydata = i;
             	SET i = i+1;
         	end ;
         end ;
 
-DELIMITER $$
+DELIMITER ;
