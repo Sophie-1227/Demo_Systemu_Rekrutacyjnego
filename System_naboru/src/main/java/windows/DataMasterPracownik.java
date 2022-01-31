@@ -232,7 +232,26 @@ public class DataMasterPracownik {
     }
 
     public void setGridBagMaturyLayout(){
+        //Robimy dokładnie to samo co w GridBagPreferencjeLayout w PreferencjeKandydata
+        //Tylko dokładamy wynik z egzaminu
+        Panel panel = new Panel();
+        panel.setSize(350, 400);
+        GridBagLayout layout = new GridBagLayout();
 
+        panel.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        JLabel polski = new JLabel("Język Polski: ");
+        panel.add(polski, gbc);
+
+        gbc.fill = GridBagConstrains.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JTextField polskiWynik = new JTextField();
+        panel.add(polskiWynik, gbc);
     }
 
 }
