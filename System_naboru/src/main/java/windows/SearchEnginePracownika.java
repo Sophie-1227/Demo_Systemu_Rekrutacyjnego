@@ -52,7 +52,8 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
         pracownikSearchPanel = new Panel();
         pracownikSearchPanel.setLayout(new FlowLayout());
-
+        mainListaPanel = new Panel();
+        mainListaPanel.setLayout(new FlowLayout());
         createPanelList();
 
         pracownikSearchFrame.add(headerLabelPracownikSearch);
@@ -161,7 +162,6 @@ public class SearchEnginePracownika implements ListSelectionListener {
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
         list = new JList(listaKandydatow);
         list.addListSelectionListener(this);
-
         listPanel.add(list, BorderLayout.CENTER);
         mainListaPanel.add(listPanel, BorderLayout.CENTER);
         //hackermove
