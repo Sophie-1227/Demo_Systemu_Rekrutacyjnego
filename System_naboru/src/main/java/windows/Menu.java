@@ -54,7 +54,7 @@ public class Menu {
         headerLabel.setText("Choose access level to log in");
 
         Panel panel = new Panel();
-        //panel.setBackground(Color.RED);
+        //listPanel.setBackground(Color.RED);
         panel.setSize(300,100);
         GridBagLayout layout = new GridBagLayout();
 
@@ -70,7 +70,7 @@ public class Menu {
         kandydat.setBackground(mainFrame.getBackground());
         kandydat.setPreferredSize(new Dimension(125, 100));
         panel.add(kandydat, gbc);
-        //panel.add(new Button("KANDYDAT"),gbc);
+        //listPanel.add(new Button("KANDYDAT"),gbc);
 
         gbc.gridx = 1;
         gbc.gridy = 0;
@@ -80,7 +80,7 @@ public class Menu {
         pracownik.setBackground(mainFrame.getBackground());
         pracownik.setPreferredSize(new Dimension(125, 100));
         panel.add(pracownik, gbc);
-        //panel.add(new Button("PRACOWNIK"),gbc);
+        //listPanel.add(new Button("PRACOWNIK"),gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         //gbc.ipady = 20;
@@ -91,7 +91,7 @@ public class Menu {
         admin.setBackground(mainFrame.getBackground());
         admin.setPreferredSize(new Dimension(125, 100));
         panel.add(admin, gbc);
-        //panel.add(new Button("ADMINISTRATOR"),gbc);
+        //listPanel.add(new Button("ADMINISTRATOR"),gbc);
 
         kandydat.addActionListener(
                 new ActionListener() {

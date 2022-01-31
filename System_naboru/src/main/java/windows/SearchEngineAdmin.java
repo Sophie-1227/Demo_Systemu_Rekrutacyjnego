@@ -94,7 +94,7 @@ public class SearchEngineAdmin {
         gbc.gridx = 3;
         gbc.gridy = 0;
         JTextField pesel = new JTextField("PESEL");
-        panel.add(pesel, gbc);*/
+        listPanel.add(pesel, gbc);*/
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
@@ -120,7 +120,7 @@ public class SearchEngineAdmin {
         gbc.gridy = 2;
         JTextField data = new JTextField("");
         //data.setPreferredSize(new Dimension(700, 300));
-        panel.add(data);*/
+        listPanel.add(data);*/
 
         adminSearchPanel.add(panel);
         adminSearchFrame.setVisible(true);

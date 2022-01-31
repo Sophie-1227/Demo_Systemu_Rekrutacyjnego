@@ -90,7 +90,7 @@ public class DataMasterPracownik {
         gbc.gridx = 4;
         gbc.gridy = 0;
         JTextField ewidencja data = new JTextField("Ewidencja");
-        panel.add(ewidencja, gbc);*/
+        listPanel.add(ewidencja, gbc);*/
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 3;

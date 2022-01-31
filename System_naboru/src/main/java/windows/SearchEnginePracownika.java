@@ -26,7 +26,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
     //deklaracje JTextFieldów
     JTextField pesel, name, sname, nrRej;
     JList list;
-    JPanel panel;
+    JPanel listPanel;
 
     public SearchEnginePracownika(DatebaseInterface datebase, StatementCreator creator){
         this.datebase = datebase;
@@ -36,7 +36,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
     private void prepareLogGUI(){
         pracownikSearchFrame = new Frame("Search Engine");
-        pracownikSearchFrame.setSize(700, 500);
+        pracownikSearchFrame.setSize(700, 600);
         pracownikSearchFrame.setLayout(new GridLayout(3, 1));
         pracownikSearchFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -45,6 +45,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         });
         Font font = new Font("Modern Love", BOLD & ITALIC, 30);
         headerLabelPracownikSearch = new Label();
+        headerLabelPracownikSearch.setSize(700,200);
         headerLabelPracownikSearch.setAlignment(Label.CENTER);
         headerLabelPracownikSearch.setFont(font);
 
@@ -62,7 +63,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         headerLabelPracownikSearch.setText("Wpisz dane kandydata do wyszukania");
 
         Panel panel = new Panel();
-        panel.setSize(700, 300);
+        panel.setSize(700, 100);
         GridBagLayout layout = new GridBagLayout();
 
         panel.setLayout(layout);
@@ -146,20 +147,20 @@ public class SearchEnginePracownika implements ListSelectionListener {
     }
 
     public void createPanelList(){
-        panel = new JPanel();
-        panel.setSize(500, 300);
-        panel.setLayout(new BorderLayout(1, 1));
-        panel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
+        listPanel = new JPanel();
+        listPanel.setSize(500, 300);
+        listPanel.setLayout(new BorderLayout(1, 1));
+        listPanel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
     }
 
     public void updateList(){
         System.out.println("Updating list");
-        panel.removeAll();
+        listPanel.removeAll();
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
         list = new JList(listaKandydatow);
         list.addListSelectionListener(this);
-        panel.add(list, BorderLayout.CENTER);
-        pracownikSearchPanel.add(panel, BorderLayout.SOUTH);
+        listPanel.add(list, BorderLayout.CENTER);
+        pracownikSearchPanel.add(listPanel, BorderLayout.SOUTH);
         //hackermove
         pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()+1, pracownikSearchFrame.getHeight());
         pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()-1, pracownikSearchFrame.getHeight());
