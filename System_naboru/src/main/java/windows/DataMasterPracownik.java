@@ -111,4 +111,128 @@ public class DataMasterPracownik {
 
     }
 
+    public void setGridBagPreferencjeLayout(){
+        Panel panel = new Panel();
+        panel.setSize(350, 400);
+        GridBagLayout layout = new GridBagLayout();
+
+        panel.setLayout(layout);
+        GridBagConstraints gbc = new GridBagConstraints();
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 0;
+        JLabel pref1 = new JLabel("1");
+        panel.add(pref1, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 0;
+        JLabel pref1Wskaznik = new JLabel();
+        panel.add(pref1Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 0;
+        JTextLabel pref1Data = new JTextLabel(); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
+        panel.add(pref1Data, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JLabel pref2 = new JLabel("2");
+        panel.add(pref2, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JLabel pref2Wskaznik = new JLabel();
+        panel.add(pref2Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        JTextLabel pref2Data = new JTextLabel();
+        panel.add(pref2Data, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        JLabel pref3 = new JLabel("3");
+        panel.add(pref3, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        JLabel pref3Wskaznik = new JLabel();
+        panel.add(pref3Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 2;
+        JTextLabel pref3Data = new JTextLabel();
+        panel.add(pref3Data, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        JLabel pref4 = new JLabel("4");
+        panel.add(pref4, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        JLabel pref4Wskaznik = new JLabel();
+        panel.add(pref4Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 3;
+        JTextLabel pref4Data = new JTextLabel();
+        panel.add(pref4Data, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        JLabel pref5 = new JLabel("5");
+        panel.add(pref5, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        JLabel pref5Wskaznik = new JLabel();
+        panel.add(pref5Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 4;
+        JTextLabel pref5Data = new JTextLabel();
+        panel.add(pref5Data, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        JLabel pref6 = new JLabel("6");
+        panel.add(pref6, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        JLabel pref6Wskaznik = new JLabel();
+        panel.add(pref6Wskaznik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
+        gbc.gridy = 5;
+        JTextLabel pref6Data = new JTextLabel();
+        panel.add(pref6Data, gbc);
+
+        pracownikDataPanel.add(panel, Borderlayout.SOUTH-WEST);
+        pracownikDataFrame.setVisible(true);
+    }
+
+    public void setGridBagMaturyLayout(){
+
+    }
+
 }
