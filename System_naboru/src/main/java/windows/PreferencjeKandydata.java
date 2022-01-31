@@ -4,6 +4,8 @@ import datebase.DatebaseInterface;
 import datebase.StatementCreator;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -69,7 +71,7 @@ class SortedListModel extends AbstractListModel {
 }
 
 
-public class PreferencjeKandydata {
+public class PreferencjeKandydata implements ChangeListener {
 
     final int smallPaddingX = 0;
     final int smallPaddingY = 15;
@@ -102,8 +104,8 @@ public class PreferencjeKandydata {
         prepareGUI();
         setGridBagDaneLayout();
         //setGridBagMaturyLayout();
-        //setGridBagPreferencjeLayout();
-        //addSourceElements(new String[] {"Tu", "Beda", "Wypisane", "Kierunki"});
+        setGridBagPreferencjeLayout();
+        addSourceElements(new String[] {"Tu", "Beda", "Wypisane", "Kierunki"});
     }
 
     public void clearlistaKierunkowModel() {
@@ -184,6 +186,7 @@ public class PreferencjeKandydata {
         headerLabelPreferencjekandydata.setSize(700,200);
 
         preferencjeKandydataPane = new JTabbedPane(SwingConstants.LEFT);
+        preferencjeKandydataPane.addChangeListener(this);
         preferencjeKandydataPane.setSize(700,500);
         //preferencjeKandydataPane.setLayout(new FlowLayout());
 
@@ -312,7 +315,7 @@ public class PreferencjeKandydata {
         gbc.gridx = 0;
         gbc.gridy = 0;
         //Do dodania Jlist dual http://www.java2s.com/Tutorials/Java/Swing/JList/Create_a_dual_JList_component_in_Java.htm
-        JPanel leftPanel = new JPanel();
+        JPanel leftPanel = new JPanel(new BorderLayout());
         leftPanel.add(new JLabel("Dostepne kierunki: "), BorderLayout.NORTH);
         leftPanel.add(new JScrollPane(listaKierunkow), BorderLayout.CENTER);
         addButton = new JButton();
@@ -332,7 +335,7 @@ public class PreferencjeKandydata {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JPanel rightPanel = new JPanel();
+        JPanel rightPanel = new JPanel(new BorderLayout());
         rightPanel.add(new JLabel("Wybrane kierunki: "), BorderLayout.NORTH);
         rightPanel.add(new JScrollPane(listaPreferencji), BorderLayout.CENTER);
         removeButton = new JButton();
@@ -368,7 +371,7 @@ public class PreferencjeKandydata {
 
     public void setGridBagMaturyLayout(){
         //Uzupełnienie wyników matur
-        headerLabelPreferencjekandydata.setText("Uzupełnij wyniki matur");
+        headerLabelPreferencjekandydata.setText("Przejrzyj i/lub uzupełnij wyniki matur");
 
         Panel panel = new Panel();
         panel.setSize(500, 300);
@@ -533,5 +536,20 @@ public class PreferencjeKandydata {
         Matura.add(panel);
         preferencjeKandydatFrame.setVisible(true);
 
+    }
+
+    @Override
+    public void stateChanged(ChangeEvent e) {
+        int ind = preferencjeKandydataPane.getSelectedIndex();
+        headerLabelPreferencjekandydata.setText(getMessageForInd(ind));
+    }
+
+    public String getMessageForInd(int index){
+        return switch (index) {
+            case 0 -> "Twoje dane osobowe";
+            case 1 -> "Wybierz kierunki, którymi jesteś zainteresowany";
+            case 2 -> "Przejrzyj i/lub uzupełnij wyniki matur";
+            default -> "Error 404";
+        };
     }
 }
