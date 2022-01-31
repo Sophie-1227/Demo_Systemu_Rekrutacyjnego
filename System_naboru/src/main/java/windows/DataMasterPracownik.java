@@ -100,7 +100,6 @@ public class DataMasterPracownik {
         olimp.add("NIE");
         panel.add(olimp, gbc);
 
-
         pracownikDataPanel.add(panel, BorderLayout.NORTH);
         pracownikDataFrame.setVisible(true);
 

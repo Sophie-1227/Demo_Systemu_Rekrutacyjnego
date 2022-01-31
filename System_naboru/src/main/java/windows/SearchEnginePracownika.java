@@ -16,6 +16,10 @@ import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
 public class SearchEnginePracownika implements ListSelectionListener {
+
+    final int smallYspacing = 20;
+    final int smallXspacing = 50;
+
     private Frame pracownikSearchFrame;
     private Label headerLabelPracownikSearch;
     private Panel pracownikSearchPanel;
@@ -26,7 +30,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
     //deklaracje JTextFieldów
     JTextField pesel, name, sname, nrRej;
-    JScrollPane list;
+    JList<String> list;
     JPanel listPanel;
 
     public SearchEnginePracownika(DatebaseInterface datebase, StatementCreator creator){
@@ -73,64 +77,66 @@ public class SearchEnginePracownika implements ListSelectionListener {
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel nrRejLabel = new JLabel("Numer Rejestracyjny: ");
         panel.add(nrRejLabel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 1;
         gbc.gridy = 0;
         JLabel nameLabel = new JLabel("Imię: ");
         panel.add(nameLabel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 2;
         gbc.gridy = 0;
         JLabel snameLabel = new JLabel("Nazwisko: ");
         panel.add(snameLabel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 3;
         gbc.gridy = 0;
         JLabel peselLabel = new JLabel("Numer PESEL: ");
         panel.add(peselLabel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 1;
         nrRej = new JTextField();
-        nrRej.setPreferredSize(new Dimension(120, 40));
         panel.add(nrRej, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 1;
         gbc.gridy = 1;
         name = new JTextField();
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 2;
         gbc.gridy = 1;
         sname = new JTextField();
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 3;
         gbc.gridy = 1;
         pesel = new JTextField();
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 4;
         gbc.gridy = 1;
         JButton exec = new JButton("Wykonaj");
@@ -151,7 +157,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
 
     public void createPanelList(){
         listPanel = new JPanel();
-        listPanel.setSize(500, 300);
+        listPanel.setSize(600, 500);
         listPanel.setLayout(new BorderLayout(1, 1));
         listPanel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
     }
@@ -160,9 +166,10 @@ public class SearchEnginePracownika implements ListSelectionListener {
         System.out.println("Updating list");
         listPanel.removeAll();
         listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
-        list = new JScrollPane(listaKandydatow);
+
+        list = new JList<>(listaKandydatow);
         list.addListSelectionListener(this);
-        listPanel.add(list, BorderLayout.CENTER);
+        listPanel.add(new JScrollPane(list), BorderLayout.CENTER);
         mainListaPanel.add(listPanel, BorderLayout.CENTER);
         //hackermove
         pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()+1, pracownikSearchFrame.getHeight());
