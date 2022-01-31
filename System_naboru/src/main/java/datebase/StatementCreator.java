@@ -88,6 +88,7 @@ public class StatementCreator {
             statement.setString(2, sname);
             statement.setString(3, pesel);
             datebase.executeQuery(statement, true);
+            datebase.scroll();
             return Integer.parseInt(datebase.receiveCol(1)[0]);
         } catch (SQLException e) {
             e.printStackTrace();

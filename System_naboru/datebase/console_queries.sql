@@ -57,3 +57,4 @@ insert into logkandydaci (IdKandydata) value (415);
 select IdKierunku, NazwaKierunku, KodWydzialu from kierunki;
 
 select * from preferencjekandydata where IdKandydata = 422;
+select NrRejestracyjny from kandydaci where Imie='Flutter' and Nazwisko = 'Shy' and PESEL = '0215420102';
