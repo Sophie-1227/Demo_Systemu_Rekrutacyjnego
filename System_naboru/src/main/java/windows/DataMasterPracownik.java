@@ -1,4 +1,4 @@
-package windows;
+package main.java;
 
 import datebase.DatebaseInterface;
 import datebase.StatementCreator;
