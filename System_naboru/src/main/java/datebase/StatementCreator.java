@@ -225,7 +225,7 @@ public class StatementCreator {
         return datebase.executeQuery(statement, false);
     }
 
-    public String[] getMatchingCandidates(int registrationNumber, String fname, String sname , String PESEL){
+    public String[] getMatchingCandidates(String registrationNumber, String fname, String sname , String PESEL){
         String query = "select * from kandydaci where Imie like ? and Nazwisko like ? and PESEL like ? and NrRejestracyjny like ?;";
         PreparedStatement statement = datebase.prepareQuery(query);
         try {
@@ -237,16 +237,20 @@ public class StatementCreator {
             e.printStackTrace();
         }
 
-        datebase.executeQuery(statement, true);
-        datebase.scroll();
-        ArrayList<String[]> DBanswer = datebase.receiveAnswer(7);
-        String[] matchingList = new String[DBanswer.size()];
-        int i = 0;
-        for (String[] tab: DBanswer) {
-            matchingList[i] = tab[0] + " "+tab[1]+" "+tab[2]+" - "+tab[3];
-            i++;
+        if(datebase.executeQuery(statement, true)){
+            datebase.scroll();
+            ArrayList<String[]> DBanswer = datebase.receiveAnswer(7);
+            String[] matchingList = new String[DBanswer.size()];
+            int i = 0;
+            for (String[] tab: DBanswer) {
+                matchingList[i] = tab[0] + " "+tab[1]+" "+tab[2]+" - "+tab[3];
+                i++;
+            }
+            return matchingList;
+        } else {
+            System.out.println("Coś nie pykło");
+            return null;
         }
-        return matchingList;
     }
 
 

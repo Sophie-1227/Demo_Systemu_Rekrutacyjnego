@@ -1,6 +1,11 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
+import javax.swing.event.ListSelectionEvent;
+import javax.swing.event.ListSelectionListener;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -10,13 +15,22 @@ import java.awt.event.WindowEvent;
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
-public class SearchEnginePracownika {
+public class SearchEnginePracownika implements ListSelectionListener {
     private Frame pracownikSearchFrame;
     private Label headerLabelPracownikSearch;
     private Panel pracownikSearchPanel;
     public String[] listaKandydatow;
+    DatebaseInterface datebase;
+    StatementCreator creator;
 
-    public SearchEnginePracownika(){
+    //deklaracje JTextFieldów
+    JTextField pesel, name, sname, nrRej;
+    JList list;
+    JPanel panel;
+
+    public SearchEnginePracownika(DatebaseInterface datebase, StatementCreator creator){
+        this.datebase = datebase;
+        this.creator = creator;
         prepareLogGUI();
     }
 
@@ -37,6 +51,8 @@ public class SearchEnginePracownika {
         pracownikSearchPanel = new Panel();
         pracownikSearchPanel.setLayout(new FlowLayout());
 
+        createPanelList();
+
         pracownikSearchFrame.add(headerLabelPracownikSearch);
         pracownikSearchFrame.add(pracownikSearchPanel);
         pracownikSearchFrame.setVisible(true);
@@ -55,7 +71,7 @@ public class SearchEnginePracownika {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JTextField nrRej = new JTextField("Numer Rejestracyjny");
+        nrRej = new JTextField("Numer Rejestracyjny");
         nrRej.setPreferredSize(new Dimension(120, 40));
         panel.add(nrRej, gbc);
 
@@ -63,21 +79,21 @@ public class SearchEnginePracownika {
         gbc.ipady = 20;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField name = new JTextField("Imię      ");
+        name = new JTextField("Imię      ");
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        JTextField sname = new JTextField("Nazwisko");
+        sname = new JTextField("Nazwisko");
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
         gbc.gridx = 3;
         gbc.gridy = 0;
-        JTextField pesel = new JTextField("PESEL");
+        pesel = new JTextField("PESEL");
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -92,7 +108,7 @@ public class SearchEnginePracownika {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Wykonanie kweredny sql do wyszukiwania danych kandydata
-                        pracownikSearchFrame.setVisible(false);
+                        updateList();
                     }
                 }
         );
@@ -102,15 +118,28 @@ public class SearchEnginePracownika {
 
     }
 
-    public void CreateList(){
-        JPanel panel = new JPanel();
+    public void createPanelList(){
+        panel = new JPanel();
         panel.setSize(500, 300);
         panel.setLayout(new BorderLayout(1, 1));
 
         panel.add(new JLabel("Wyniki wyszukiwania: "), BorderLayout.NORTH);
-        JList list = new JList(listaKandydatow);
-        panel.add(new list, BorderLayout.CENTER);
+
+    }
+
+    public void updateList(){
+        System.out.println("Updating list");
+        panel.removeAll();
+        listaKandydatow = creator.getMatchingCandidates(nrRej.getText(), name.getText(), sname.getText(), pesel.getText());
+        list = new JList(listaKandydatow);
+        panel.add(list, BorderLayout.CENTER);
         pracownikSearchPanel.add(panel, BorderLayout.CENTER);
     }
 
+    @Override
+    public void valueChanged(ListSelectionEvent e) {
+        String selected = list.getSelectedValue().toString();
+        int idKand = Integer.parseInt(selected.split(" ")[0]);
+        System.out.println(idKand);
+    }
 }
