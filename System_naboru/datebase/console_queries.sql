@@ -77,3 +77,4 @@ union
 select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref6 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja6 = 2
 order by WskaznikPref1 desc, Nazwisko, Imie;
 
+select * from pracownicy where Imie like '%' and Nazwisko like '%' and Jednostka like '%' and IdPracownika like '3%';

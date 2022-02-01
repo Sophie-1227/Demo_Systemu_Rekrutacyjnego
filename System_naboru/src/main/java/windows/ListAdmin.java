@@ -6,6 +6,8 @@ import datebase.StatementCreator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
@@ -36,8 +38,9 @@ public class ListAdmin {
     }
 
     private void prepareGUI(){
-        listAdminFrame = new  JFrame("Tworzenie List");
+        listAdminFrame = new JFrame("Tworzenie List");
         listAdminFrame.setSize(700, 600);
+        listAdminFrame.setVisible(true);
         listAdminFrame.setLayout(new GridLayout(3, 1));
         listAdminFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -57,7 +60,7 @@ public class ListAdmin {
         createPanelList();
 
         listAdminFrame.add(listaAdminLabel);
-        listaAdminPanel.add(listaAdminPanel);
+        listAdminFrame.add(admin)
         listaAdminPanel.add(mainListaPanel);
         listaAdminPanel.setVisible(true);
     }
@@ -115,6 +118,23 @@ public class ListAdmin {
         type.add("Alfabetyczna");
         type.add("Wskaznikiem");
         panel.add(type, gbc);
+
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 3;
+        gbc.gridy = 0;
+        JButton execute = new JButton("Stwórz");
+        panel.add(execute, gbc);
+
+        listaAdminPanel.add(panel);
+
+        execute.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                updateList();
+            }
+        });
     }
 
     public void createPanelList(){

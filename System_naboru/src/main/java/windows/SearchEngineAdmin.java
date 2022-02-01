@@ -37,6 +37,7 @@ public class SearchEngineAdmin implements ListSelectionListener {
         this.datebase = datebase;
         this.creator = creator;
         prepareLogGUI();
+        setGridBagLayout();
     }
 
     private void prepareLogGUI(){
@@ -55,9 +56,12 @@ public class SearchEngineAdmin implements ListSelectionListener {
 
         adminSearchPanel = new Panel();
         adminSearchPanel.setLayout(new FlowLayout());
+        mainListPanel = new Panel(new FlowLayout());
+        createPaneList();;
 
         adminSearchFrame.add(headerLabelAdminSearch);
         adminSearchFrame.add(adminSearchPanel);
+        adminSearchFrame.add(mainListPanel);
 
         JTextField data = new JTextField();
         data.setAlignmentX(350);
@@ -148,8 +152,7 @@ public class SearchEngineAdmin implements ListSelectionListener {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        //Wykonanie kweredny sql do wyszukiwania danych kandydata
-
+                        updateWorkerList(creator.findMatchingWorkers(Id.getText(), name.getText(), sname.getText(), office.getText()));
                     }
                 }
         );
@@ -168,8 +171,7 @@ public class SearchEngineAdmin implements ListSelectionListener {
 
     public void updateWorkerList(String[] contents){
         listPanel.removeAll();
-
-        list = new JList<>(listaPracownikow);
+        list = new JList<>(contents);
         list.addListSelectionListener(this);
         listPanel.add(new JScrollPane(list), BorderLayout.CENTER);
         mainListPanel.add(listPanel, BorderLayout.CENTER);

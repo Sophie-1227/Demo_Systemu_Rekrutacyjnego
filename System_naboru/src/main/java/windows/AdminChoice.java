@@ -109,6 +109,13 @@ public class AdminChoice {
             }
         });
 
+        list.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new ListAdmin(datebase, creator);
+            }
+        });
+
         adminChoicePanel.add(panel);
         adminChoiceFrame.setVisible(true);
     }

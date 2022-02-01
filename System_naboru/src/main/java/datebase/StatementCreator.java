@@ -372,8 +372,8 @@ public class StatementCreator {
         return -1;
     }
 
-    String[] findMatchingWorkers(String id, String name, String sname, String faculty){
-        String query = "select * from pracownicy where Imie like ? and Nazwisko like ? and Jednostka like ? and NrRejestracyjny like ?;";
+    public String[] findMatchingWorkers(String id, String name, String sname, String faculty){
+        String query = "select * from pracownicy where Imie like ? and Nazwisko like ? and Jednostka like ? and IdPracownika like ?;";
         PreparedStatement statement = datebase.prepareQuery(query);
         try {
             statement.setString(1,name += "%");
