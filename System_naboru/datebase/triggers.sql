@@ -269,7 +269,7 @@ BEGIN
                 	end ;
             	ELSEIF n=2 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja2 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -335,7 +335,7 @@ BEGIN
                 	end ;
             	ELSEIF n=3 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja3 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -401,7 +401,7 @@ BEGIN
                 	end ;
             	ELSEIF n=4 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja4 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -467,7 +467,7 @@ BEGIN
                 	end ;
             	ELSEIF n=5 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja5 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -533,7 +533,7 @@ BEGIN
                 	end ;
             	ELSEIF n=6 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja6 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -750,7 +750,7 @@ BEGIN
                 	end ;
             	ELSEIF n=2 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja2 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -816,7 +816,7 @@ BEGIN
                 	end ;
             	ELSEIF n=3 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja3 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -882,7 +882,7 @@ BEGIN
                 	end ;
             	ELSEIF n=4 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja4 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -948,7 +948,7 @@ BEGIN
                 	end ;
             	ELSEIF n=5 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja5 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
@@ -1014,7 +1014,7 @@ BEGIN
                 	end ;
             	ELSEIF n=6 THEN
                 	BEGIN
-                   	SET Id = (SELECT Preferencja1 FROM preferencjekandydata WHERE IdKandydata=i);
+                   	SET Id = (SELECT Preferencja6 FROM preferencjekandydata WHERE IdKandydata=i);
                    	IF(Id IS NOT NULL) THEN
                        	IF(Id = 4 OR Id=5 OR Id=6 OR Id=7 OR Id=8) THEN #Dla W3 całego
                             	#SET pd = max(fiz, chem);
