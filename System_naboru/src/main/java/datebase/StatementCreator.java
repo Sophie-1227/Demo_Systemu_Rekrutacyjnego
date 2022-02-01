@@ -307,6 +307,8 @@ public class StatementCreator {
         }
     }
 
+
+
     public enum UserType{
         CANDIDATE,
         WORKER

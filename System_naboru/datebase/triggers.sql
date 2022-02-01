@@ -247,7 +247,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -312,7 +312,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -377,7 +377,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -442,7 +442,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -507,7 +507,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -572,7 +572,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -722,7 +722,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -787,7 +787,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -852,7 +852,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -917,7 +917,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -982,7 +982,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN
@@ -1047,7 +1047,7 @@ BEGIN
                            	#SET pd = max(fiz, chem, biol);
                            	IF fiz>chem THEN
                                	SET pd = fiz;
-                               	IF pd<biol
+                               	IF pd<biol then
                                	SET pd = biol;
                                	end if;
                             ELSEIF chem>biol THEN

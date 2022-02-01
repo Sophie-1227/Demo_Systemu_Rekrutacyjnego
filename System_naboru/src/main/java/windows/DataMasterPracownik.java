@@ -466,7 +466,7 @@ public class DataMasterPracownik {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
                         //Przeslanie wpisanych wartosci do bazy danych
-                        int[] results = new int[10];
+                        int[] results = new int[11];
                         results[0] = Integer.parseInt(polskiWynik.getText());
                         results[1] = Integer.parseInt(matPodstWynik.getText());
                         results[2] = Integer.parseInt(matRozWynik.getText());
