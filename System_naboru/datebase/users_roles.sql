@@ -62,6 +62,7 @@ grant select on wynikimatur to Worker@localhost;
 grant select on preferencjekandydata to Worker@localhost;
 grant select on kierunki to Worker@localhost;
 grant select on boolwskaznikikierunki to Worker@localhost;
+grant select on wskaznik to Worker@localhost;
 
 grant update on kandydaci to Worker@localhost;
 grant update on wynikimatur to Worker@localhost;

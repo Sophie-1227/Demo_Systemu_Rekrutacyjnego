@@ -6,6 +6,10 @@ import datebase.StatementCreator;
 
 import javax.swing.*;
 import java.awt.*;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.util.ArrayList;
+
 import static javax.swing.JOptionPane.showMessageDialog;
 
 import static java.awt.Font.BOLD;
@@ -34,7 +38,7 @@ public class DataMasterPracownik {
 
     private void prepareGUI(){
         pracownikDataFrame = new JFrame("Dane kandydata");
-        pracownikDataFrame.setSize(700, 500);
+        pracownikDataFrame.setSize(700, 700);
         //pracownikDataFrame.setLayout(new GridLayout(3, 1));
         pracownikDataFrame.setLayout(new BorderLayout());
         pracownikDataFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -165,10 +169,17 @@ public class DataMasterPracownik {
 
     public void setGridBagPreferencjeLayout(){
 
-        String[] prefStr = creator.getPrefferedString(idKand);
-        if(prefStr == null){
-            showMessageDialog(pracownikDataFrame, "Bład przy pobieraniu preferencji");
+        String[] tempPrefStr = creator.getPrefferedString(idKand);
+        ArrayList<Float> pointsTab = creator.getPoints(idKand);
+        if(tempPrefStr == null || pointsTab == null){
+            showMessageDialog(pracownikDataFrame, "Bład przy pobieraniu preferencji i wskazników");
             return;
+        }
+        while(pointsTab.size() < 6) pointsTab.add(null);
+        String[] prefStr = new String[6];
+        for(int i=0; i<6; i++){
+            if(i < tempPrefStr.length) prefStr[i] = tempPrefStr[i];
+            else prefStr[i] = null;
         }
 
         Panel panel = new Panel();
@@ -187,13 +198,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JLabel pref1Wskaznik = new JLabel();
+        JLabel pref1Wskaznik = new JLabel(String.valueOf(pointsTab.get(0)));
         panel.add(pref1Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        JTextField pref1Data = new JTextField(); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
+        JTextField pref1Data = new JTextField(prefStr[0]); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
         panel.add(pref1Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -205,13 +216,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JLabel pref2Wskaznik = new JLabel();
+        JLabel pref2Wskaznik = new JLabel(String.valueOf(pointsTab.get(1)));
         panel.add(pref2Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 1;
-        JTextField pref2Data = new JTextField();
+        JTextField pref2Data = new JTextField(prefStr[1]);
         panel.add(pref2Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -223,13 +234,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 2;
-        JLabel pref3Wskaznik = new JLabel();
+        JLabel pref3Wskaznik = new JLabel(String.valueOf(pointsTab.get(2)));
         panel.add(pref3Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 2;
-        JTextField pref3Data = new JTextField();
+        JTextField pref3Data = new JTextField(prefStr[2]);
         panel.add(pref3Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -241,13 +252,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 3;
-        JLabel pref4Wskaznik = new JLabel();
+        JLabel pref4Wskaznik = new JLabel(String.valueOf(pointsTab.get(3)));
         panel.add(pref4Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        JTextField pref4Data = new JTextField();
+        JTextField pref4Data = new JTextField(prefStr[3]);
         panel.add(pref4Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -259,13 +270,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 4;
-        JLabel pref5Wskaznik = new JLabel();
+        JLabel pref5Wskaznik = new JLabel(String.valueOf(pointsTab.get(4)));
         panel.add(pref5Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 4;
-        JTextField pref5Data = new JTextField();
+        JTextField pref5Data = new JTextField(prefStr[4]);
         panel.add(pref5Data, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -277,13 +288,13 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 5;
-        JLabel pref6Wskaznik = new JLabel();
+        JLabel pref6Wskaznik = new JLabel(String.valueOf(pointsTab.get(5)));
         panel.add(pref6Wskaznik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 5;
-        JTextField pref6Data = new JTextField();
+        JTextField pref6Data = new JTextField(prefStr[5]);
         panel.add(pref6Data, gbc);
 
         pracownikDataPanel.add(panel, BorderLayout.WEST);
@@ -300,11 +311,11 @@ public class DataMasterPracownik {
         panel.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
 
-        String[] maturaResults = creator.getMaturaResults(idKandydata, 11);
+        String[] maturaResults = creator.getMaturaResults(idKand, 11);
 
         //Do dodania pola tekstowe + label do każdego przedmiotu
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady=smallPaddingY;
+        gbc.ipady=smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 0;
         JLabel polski = new JLabel("J.Polski Podstawowy");
@@ -317,7 +328,7 @@ public class DataMasterPracownik {
         panel.add(polskiWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 1;
         JLabel matPodstawa = new JLabel("Matematyka Podstawowa");
@@ -330,7 +341,7 @@ public class DataMasterPracownik {
         panel.add(matPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 2;
         JLabel matRozszerzenie = new JLabel("Matematyka Rozszerzenie");
@@ -343,7 +354,7 @@ public class DataMasterPracownik {
         panel.add(matRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 3;
         JLabel jezykPodstawa = new JLabel("J.Obcy Podstawowy");
@@ -356,7 +367,7 @@ public class DataMasterPracownik {
         panel.add(jezykPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 4;
         JLabel jezykRozszerzenie = new JLabel("J.Obcy Rozszerzenie");
@@ -369,7 +380,7 @@ public class DataMasterPracownik {
         panel.add(jezykRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 5;
         JLabel fizyka = new JLabel("Fizyka");
@@ -382,7 +393,7 @@ public class DataMasterPracownik {
         panel.add(fizykaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 6;
         JLabel chemia = new JLabel("Chemia");
@@ -395,7 +406,7 @@ public class DataMasterPracownik {
         panel.add(chemiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 7;
         JLabel biologia = new JLabel("Biologia");
@@ -408,7 +419,7 @@ public class DataMasterPracownik {
         panel.add(biologiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 8;
         JLabel inf = new JLabel("Informatyka");
@@ -421,7 +432,7 @@ public class DataMasterPracownik {
         panel.add(infWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 9;
         JLabel geo = new JLabel("Geografia");
@@ -434,7 +445,7 @@ public class DataMasterPracownik {
         panel.add(geoWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 10;
         JLabel egzamin = new JLabel("Egzamin z Rysunku");
@@ -447,7 +458,7 @@ public class DataMasterPracownik {
         panel.add(egzaminWynik, gbc);
 
         gbc.fill = GridBagConstraints.SOUTH;
-        gbc.ipady = smallPaddingY;
+        gbc.ipady = smallYspacing;
         gbc.gridy = 11;
         JButton confirm = new JButton("Zatwierdz");
         confirm.addActionListener(
@@ -467,17 +478,17 @@ public class DataMasterPracownik {
                         results[8] = Integer.parseInt(infWynik.getText());
                         results[9] = Integer.parseInt(geoWynik.getText());
                         results[10] = Integer.parseInt(egzaminWynik.getText());
-                        if(creator.updateMaturaResults(results, idKandydata)){
-                            showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano wyniki matur");
+                        if(creator.updateMaturaResults(results, idKand)){
+                            showMessageDialog(pracownikDataFrame, "Poprawnie zaktualizowano wyniki matur");
                         } else{
-                            showMessageDialog(preferencjeKandydatFrame, "Wystąpił błąd podczas aktualizacji wyników matur");
+                            showMessageDialog(pracownikDataFrame, "Wystąpił błąd podczas aktualizacji wyników matur");
                         }
                     }
                 }
         );
 
         panel.add(confirm, gbc);
-        pracownikDataPanel.add(panel);
+        pracownikDataPanel.add(panel, BorderLayout.EAST);
         pracownikDataFrame.setVisible(true);
     }
 

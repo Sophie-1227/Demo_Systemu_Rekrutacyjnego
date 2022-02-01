@@ -166,6 +166,7 @@ public class StatementCreator {
                 PreparedStatement statement = datebase.prepareQuery(query);
                 statement.setInt(1, prefId);
                 if(datebase.executeQuery(statement, true)){
+                    datebase.scroll();
                     String[] row = datebase.receiveRow(6);
                     prefferedStr[i] = row[4] + " " + row[5];
                     i++;
@@ -204,6 +205,35 @@ public class StatementCreator {
             }
             datebase.setAutoscroll(false);
             return fieldsArray;
+        } else{
+            return null;
+        }
+    }
+
+    public ArrayList<Float> getPoints(int idKandydata) {
+        ArrayList<Float> pointsArray = new ArrayList<>();
+        String query = "select * from wskaznik where IdKandydata = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setInt(1, idKandydata);
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(datebase.executeQuery(statement, true)){
+            String[] tempTab;
+            datebase.scroll();
+            datebase.setAutoscroll(true);
+            if( !datebase.isResultNull() && (tempTab = datebase.receiveRow(7)) != null){
+                for(int i = 1; i<= PreferencjeKandydata.max_fields_count; i++){
+                    if( !tempTab[i].equals("null")) {
+                        //System.out.println("Dodano "+tempTab[i]);
+                        pointsArray.add(Float.parseFloat(tempTab[i]));
+                    }
+                    else break;
+                }
+            }
+            datebase.setAutoscroll(false);
+            return pointsArray;
         } else{
             return null;
         }
