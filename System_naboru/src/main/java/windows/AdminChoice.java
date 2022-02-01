@@ -74,8 +74,8 @@ public class AdminChoice {
         gbc.gridx = 1;
         gbc.gridy = 0;
         gbc.gridheight = 20;
-        JButton search = new JButton("Wyszukać pracownika");
-        panel.add(search, gbc);
+        JButton searchWorker = new JButton("Wyszukać pracownika");
+        panel.add(searchWorker, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
@@ -96,11 +96,19 @@ public class AdminChoice {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SearchEngineAdmin sea = new SearchEngineAdmin(datebase, creator);
-                        sea.setGridBagLayout();
+                        new SearchEnginePracownika(datebase, creator);
+                        adminChoiceFrame.dispose();
                     }
                 }
         );
+
+        searchWorker.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                new SearchEngineAdmin(datebase, creator);
+            }
+        });
+
         adminChoicePanel.add(panel);
         adminChoiceFrame.setVisible(true);
     }

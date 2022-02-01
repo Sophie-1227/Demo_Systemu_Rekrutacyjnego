@@ -39,6 +39,7 @@ public class SearchEnginePracownika implements ListSelectionListener {
         this.datebase = datebase;
         this.creator = creator;
         prepareLogGUI();
+        setGridBagLayout();
     }
 
     private void prepareLogGUI(){

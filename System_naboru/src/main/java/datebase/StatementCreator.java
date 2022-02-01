@@ -372,6 +372,33 @@ public class StatementCreator {
         return -1;
     }
 
+    String[] findMatchingWorkers(String id, String name, String sname, String faculty){
+        String query = "select * from pracownicy where Imie like ? and Nazwisko like ? and Jednostka like ? and NrRejestracyjny like ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setString(1,name += "%");
+            statement.setString(2, sname += "%");
+            statement.setString(3, faculty += "%");
+            statement.setString(4, id + "%");
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        if(datebase.executeQuery(statement, true)){
+            ArrayList<String[]> DBanswer = datebase.receiveAnswer(4);
+            String[] matchingList = new String[DBanswer.size()];
+            int i = 0;
+            for (String[] tab: DBanswer) {
+                matchingList[i] = tab[0] + "-" +tab[1]+" "+tab[2]+" - "+tab[3];
+                //System.out.println(matchingList[i]);
+                i++;
+            }
+            return matchingList;
+        } else {
+            System.out.println("Coś nie pykło");
+            return null;
+        }
+    }
+
 
     public enum UserType{
         CANDIDATE,

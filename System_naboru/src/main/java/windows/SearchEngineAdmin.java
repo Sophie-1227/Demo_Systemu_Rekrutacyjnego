@@ -25,6 +25,8 @@ public class SearchEngineAdmin {
     int smallYspacing = 20;
     int smallXspacing = 50;
     JTextField nrRej, pesel, name, sname, Id, office;
+    JScrollPane scrollPane;
+    JList<String> list;
 
     public SearchEngineAdmin(DatebaseInterface datebase, StatementCreator creator) {
         this.datebase = datebase;
@@ -200,6 +202,8 @@ public class SearchEngineAdmin {
             office = new JTextField();
             panel.add(office, gbc);
 
+            gbc.fill = GridBagConstraints.S
+
         }
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -214,13 +218,17 @@ public class SearchEngineAdmin {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         //Wykonanie kweredny sql do wyszukiwania danych kandydata
-                        adminSearchFrame.setVisible(false);
+
                     }
                 }
         );
 
         adminSearchPanel.add(panel);
         adminSearchFrame.setVisible(true);
+
+    }
+
+    private void updateWorkerList(String[] contents){
 
     }
 

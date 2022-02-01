@@ -96,7 +96,6 @@ public class PracownikLog {
                             try {
                                 datebase.startConnection("worker");
                                 SearchEnginePracownika sep = new SearchEnginePracownika(datebase, creator);
-                                sep.setGridBagLayout();
                                 pracownikLogFrame.setVisible(false);
                             } catch (SQLException ex) {
                                 ex.printStackTrace();
