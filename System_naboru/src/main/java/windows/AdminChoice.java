@@ -55,11 +55,18 @@ public class AdminChoice {
         gbc.gridx = 0;
         gbc.gridy = 0;
         gbc.gridheight = 20;
-        JButton search = new JButton("Wyszukać kogoś");
+        JButton search = new JButton("Wyszukać kandydata");
         panel.add(search, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
+        gbc.gridy = 0;
+        gbc.gridheight = 20;
+        JButton search = new JButton("Wyszukać pracownika");
+        panel.add(search, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 2;
         gbc.gridy = 0;
         gbc.gridheight = 20;
         JButton kierunki = new JButton("Edytować kierunki");
@@ -67,7 +74,7 @@ public class AdminChoice {
 
         //Możliwe jak nam się uda aka będzie chciało
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 2;
+        gbc.gridx = 3;
         gbc.gridy = 0;
         gbc.gridheight = 20;
         JButton list = new JButton("Stworzyć listę");
