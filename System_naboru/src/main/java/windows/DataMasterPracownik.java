@@ -79,6 +79,12 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
+        JTextField pesel = new JTextField(candData[3]);
+        panel.add(pesel, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 3;
+        gbc.gridy = 0;
         Choice status = new Choice();
         status.add("Oczekuje na oplate");
         status.add("Zlozono dokumenty");
@@ -98,7 +104,7 @@ public class DataMasterPracownik {
         listPanel.add(ewidencja, gbc);*/
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.gridx = 3;
+        gbc.gridx = 4;
         gbc.gridy = 0;
         Choice olimp = new Choice();
         olimp.add("TAK");
