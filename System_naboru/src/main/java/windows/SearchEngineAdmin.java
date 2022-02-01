@@ -209,15 +209,6 @@ public class SearchEngineAdmin {
                 }
         );
 
-        /*gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
-        gbc.ipadx = 700;
-        gbc.gridx = 0;
-        gbc.gridy = 2;
-        JTextField data = new JTextField("");
-        //data.setPreferredSize(new Dimension(700, 300));
-        listPanel.add(data);*/
-
         adminSearchPanel.add(panel);
         adminSearchFrame.setVisible(true);
 

@@ -326,9 +326,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w2 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w2 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=3 THEN
@@ -391,9 +391,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w3 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w3 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=4 THEN
@@ -456,9 +456,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w4 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w4 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=5 THEN
@@ -521,9 +521,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w5 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w5 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=6 THEN
@@ -586,9 +586,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w6 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w6 = NULL;
                    	end if;
                 	end ;
             	end if ;
@@ -801,9 +801,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w2 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w2 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=3 THEN
@@ -866,9 +866,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w3 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w3 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=4 THEN
@@ -931,9 +931,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w4 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w4 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=5 THEN
@@ -996,9 +996,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w5 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w5 = NULL;
                    	end if;
                 	end ;
             	ELSEIF n=6 THEN
@@ -1061,9 +1061,9 @@ BEGIN
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
-      	                 SET w1 = p + m + pd + e + jo;
+      	                 SET w6 = p + m + pd + e + jo;
                     	ELSE
-                       	SET w1 = NULL;
+                       	SET w6 = NULL;
                    	end if;
                 	end ;
             	end if ;
