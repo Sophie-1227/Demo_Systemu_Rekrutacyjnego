@@ -257,11 +257,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w1 = p + m + pd + e + jo;
+                       	 SET e = 0;
                     	ELSE
                        	SET w1 = NULL;
                    	end if;
@@ -322,11 +323,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w2 = p + m + pd + e + jo;
+                       	 Set e =0;
                     	ELSE
                        	SET w2 = NULL;
                    	end if;
@@ -387,11 +389,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w3 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w3 = NULL;
                    	end if;
@@ -452,11 +455,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w4 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w4 = NULL;
                    	end if;
@@ -517,11 +521,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w5 = p + m + pd + e + jo;
+                       	SET e=0;
                     	ELSE
                        	SET w5 = NULL;
                    	end if;
@@ -582,11 +587,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w6 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w6 = NULL;
                    	end if;
@@ -732,11 +738,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w1 = p + m + pd + e + jo;
+                       	 SET e = 0;
                     	ELSE
                        	SET w1 = NULL;
                    	end if;
@@ -797,11 +804,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w2 = p + m + pd + e + jo;
+                       	 Set e =0;
                     	ELSE
                        	SET w2 = NULL;
                    	end if;
@@ -862,11 +870,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w3 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w3 = NULL;
                    	end if;
@@ -927,11 +936,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w4 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w4 = NULL;
                    	end if;
@@ -992,11 +1002,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w5 = p + m + pd + e + jo;
+                       	SET e=0;
                     	ELSE
                        	SET w5 = NULL;
                    	end if;
@@ -1057,11 +1068,12 @@ BEGIN
                            	end if ;
                       	  ELSEIF (Id = 1) THEN #dla ARC
                            	SET pd = fiz;
-                           	SET e = RAND()*660 + 1;
+                           	SET e = (SELECT EgzaminZRysunku FROM wynikimatur WHERE IdKandydata=i);
                         	ELSE
                            	SET pd = fiz;
                        	end if ;
       	                 SET w6 = p + m + pd + e + jo;
+                       	SET e =0;
                     	ELSE
                        	SET w6 = NULL;
                    	end if;
