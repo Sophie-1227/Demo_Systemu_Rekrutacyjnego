@@ -3,17 +3,25 @@ package dataStoragers;
 public class Field {
     int id;
     String nazwa;
-    String wydzial;
+    String kod;
+    String wydzialKod;
 
-    public Field(int id, String nazwa, String wydzial){
+
+
+    public Field(int id, String nazwa, String wydzial, String kod){
         this.id = id;
         this.nazwa = nazwa;
-        this.wydzial = wydzial;
+        this.wydzialKod = wydzial;
+        this.kod = kod;
     }
 
     @Override
     public String toString(){
-        return nazwa+ " - "+wydzial;
+        return nazwa+ " - "+wydzialKod;
+    }
+
+    public String getKod() {
+        return kod;
     }
 
     public int getId() {
@@ -24,7 +32,7 @@ public class Field {
         return nazwa;
     }
 
-    public String getWydzial() {
-        return wydzial;
+    public String getWydzialKod() {
+        return wydzialKod;
     }
 }
