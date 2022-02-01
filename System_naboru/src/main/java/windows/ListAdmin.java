@@ -112,14 +112,14 @@ public class ListAdmin {
     public void updateList(){
         System.out.println("Updating list");
         listPanel.removeAll();
-        listaKandydatow = creator;
+        //listaKandydatow = creator;
 
         list = new JList<>(listaKandydatow);
         list.addListSelectionListener(this);
         listPanel.add(new JScrollPane(list), BorderLayout.CENTER);
         mainListaPanel.add(listPanel, BorderLayout.CENTER);
         //hackermove
-        pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()+1, pracownikSearchFrame.getHeight());
-        pracownikSearchFrame.setSize(pracownikSearchFrame.getWidth()-1, pracownikSearchFrame.getHeight());
+        listAdminFrame.setSize(listAdminFrame.getWidth()+1, listAdminFrame.getHeight());
+        listAdminFrame.setSize(listAdminFrame.getWidth()-1, listAdminFrame.getHeight());
     }
 }
