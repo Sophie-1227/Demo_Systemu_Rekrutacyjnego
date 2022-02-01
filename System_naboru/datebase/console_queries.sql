@@ -64,3 +64,16 @@ delete from pracownicy where IdPracownika = 29;
 select * from kandydaci where Imie like 'Anna%' and Nazwisko like '%' and PESEL like '%' and NrRejestracyjny like '%';
 update kandydaci set Imie = 'Czesława', Nazwisko = 'Kucharska', PESEL = '2280488244', Status = 'Oczekuje na oplate', Ewidencja = null, CzyOlimpijczyk = 0 where NrRejestracyjny = 60;
 
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref1 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja1 = 2
+union
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref2 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja2 = 2
+union
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref3 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja3 = 2
+union
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref4 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja4 = 2
+union
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref5 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja5 = 2
+union
+select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref6 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja6 = 2
+order by WskaznikPref1 desc, Nazwisko, Imie;
+

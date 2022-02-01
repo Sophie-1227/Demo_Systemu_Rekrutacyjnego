@@ -96,8 +96,9 @@ public class AdminLog {
 
                         try {
                             datebase.startConnection(login.getText(), pass.getText());
-                            adminLogPanel.add(panel);
-                            adminLogFrame.setVisible(true);
+                            new AdminChoice(datebase, creator);
+                            adminLogFrame.dispose();
+
                         } catch (SQLException ex) {
                             System.out.println("Nieprawidłowe dane logowania");
                         }

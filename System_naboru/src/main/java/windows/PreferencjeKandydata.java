@@ -390,10 +390,9 @@ public class PreferencjeKandydata implements ChangeListener {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent actionEvent) {
-                        int fieldsCount = listaPreferencjiModel.getSize();
-                        if(fieldsCount == 0) return;
                         boolean succeeded = true;
-                        for(int i = 1; i<= fieldsCount; i++){
+                        int i = 1;
+                        while(i <= listaPreferencjiModel.getSize()){
                             String fieldStr = (String) listaPreferencjiModel.getElementAt(i-1);
                             for (Field field : allFields) {
                                 if (fieldStr.equals(field.toString())) {
@@ -404,6 +403,14 @@ public class PreferencjeKandydata implements ChangeListener {
                                         showMessageDialog(preferencjeKandydatFrame, "Nie udało się dodać "+field.getNazwa()+ " do listy preferencji");
                                     }
                                 }
+                            }
+                            i++;
+                        }
+                        for(; i<6; i++){
+                            if(creator.updatePreferences(idKandydata, i)){
+                            } else {
+                                succeeded = false;
+                                showMessageDialog(preferencjeKandydatFrame, "Nie udało się wyzerować preferencji nr "+i);
                             }
                         }
                         if(succeeded) showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano preferencje kandydata");

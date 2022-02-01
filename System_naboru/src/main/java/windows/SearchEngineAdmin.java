@@ -1,6 +1,10 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
+import javax.swing.plaf.nimbus.State;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -11,6 +15,10 @@ import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
 public class SearchEngineAdmin {
+
+    DatebaseInterface datebase;
+    StatementCreator creator;
+
     private Frame adminSearchFrame;
     private Label headerLabelAdminSearch;
     private Panel adminSearchPanel;
@@ -18,7 +26,9 @@ public class SearchEngineAdmin {
     int smallXspacing = 50;
     JTextField nrRej, pesel, name, sname, Id, office;
 
-    public SearchEngineAdmin(){
+    public SearchEngineAdmin(DatebaseInterface datebase, StatementCreator creator) {
+        this.datebase = datebase;
+        this.creator = creator;
         prepareLogGUI();
     }
 
@@ -28,7 +38,7 @@ public class SearchEngineAdmin {
         adminSearchFrame.setLayout(new GridLayout(3, 1));
         adminSearchFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
+                adminSearchFrame.dispose();
             }
         });
         Font font = new Font("Modern Love", BOLD & ITALIC, 30);

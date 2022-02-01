@@ -170,6 +170,11 @@ public class StatementCreator {
     }
 
     public boolean updatePreferences(int id, int preferenceNumber, int preference){
+        System.out.print(id);
+        System.out.print(" ");
+        System.out.print(preferenceNumber);
+        System.out.print(" ");
+        System.out.println(preference);
         String pref = "Preferencja"+preferenceNumber;
         String query = "update preferencjekandydata set "+pref+" = ? where IdKandydata = ?;";
         PreparedStatement statement = datebase.prepareQuery(query);
@@ -183,7 +188,7 @@ public class StatementCreator {
         }
     }
 
-    public boolean updatePreference(int id, int preferenceNumber){
+    public boolean updatePreferences(int id, int preferenceNumber){
         String pref = "Preferencja"+preferenceNumber;
         String query = "update preferencjekandydata set "+pref+" = null where IdKandydata = ?;";
         PreparedStatement statement = datebase.prepareQuery(query);
@@ -354,11 +359,16 @@ public class StatementCreator {
     }
 
     public int getFieldId(String facultyCode, String fieldCode){
-        for(Field f: getFieldsInfo()){
+        System.out.println(facultyCode + " " + fieldCode);
+        ArrayList<Field> templist = getFieldsInfo();
+        for(int i=0; i < templist.size(); i++){
+            Field f = templist.get(i);
+            System.out.println("Sprawdzam dla: " +f.getWydzialKod() + " " + f.getKod());
             if(f.getWydzialKod().equals(facultyCode) && f.getKod().equals(fieldCode)){
                 return f.getId();
             }
         }
+        System.out.println("Nie znaleziono");
         return -1;
     }
 

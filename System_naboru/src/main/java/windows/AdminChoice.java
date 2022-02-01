@@ -1,5 +1,8 @@
 package windows;
 
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
@@ -8,12 +11,21 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class AdminChoice {
+
+
+    DatebaseInterface datebase;
+    StatementCreator creator;
+
     private Frame adminChoiceFrame;
     private Label adminChoiceHeaderLabel;
     private Panel adminChoicePanel;
 
-    public AdminChoice(){
+    public AdminChoice(DatebaseInterface datebase, StatementCreator creator) {
+        this.datebase = datebase;
+        this.creator = creator;
         prepareGUI();
+        setGridBagLayout();
+
     }
 
     private void prepareGUI(){
@@ -77,7 +89,7 @@ public class AdminChoice {
                 new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        SearchEngineAdmin sea = new SearchEngineAdmin();
+                        SearchEngineAdmin sea = new SearchEngineAdmin(datebase, creator);
                         sea.setGridBagLayout();
                     }
                 }

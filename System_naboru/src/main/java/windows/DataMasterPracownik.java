@@ -513,23 +513,25 @@ public class DataMasterPracownik implements ActionListener{
 
         //dane dot. preferencji
         for(int i =0; i< preferenceNum; i++){
-            if(prefData[i].getText() == null) {
-                System.out.println("Pusto jak u mnie we łbie");
-                break;
+            if(prefData[i].getText().equals("")) {
+                //System.out.println("wykryto nulla");
+                creator.updatePreferences(idKand, i+1);
+            } else{
+                //System.out.println("wykryto" + prefData[i].getText());
+                String[] temp = prefData[i].getText().split(" ");
+                //System.out.println("Dodawanie "+temp[0]+" "+ temp[1]);
+                int fieldId = creator.getFieldId(temp[0], temp[1]);
+                if( !creator.updatePreferences(idKand, i+1, fieldId)){
+                    succeeded = false;
+                    break;
+                }
             }
-            String[] temp = prefData[i].getText().split(" ");
-            int fieldId = creator.getFieldId(temp[0], temp[1]);
-            if( !creator.updatePreferences(idKand, i+1, fieldId)){
-                succeeded = false;
-                break;
-            };
         }
 
         //dane kandydata
         String name = nameData.getText();
         String sname = snameData.getText();
         String pesel = peselData.getText();
-        String ewid = ewidData.getText();
         String ewidInt = ewidData.getText();
         String status = statusData.getSelectedItem();
         int czyOlimp = 1;
