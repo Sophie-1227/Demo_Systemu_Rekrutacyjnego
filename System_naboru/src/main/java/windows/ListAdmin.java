@@ -40,7 +40,6 @@ public class ListAdmin {
     private void prepareGUI(){
         listAdminFrame = new JFrame("Tworzenie List");
         listAdminFrame.setSize(700, 600);
-        listAdminFrame.setVisible(true);
         listAdminFrame.setLayout(new GridLayout(3, 1));
         listAdminFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
@@ -60,9 +59,10 @@ public class ListAdmin {
         createPanelList();
 
         listAdminFrame.add(listaAdminLabel);
-        listAdminFrame.add(admin)
-        listaAdminPanel.add(mainListaPanel);
+        listAdminFrame.add(listaAdminPanel);
+        listAdminFrame.add(mainListaPanel);
         listaAdminPanel.setVisible(true);
+        listAdminFrame.setVisible(true);
     }
 
     public void setGridBagLayout(){
