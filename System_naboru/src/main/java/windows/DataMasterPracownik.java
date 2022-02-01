@@ -15,9 +15,17 @@ import static javax.swing.JOptionPane.showMessageDialog;
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
-public class DataMasterPracownik {
+public class DataMasterPracownik implements ActionListener{
     final int smallYspacing = 20;
     final int smallXspacing = 50;
+    final int preferenceNum = 6;
+
+    private JTextField polskiWynik, matPodstWynik, matRozWynik, chemiaWynik;
+    private JTextField jezykPodstWynik, fizykaWynik, jezykRozWynik, biologiaWynik, geoWynik;
+    private JTextField nameData, snameData, peselData, infWynik, egzaminWynik, ewidData;
+    private JTextField[] prefData = new JTextField[6];
+
+    Choice olimpData, statusData;
 
     private JFrame pracownikDataFrame;
     private Label headerLabelPracownikData;
@@ -38,7 +46,7 @@ public class DataMasterPracownik {
 
     private void prepareGUI(){
         pracownikDataFrame = new JFrame("Dane kandydata");
-        pracownikDataFrame.setSize(700, 700);
+        pracownikDataFrame.setSize(1000, 700);
         //pracownikDataFrame.setLayout(new GridLayout(3, 1));
         pracownikDataFrame.setLayout(new BorderLayout());
         pracownikDataFrame.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
@@ -97,13 +105,21 @@ public class DataMasterPracownik {
         gbc.ipadx = smallXspacing;
         gbc.gridx = 3;
         gbc.gridy = 0;
+        JLabel ewidencja = new JLabel("Ewidencja: ");
+        panel.add(ewidencja, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
+        gbc.gridx = 4;
+        gbc.gridy = 0;
         JLabel status = new JLabel("Status: ");
         panel.add(status, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = smallYspacing;
         gbc.ipadx = smallXspacing;
-        gbc.gridx = 4;
+        gbc.gridx = 5;
         gbc.gridy = 0;
         JLabel olimp = new JLabel("Czy Olimpijczyk: ");
         panel.add(olimp, gbc);
@@ -112,28 +128,36 @@ public class DataMasterPracownik {
         gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JTextField nameData = new JTextField(candData[1]);
+         nameData = new JTextField(candData[1]);
         panel.add(nameData, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = smallYspacing;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JTextField snameData = new JTextField(candData[2]);
+         snameData = new JTextField(candData[2]);
         panel.add(snameData, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = smallYspacing;
         gbc.gridx = 2;
         gbc.gridy = 1;
-        JTextField peselData = new JTextField(candData[3]);
+         peselData = new JTextField(candData[3]);
         panel.add(peselData, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = smallYspacing;
         gbc.gridx = 3;
         gbc.gridy = 1;
-        Choice statusData = new Choice();
+        ewidData = new JTextField(candData[5]);
+        panel.add(ewidData, gbc);
+
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 4;
+        gbc.gridy = 1;
+        statusData = new Choice();
         statusData.add("Oczekuje na oplate");
         statusData.add("Zlozono dokumenty");
         statusData.add("Przyjety");
@@ -148,14 +172,14 @@ public class DataMasterPracownik {
         /*gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 4;
         gbc.gridy = 0;
-        JTextField ewidencja data = new JTextField("Ewidencja");
+         ewidencja data = new JTextField("Ewidencja");
         listPanel.add(ewidencja, gbc);*/
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = smallYspacing;
-        gbc.gridx = 4;
+        gbc.gridx = 5;
         gbc.gridy = 1;
-        Choice olimpData = new Choice();
+        olimpData = new Choice();
         olimpData.add("TAK");
         olimpData.add("NIE");
         if(candData[6].equals("1")) olimpData.select("TAK");
@@ -204,8 +228,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        JTextField pref1Data = new JTextField(prefStr[0]); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
-        panel.add(pref1Data, gbc);
+         prefData[0] = new JTextField(prefStr[0]); //Wrzucamy w środek kod kierunku i kod wydziału, bo na pełne nazwy nie ma miejsca
+        panel.add(prefData[0], gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -222,8 +246,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 1;
-        JTextField pref2Data = new JTextField(prefStr[1]);
-        panel.add(pref2Data, gbc);
+         prefData[1] = new JTextField(prefStr[1]);
+        panel.add(prefData[1], gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -240,8 +264,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 2;
-        JTextField pref3Data = new JTextField(prefStr[2]);
-        panel.add(pref3Data, gbc);
+         prefData[2] = new JTextField(prefStr[2]);
+        panel.add(prefData[2], gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -258,8 +282,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 3;
-        JTextField pref4Data = new JTextField(prefStr[3]);
-        panel.add(pref4Data, gbc);
+         prefData[3] = new JTextField(prefStr[3]);
+        panel.add(prefData[3], gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -276,8 +300,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 4;
-        JTextField pref5Data = new JTextField(prefStr[4]);
-        panel.add(pref5Data, gbc);
+         prefData[4] = new JTextField(prefStr[4]);
+        panel.add(prefData[4], gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
@@ -294,8 +318,8 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 2;
         gbc.gridy = 5;
-        JTextField pref6Data = new JTextField(prefStr[5]);
-        panel.add(pref6Data, gbc);
+         prefData[5] = new JTextField(prefStr[5]);
+        panel.add(prefData[5], gbc);
 
         pracownikDataPanel.add(panel, BorderLayout.WEST);
         pracownikDataFrame.setVisible(true);
@@ -324,7 +348,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField polskiWynik = new JTextField(maturaResults[1]);
+         polskiWynik = new JTextField(maturaResults[1]);
         panel.add(polskiWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -337,7 +361,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 1;
-        JTextField matPodstWynik = new JTextField(maturaResults[2]);
+         matPodstWynik = new JTextField(maturaResults[2]);
         panel.add(matPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -350,7 +374,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 2;
-        JTextField matRozWynik = new JTextField(maturaResults[3]);
+         matRozWynik = new JTextField(maturaResults[3]);
         panel.add(matRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -363,7 +387,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 3;
-        JTextField jezykPodstWynik = new JTextField(maturaResults[4]);
+         jezykPodstWynik = new JTextField(maturaResults[4]);
         panel.add(jezykPodstWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -376,7 +400,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 4;
-        JTextField jezykRozWynik = new JTextField(maturaResults[5]);
+         jezykRozWynik = new JTextField(maturaResults[5]);
         panel.add(jezykRozWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -389,7 +413,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 5;
-        JTextField fizykaWynik = new JTextField(maturaResults[6]);
+         fizykaWynik = new JTextField(maturaResults[6]);
         panel.add(fizykaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -402,7 +426,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 6;
-        JTextField chemiaWynik = new JTextField(maturaResults[7]);
+         chemiaWynik = new JTextField(maturaResults[7]);
         panel.add(chemiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -415,7 +439,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 7;
-        JTextField biologiaWynik = new JTextField(maturaResults[8]);
+         biologiaWynik = new JTextField(maturaResults[8]);
         panel.add(biologiaWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -428,7 +452,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 8;
-        JTextField infWynik = new JTextField(maturaResults[9]);
+         infWynik = new JTextField(maturaResults[9]);
         panel.add(infWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -441,7 +465,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 9;
-        JTextField geoWynik = new JTextField(maturaResults[10]);
+         geoWynik = new JTextField(maturaResults[10]);
         panel.add(geoWynik, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -454,38 +478,14 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 10;
-        JTextField egzaminWynik = new JTextField(maturaResults[11]);
+         egzaminWynik = new JTextField(maturaResults[11]);
         panel.add(egzaminWynik, gbc);
 
         gbc.fill = GridBagConstraints.SOUTH;
         gbc.ipady = smallYspacing;
         gbc.gridy = 11;
         JButton confirm = new JButton("Zatwierdz");
-        confirm.addActionListener(
-                new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent actionEvent) {
-                        //Przeslanie wpisanych wartosci do bazy danych
-                        int[] results = new int[11];
-                        results[0] = Integer.parseInt(polskiWynik.getText());
-                        results[1] = Integer.parseInt(matPodstWynik.getText());
-                        results[2] = Integer.parseInt(matRozWynik.getText());
-                        results[3] = Integer.parseInt(jezykPodstWynik.getText());
-                        results[4] = Integer.parseInt(jezykRozWynik.getText());
-                        results[5] = Integer.parseInt(fizykaWynik.getText());
-                        results[6] = Integer.parseInt(chemiaWynik.getText());
-                        results[7] = Integer.parseInt(biologiaWynik.getText());
-                        results[8] = Integer.parseInt(infWynik.getText());
-                        results[9] = Integer.parseInt(geoWynik.getText());
-                        results[10] = Integer.parseInt(egzaminWynik.getText());
-                        if(creator.updateMaturaResults(results, idKand)){
-                            showMessageDialog(pracownikDataFrame, "Poprawnie zaktualizowano wyniki matur");
-                        } else{
-                            showMessageDialog(pracownikDataFrame, "Wystąpił błąd podczas aktualizacji wyników matur");
-                        }
-                    }
-                }
-        );
+        confirm.addActionListener(this);
 
         panel.add(confirm, gbc);
         pracownikDataPanel.add(panel, BorderLayout.EAST);
@@ -493,4 +493,59 @@ public class DataMasterPracownik {
     }
 
 
+    @Override
+    public void actionPerformed(ActionEvent e) {
+        boolean succeeded = true;
+
+        //dane dot. matury
+        int[] results = new int[11];
+        results[0] = Integer.parseInt(polskiWynik.getText());
+        results[1] = Integer.parseInt(matPodstWynik.getText());
+        results[2] = Integer.parseInt(matRozWynik.getText());
+        results[3] = Integer.parseInt(jezykPodstWynik.getText());
+        results[4] = Integer.parseInt(jezykRozWynik.getText());
+        results[5] = Integer.parseInt(fizykaWynik.getText());
+        results[6] = Integer.parseInt(chemiaWynik.getText());
+        results[7] = Integer.parseInt(biologiaWynik.getText());
+        results[8] = Integer.parseInt(infWynik.getText());
+        results[9] = Integer.parseInt(geoWynik.getText());
+        results[10] = Integer.parseInt(egzaminWynik.getText());
+
+        //dane dot. preferencji
+        for(int i =0; i< preferenceNum; i++){
+            if(prefData[i].getText() == null) {
+                System.out.println("Pusto jak u mnie we łbie");
+                break;
+            }
+            String[] temp = prefData[i].getText().split(" ");
+            int fieldId = creator.getFieldId(temp[0], temp[1]);
+            if( !creator.updatePreferences(idKand, i+1, fieldId)){
+                succeeded = false;
+                break;
+            };
+        }
+
+        //dane kandydata
+        String name = nameData.getText();
+        String sname = snameData.getText();
+        String pesel = peselData.getText();
+        String ewid = ewidData.getText();
+        String ewidInt = ewidData.getText();
+        String status = statusData.getSelectedItem();
+        int czyOlimp = 1;
+        if(olimpData.getSelectedIndex() == 1) czyOlimp = 0;
+        if(!creator.updateUserInfo(idKand, name, sname, pesel, ewidInt, status, czyOlimp)){
+            succeeded = false;
+        };
+
+        if( !creator.updateMaturaResults(results, idKand, true)){
+            succeeded = false;
+        }
+
+        if(succeeded){
+            showMessageDialog(pracownikDataFrame, "Poprawnie zaktualizowano dane kandydata");
+        } else{
+            showMessageDialog(pracownikDataFrame, "Wystąpił błąd podczas aktualizacji danych");
+        }
+    }
 }

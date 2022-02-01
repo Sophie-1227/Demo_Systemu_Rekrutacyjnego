@@ -579,7 +579,7 @@ public class PreferencjeKandydata implements ChangeListener {
                         results[7] = Integer.parseInt(biologiaWynik.getText());
                         results[8] = Integer.parseInt(infWynik.getText());
                         results[9] = Integer.parseInt(geoWynik.getText());
-                        if(creator.updateMaturaResults(results, idKandydata)){
+                        if(creator.updateMaturaResults(results, idKandydata, false)){
                             showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano wyniki matur");
                         } else{
                           showMessageDialog(preferencjeKandydatFrame, "Wystąpił błąd podczas aktualizacji wyników matur");

@@ -16,7 +16,7 @@ public class ConcreteDatebase implements DatebaseInterface {
 
     @Override
     public PreparedStatement prepareQuery(String query) {
-        System.out.println("Preparing query");
+        //System.out.println("Preparing query");
         PreparedStatement statement = null;
         try {
             statement = dbConnection.prepareStatement(query);
@@ -70,7 +70,7 @@ public class ConcreteDatebase implements DatebaseInterface {
         for(int i=1; i<=colNo; i++){
             try {
                 rowStr.append(currentResult.getString(i));
-                System.out.println(currentResult.getString(i));
+                //System.out.println(currentResult.getString(i));
                 rowStr.append(";;");
             } catch (SQLException e) {
                 System.out.println("Result is empty");
@@ -82,7 +82,7 @@ public class ConcreteDatebase implements DatebaseInterface {
                 if( !currentResult.next()){
                     currentResult.close();
                     currentResult = null;
-                    System.out.println("Zamknięto odpowiedź, bo jest już pusta");
+                    //System.out.println("Zamknięto odpowiedź, bo jest już pusta");
                 }
             } catch (SQLException e) {
                 e.printStackTrace();

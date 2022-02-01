@@ -62,4 +62,5 @@ insert into pracownicy (Imie, Nazwisko, Jednostka) value ('John', 'Wick', 'W11')
 insert into pracownicylogi (IdPracownika ,Login, Haslo) value (30, 'Login', 'Password');
 delete from pracownicy where IdPracownika = 29;
 select * from kandydaci where Imie like 'Anna%' and Nazwisko like '%' and PESEL like '%' and NrRejestracyjny like '%';
+update kandydaci set Imie = 'Czesława', Nazwisko = 'Kucharska', PESEL = '2280488244', Status = 'Oczekuje na oplate', Ewidencja = null, CzyOlimpijczyk = 0 where NrRejestracyjny = 60;
 

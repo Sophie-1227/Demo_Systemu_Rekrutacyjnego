@@ -124,16 +124,43 @@ public class StatementCreator {
         }
     }
 
+    public boolean updateUserInfo(int idKand, String name, String sname, String pesel, String ewidencja, String status, int czyOlimp){
+        String query = "update kandydaci set " +
+                "Imie = ?, " +
+                "Nazwisko = ?, "+
+                "PESEL = ?, "+
+                "Status = ?, "+
+                "Ewidencja = ?, "+
+                "CzyOlimpijczyk = ? "+
+                "where NrRejestracyjny = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setString(1, name);
+            statement.setString(2, sname);
+            statement.setString(3, pesel);
+            statement.setString(4, status);
+            if(ewidencja.equals("null")) {
+                statement.setObject(5, null);
+            } else statement.setString(5, ewidencja);
+            statement.setInt(6, czyOlimp);
+            statement.setInt(7, idKand);
+            if(datebase.executeQuery(statement, false)) return true;
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+       return false;
+    }
+
     public ArrayList<Field> getFieldsInfo(){
         ArrayList<Field> fieldsArray = new ArrayList<>();
-        String query = "select IdKierunku, NazwaKierunku, KodWydzialu from kierunki;";
+        String query = "select IdKierunku, NazwaKierunku, KodWydzialu, KodKierunku from kierunki;";
         PreparedStatement statement = datebase.prepareQuery(query);
         if(datebase.executeQuery(statement, true)){
             String[] tempTab;
             datebase.scroll();
             datebase.setAutoscroll(true);
-            while( !datebase.isResultNull() && (tempTab = datebase.receiveRow(3)) != null){
-                fieldsArray.add(new Field(Integer.parseInt(tempTab[0]),tempTab[1],tempTab[2]));
+            while( !datebase.isResultNull() && (tempTab = datebase.receiveRow(4)) != null){
+                fieldsArray.add(new Field(Integer.parseInt(tempTab[0]),tempTab[1],tempTab[2], tempTab[3]));
             }
             datebase.setAutoscroll(false);
             return fieldsArray;
@@ -149,6 +176,19 @@ public class StatementCreator {
         try {
             statement.setInt(1, preference);
             statement.setInt(2, id);
+            return datebase.executeQuery(statement, false);
+        } catch (SQLException e) {
+            e.printStackTrace();
+            return false;
+        }
+    }
+
+    public boolean updatePreference(int id, int preferenceNumber){
+        String pref = "Preferencja"+preferenceNumber;
+        String query = "update preferencjekandydata set "+pref+" = null where IdKandydata = ?;";
+        PreparedStatement statement = datebase.prepareQuery(query);
+        try {
+            statement.setInt(1, id);
             return datebase.executeQuery(statement, false);
         } catch (SQLException e) {
             e.printStackTrace();
@@ -253,7 +293,8 @@ public class StatementCreator {
         } else return null;
     }
 
-    public boolean updateMaturaResults(int[] results, int idKandydata ){
+    public boolean updateMaturaResults(int[] results, int idKandydata, boolean exam ){
+        int max_ind = 10;
         String query = "update wynikimatur set " +
                 "PolskiPodstawa = ?, "+
                 "MatematykaPodstawa = ?, "+
@@ -264,14 +305,19 @@ public class StatementCreator {
                 "ChemiaRozszezrenie = ?, "+
                 "BiologiaRozszezrenie = ?, "+
                 "InformatykaRozszerzenie = ?, "+
-                "GeografiaRozszerzenie = ? "+
-                "where IdKandydata = ?;";
+                "GeografiaRozszerzenie = ? ";
+        if(exam) {
+            query += ", EgzaminZRysunku = ? ";
+            max_ind = 11;
+        }
+        query += "where IdKandydata = ?;";
+
         PreparedStatement statement = datebase.prepareQuery(query);
         try{
-            for(int i = 0; i<10; i++){
+            for(int i = 0; i<max_ind; i++){
                 statement.setInt(i+1, results[i]);
             }
-            statement.setInt(11, idKandydata);
+            statement.setInt(max_ind+1, idKandydata);
         } catch (SQLException e) {
             e.printStackTrace();
         }
@@ -307,6 +353,14 @@ public class StatementCreator {
         }
     }
 
+    public int getFieldId(String facultyCode, String fieldCode){
+        for(Field f: getFieldsInfo()){
+            if(f.getWydzialKod().equals(facultyCode) && f.getKod().equals(fieldCode)){
+                return f.getId();
+            }
+        }
+        return -1;
+    }
 
 
     public enum UserType{
