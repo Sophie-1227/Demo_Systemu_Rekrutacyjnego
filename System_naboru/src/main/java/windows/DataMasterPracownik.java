@@ -192,7 +192,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel pref1 = new JLabel("1");
+        JLabel pref1 = new JLabel("1    ");
         panel.add(pref1, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -210,7 +210,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 1;
-        JLabel pref2 = new JLabel("2");
+        JLabel pref2 = new JLabel("2    ");
         panel.add(pref2, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -228,7 +228,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 2;
-        JLabel pref3 = new JLabel("3");
+        JLabel pref3 = new JLabel("3    ");
         panel.add(pref3, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -246,7 +246,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 3;
-        JLabel pref4 = new JLabel("4");
+        JLabel pref4 = new JLabel("4    ");
         panel.add(pref4, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -264,7 +264,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 4;
-        JLabel pref5 = new JLabel("5");
+        JLabel pref5 = new JLabel("5    ");
         panel.add(pref5, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -282,7 +282,7 @@ public class DataMasterPracownik {
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 0;
         gbc.gridy = 5;
-        JLabel pref6 = new JLabel("6");
+        JLabel pref6 = new JLabel("6    ");
         panel.add(pref6, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
