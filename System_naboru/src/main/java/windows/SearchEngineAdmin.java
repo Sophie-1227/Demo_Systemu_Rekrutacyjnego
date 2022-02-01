@@ -14,6 +14,9 @@ public class SearchEngineAdmin {
     private Frame adminSearchFrame;
     private Label headerLabelAdminSearch;
     private Panel adminSearchPanel;
+    int smallYspacing = 20;
+    int smallXspacing = 50;
+    JTextField nrRej, pesel, name, sname, Id, office;
 
     public SearchEngineAdmin(){
         prepareLogGUI();
@@ -65,7 +68,7 @@ public class SearchEngineAdmin {
         //type.setPreferredSize(new Dimension(70, 40));
         panel.add(type, gbc);
 
-        if(type.getSelectedIndex()){
+        if(type.getSelectedIndex() == 1){
             //Search for Kandydat
             gbc.fill = GridBagConstraints.HORIZONTAL;
             gbc.ipady = smallYspacing;
