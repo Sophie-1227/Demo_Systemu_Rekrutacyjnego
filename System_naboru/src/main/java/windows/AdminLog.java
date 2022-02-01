@@ -104,6 +104,7 @@ public class AdminLog {
                     }
                 }
         );
+        adminLogPanel.add(panel);
+        adminLogFrame.setVisible(true);
     }
-
 }
