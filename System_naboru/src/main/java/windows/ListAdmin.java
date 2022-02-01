@@ -1,8 +1,22 @@
 package windows;
 
+
+import datebase.DatebaseInterface;
+import datebase.StatementCreator;
+
+import javax.swing.*;
+import java.awt.*;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
+
+import static java.awt.Font.BOLD;
+import static java.awt.Font.ITALIC;
+
 public class ListAdmin {
-    DatabaseInterface database;
-    StatmentCreator creator;
+    DatebaseInterface database;
+    StatementCreator creator;
+
+    final int smallYspacing = 20;
 
     private JFrame listAdminFrame;
     private JLabel listaAdminLabel;
@@ -13,8 +27,9 @@ public class ListAdmin {
     JTextField fieldCode, facultyCode;
     Choice type;
     JPanel listPanel;
+    JList list;
 
-    public ListaAdmin(){
+    public ListAdmin(DatebaseInterface database, StatementCreator creator){
         this.database = database;
         this.creator = creator;
         prepareGUI();
@@ -22,17 +37,17 @@ public class ListAdmin {
 
     private void prepareGUI(){
         listAdminFrame = new  JFrame("Tworzenie List");
-        listaAdminFrame.setSize(700, 600);
-        listaAdminFrame.setLayout(new GridLayout(3, 1));
-        listaAdminFrame.addWindowListener(new WindowAdapter() {
+        listAdminFrame.setSize(700, 600);
+        listAdminFrame.setLayout(new GridLayout(3, 1));
+        listAdminFrame.addWindowListener(new WindowAdapter() {
             public void windowClosing(WindowEvent windowEvent){
-                System.exit(0);
+                listAdminFrame.dispose();
             }
         });
         Font font = new Font("Modern Love", BOLD & ITALIC, 30);
         listaAdminLabel = new JLabel();
         listaAdminLabel.setSize(700,200);
-        listaAdminLabel.setAlignment(Label.CENTER);
+        listaAdminLabel.setAlignmentX(Label.CENTER);
         listaAdminLabel.setFont(font);
 
         listaAdminPanel = new JPanel();
@@ -41,14 +56,14 @@ public class ListAdmin {
         mainListaPanel.setLayout(new FlowLayout());
         createPanelList();
 
-        listaAdminFrame.add(listaAdminLabel);
-        listaAdminFrame.add(listaAdminPanel);
-        listaAdminFrame.add(mainListaPanel);
-        listaAdminFrame.setVisible(true);
+        listAdminFrame.add(listaAdminLabel);
+        listaAdminPanel.add(listaAdminPanel);
+        listaAdminPanel.add(mainListaPanel);
+        listaAdminPanel.setVisible(true);
     }
 
     public void setGridBagLayout(){
-        listaAdminlabel.setText("Wpisz nazwe kierunku do stworzenia listy i typ listy");
+        listaAdminLabel.setText("Wpisz nazwe kierunku do stworzenia listy i typ listy");
 
         Panel panel = new Panel();
         panel.setSize(700, 100);
@@ -99,7 +114,7 @@ public class ListAdmin {
         type = new Choice();
         type.add("Alfabetyczna");
         type.add("Wskaznikiem");
-        panel.add(type, gbc)
+        panel.add(type, gbc);
     }
 
     public void createPanelList(){
@@ -110,12 +125,11 @@ public class ListAdmin {
     }
 
     public void updateList(){
-        System.out.println("Updating list");
+        //System.out.println("Updating list");
         listPanel.removeAll();
-        //listaKandydatow = creator;
-
+        boolean ranked = type.getSelectedItem().equals("Wskaznikiem");
+        listaKandydatow = creator.generateCandidateList(facultyCode.getText(), fieldCode.getText(), ranked);
         list = new JList<>(listaKandydatow);
-        list.addListSelectionListener(this);
         listPanel.add(new JScrollPane(list), BorderLayout.CENTER);
         mainListaPanel.add(listPanel, BorderLayout.CENTER);
         //hackermove

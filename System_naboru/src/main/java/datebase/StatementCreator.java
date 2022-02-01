@@ -399,6 +399,48 @@ public class StatementCreator {
         }
     }
 
+    public String[] generateCandidateList(String facultyCode, String fieldCode, boolean isRanking){
+        String query = "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref1 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja1 = ?\n" +
+                "union\n" +
+                "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref2 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja2 = ?\n" +
+                "union\n" +
+                "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref3 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja3 = ?\n" +
+                "union\n" +
+                "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref4 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja4 = ?\n" +
+                "union\n" +
+                "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref5 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja5 = ?\n" +
+                "union\n" +
+                "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref6 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja6 = ?\n" +
+                "order by ";
+        if(isRanking) query += "WskaznikPref1 desc, ";
+        query += "Nazwisko, Imie;";
+
+        PreparedStatement statement = datebase.prepareQuery(query);
+
+        int fieldInt = getFieldId(facultyCode, fieldCode);
+        for(int i=0; i<6; i++) {
+            try {
+                statement.setInt(i, fieldInt);
+            } catch (SQLException e) {
+                e.printStackTrace();
+            }
+        }
+        if(datebase.executeQuery(statement, true)){
+            ArrayList<String[]> DBanswer = datebase.receiveAnswer(4);
+            String[] matchingList = new String[DBanswer.size()];
+            int i = 0;
+            for (String[] tab: DBanswer) {
+                matchingList[i] = tab[0] + "-" +tab[1]+" "+tab[2]+" - "+tab[3];
+                //System.out.println(matchingList[i]);
+                i++;
+            }
+            return matchingList;
+        } else {
+            System.out.println("Could not make a list");
+            return null;
+        }
+    }
+
 
     public enum UserType{
         CANDIDATE,

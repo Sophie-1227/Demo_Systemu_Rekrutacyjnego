@@ -202,8 +202,6 @@ public class SearchEngineAdmin {
             office = new JTextField();
             panel.add(office, gbc);
 
-            gbc.fill = GridBagConstraints.S
-
         }
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
