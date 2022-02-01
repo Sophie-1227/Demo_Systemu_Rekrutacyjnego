@@ -13,6 +13,9 @@ import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
 
 public class DataMasterPracownik {
+    final int smallYspacing = 20;
+    final int smallXspacing = 50;
+
     private JFrame pracownikDataFrame;
     private Label headerLabelPracownikData;
     private Panel pracownikDataPanel;
@@ -64,38 +67,80 @@ public class DataMasterPracownik {
         GridBagConstraints gbc = new GridBagConstraints();
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JTextField name = new JTextField(candData[1]);
-        //name.setPreferredSize(new Dimension(120, 20));
+        JLabel name = new JLabel("Imię: ");
         panel.add(name, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField sname = new JTextField(candData[2]);
+        JLabel sname = new JLabel("Nazwisko: ");
         panel.add(sname, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 2;
         gbc.gridy = 0;
-        JTextField pesel = new JTextField(candData[3]);
+        JLabel pesel = new JLabel("PESEL: ");
         panel.add(pesel, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
         gbc.gridx = 3;
         gbc.gridy = 0;
-        Choice status = new Choice();
-        status.add("Oczekuje na oplate");
-        status.add("Zlozono dokumenty");
-        status.add("Przyjety");
-        status.add("Odrzucony");
-        status.add("Nieprzyjety");
-        status.add("Wniesiono oplate");
-        status.add("Zakwalifikowany do przyjecia");
-        status.select(candData[4]);
-        //type.setPreferredSize(new Dimension(70, 40));
+        JLabel status = new JLabel("Status: ");
         panel.add(status, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.ipadx = smallXspacing;
+        gbc.gridx = 4;
+        gbc.gridy = 0;
+        JLabel olimp = new JLabel("Nazwisko: ");
+        panel.add(olimp, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JTextField nameData = new JTextField(candData[1]);
+        panel.add(nameData, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JTextField snameData = new JTextField(candData[2]);
+        panel.add(snameData, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 2;
+        gbc.gridy = 1;
+        JTextField peselData = new JTextField(candData[3]);
+        panel.add(peselData, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
+        gbc.gridx = 3;
+        gbc.gridy = 1;
+        Choice statusData = new Choice();
+        statusData.add("Oczekuje na oplate");
+        statusData.add("Zlozono dokumenty");
+        statusData.add("Przyjety");
+        statusData.add("Odrzucony");
+        statusData.add("Nieprzyjety");
+        statusData.add("Wniesiono oplate");
+        statusData.add("Zakwalifikowany do przyjecia");
+        statusData.select(candData[4]);
+        //type.setPreferredSize(new Dimension(70, 40));
+        panel.add(statusData, gbc);
 
         /*gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 4;
@@ -104,14 +149,15 @@ public class DataMasterPracownik {
         listPanel.add(ewidencja, gbc);*/
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallYspacing;
         gbc.gridx = 4;
-        gbc.gridy = 0;
-        Choice olimp = new Choice();
-        olimp.add("TAK");
-        olimp.add("NIE");
-        if(candData[6].equals("1")) olimp.select("TAK");
-        else olimp.select("NIE");
-        panel.add(olimp, gbc);
+        gbc.gridy = 1;
+        Choice olimpData = new Choice();
+        olimpData.add("TAK");
+        olimpData.add("NIE");
+        if(candData[6].equals("1")) olimpData.select("TAK");
+        else olimpData.select("NIE");
+        panel.add(olimpData, gbc);
 
         pracownikDataPanel.add(panel, BorderLayout.NORTH);
         pracownikDataFrame.setVisible(true);
