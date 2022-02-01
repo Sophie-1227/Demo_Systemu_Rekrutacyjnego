@@ -102,7 +102,7 @@ public class DataMasterPracownik {
         gbc.ipadx = smallXspacing;
         gbc.gridx = 4;
         gbc.gridy = 0;
-        JLabel olimp = new JLabel("Nazwisko: ");
+        JLabel olimp = new JLabel("Czy Olimpijczyk: ");
         panel.add(olimp, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
@@ -294,17 +294,185 @@ public class DataMasterPracownik {
         panel.setLayout(layout);
         GridBagConstraints gbc = new GridBagConstraints();
 
+        String[] maturaResults = creator.getMaturaResults(idKandydata, 11);
+
+        //Do dodania pola tekstowe + label do każdego przedmiotu
         gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady=smallPaddingY;
         gbc.gridx = 0;
         gbc.gridy = 0;
-        JLabel polski = new JLabel("Język Polski: ");
+        JLabel polski = new JLabel("J.Polski Podstawowy");
         panel.add(polski, gbc);
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.gridx = 1;
         gbc.gridy = 0;
-        JTextField polskiWynik = new JTextField();
+        JTextField polskiWynik = new JTextField(maturaResults[1]);
         panel.add(polskiWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 1;
+        JLabel matPodstawa = new JLabel("Matematyka Podstawowa");
+        panel.add(matPodstawa, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 1;
+        JTextField matPodstWynik = new JTextField(maturaResults[2]);
+        panel.add(matPodstWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 2;
+        JLabel matRozszerzenie = new JLabel("Matematyka Rozszerzenie");
+        panel.add(matRozszerzenie, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 2;
+        JTextField matRozWynik = new JTextField(maturaResults[3]);
+        panel.add(matRozWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 3;
+        JLabel jezykPodstawa = new JLabel("J.Obcy Podstawowy");
+        panel.add(jezykPodstawa, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 3;
+        JTextField jezykPodstWynik = new JTextField(maturaResults[4]);
+        panel.add(jezykPodstWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 4;
+        JLabel jezykRozszerzenie = new JLabel("J.Obcy Rozszerzenie");
+        panel.add(jezykRozszerzenie, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 4;
+        JTextField jezykRozWynik = new JTextField(maturaResults[5]);
+        panel.add(jezykRozWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 5;
+        JLabel fizyka = new JLabel("Fizyka");
+        panel.add(fizyka, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 5;
+        JTextField fizykaWynik = new JTextField(maturaResults[6]);
+        panel.add(fizykaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 6;
+        JLabel chemia = new JLabel("Chemia");
+        panel.add(chemia, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 6;
+        JTextField chemiaWynik = new JTextField(maturaResults[7]);
+        panel.add(chemiaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 7;
+        JLabel biologia = new JLabel("Biologia");
+        panel.add(biologia, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 7;
+        JTextField biologiaWynik = new JTextField(maturaResults[8]);
+        panel.add(biologiaWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 8;
+        JLabel inf = new JLabel("Informatyka");
+        panel.add(inf, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 8;
+        JTextField infWynik = new JTextField(maturaResults[9]);
+        panel.add(infWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 9;
+        JLabel geo = new JLabel("Geografia");
+        panel.add(geo, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 9;
+        JTextField geoWynik = new JTextField(maturaResults[10]);
+        panel.add(geoWynik, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.ipady = smallPaddingY;
+        gbc.gridx = 0;
+        gbc.gridy = 10;
+        JLabel egzamin = new JLabel("Egzamin z Rysunku");
+        panel.add(egzamin, gbc);
+
+        gbc.fill = GridBagConstraints.HORIZONTAL;
+        gbc.gridx = 1;
+        gbc.gridy = 10;
+        JTextField egzaminWynik = new JTextField(maturaResults[11]);
+        panel.add(egzaminWynik, gbc);
+
+        gbc.fill = GridBagConstraints.SOUTH;
+        gbc.ipady = smallPaddingY;
+        gbc.gridy = 11;
+        JButton confirm = new JButton("Zatwierdz");
+        confirm.addActionListener(
+                new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent actionEvent) {
+                        //Przeslanie wpisanych wartosci do bazy danych
+                        int[] results = new int[10];
+                        results[0] = Integer.parseInt(polskiWynik.getText());
+                        results[1] = Integer.parseInt(matPodstWynik.getText());
+                        results[2] = Integer.parseInt(matRozWynik.getText());
+                        results[3] = Integer.parseInt(jezykPodstWynik.getText());
+                        results[4] = Integer.parseInt(jezykRozWynik.getText());
+                        results[5] = Integer.parseInt(fizykaWynik.getText());
+                        results[6] = Integer.parseInt(chemiaWynik.getText());
+                        results[7] = Integer.parseInt(biologiaWynik.getText());
+                        results[8] = Integer.parseInt(infWynik.getText());
+                        results[9] = Integer.parseInt(geoWynik.getText());
+                        results[10] = Integer.parseInt(egzaminWynik.getText());
+                        if(creator.updateMaturaResults(results, idKandydata)){
+                            showMessageDialog(preferencjeKandydatFrame, "Poprawnie zaktualizowano wyniki matur");
+                        } else{
+                            showMessageDialog(preferencjeKandydatFrame, "Wystąpił błąd podczas aktualizacji wyników matur");
+                        }
+                    }
+                }
+        );
+
+        panel.add(confirm, gbc);
+        pracownikDataPanel.add(panel);
+        pracownikDataFrame.setVisible(true);
     }
 
 
