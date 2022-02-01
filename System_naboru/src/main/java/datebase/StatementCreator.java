@@ -156,6 +156,29 @@ public class StatementCreator {
         }
     }
 
+    public String[] getPrefferedString(int idKandydata){
+        ArrayList<Integer> prefferedInt = getPrefferedInfo(idKandydata);
+        String[] prefferedStr = new String[prefferedInt.size()];
+        String query = "select * from kierunki where IdKierunku = ?;";
+        int i = 0;
+        try{
+            for(int prefId: prefferedInt){
+                PreparedStatement statement = datebase.prepareQuery(query);
+                statement.setInt(1, prefId);
+                if(datebase.executeQuery(statement, true)){
+                    String[] row = datebase.receiveRow(6);
+                    prefferedStr[i] = row[4] + " " + row[5];
+                    i++;
+                } else {
+                    return null;
+                }
+            }
+        } catch (SQLException e) {
+            e.printStackTrace();
+        }
+        return prefferedStr;
+    }
+
     public ArrayList<Integer> getPrefferedInfo(int idKandydata) {
         ArrayList<Integer> fieldsArray = new ArrayList<>();
         String query = "select * from preferencjekandydata where IdKandydata = ?;";

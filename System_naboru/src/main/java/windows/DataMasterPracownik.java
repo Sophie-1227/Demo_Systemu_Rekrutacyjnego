@@ -6,8 +6,7 @@ import datebase.StatementCreator;
 
 import javax.swing.*;
 import java.awt.*;
-import java.awt.event.WindowAdapter;
-import java.awt.event.WindowEvent;
+import static javax.swing.JOptionPane.showMessageDialog;
 
 import static java.awt.Font.BOLD;
 import static java.awt.Font.ITALIC;
@@ -165,6 +164,13 @@ public class DataMasterPracownik {
     }
 
     public void setGridBagPreferencjeLayout(){
+
+        String[] prefStr = creator.getPrefferedString(idKand);
+        if(prefStr == null){
+            showMessageDialog(pracownikDataFrame, "Bład przy pobieraniu preferencji");
+            return;
+        }
+
         Panel panel = new Panel();
         panel.setSize(350, 400);
         GridBagLayout layout = new GridBagLayout();
