@@ -65,36 +65,129 @@ public class SearchEngineAdmin {
         //type.setPreferredSize(new Dimension(70, 40));
         panel.add(type, gbc);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
-        gbc.gridx = 1;
-        gbc.gridy = 0;
-        JTextField nrRej = new JTextField("Id");
-        nrRej.setPreferredSize(new Dimension(120, 40));
-        panel.add(nrRej, gbc);
+        if(type.getSelectedIndex()){
+            //Search for Kandydat
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            JLabel nrRejLabel = new JLabel("Numer Rejestracyjny: ");
+            panel.add(nrRejLabel, gbc);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
-        gbc.gridx = 2;
-        gbc.gridy = 0;
-        JTextField name = new JTextField("Imię      ");
-        name.setPreferredSize(new Dimension(120, 40));
-        panel.add(name, gbc);
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            JLabel nameLabel = new JLabel("Imię: ");
+            panel.add(nameLabel, gbc);
 
-        gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        JTextField sname = new JTextField("Nazwisko");
-        sname.setPreferredSize(new Dimension(120, 40));
-        panel.add(sname, gbc);
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 2;
+            gbc.gridy = 0;
+            JLabel snameLabel = new JLabel("Nazwisko: ");
+            panel.add(snameLabel, gbc);
 
-        /*gbc.fill = GridBagConstraints.HORIZONTAL;
-        gbc.ipady = 20;
-        gbc.gridx = 3;
-        gbc.gridy = 0;
-        JTextField pesel = new JTextField("PESEL");
-        listPanel.add(pesel, gbc);*/
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 3;
+            gbc.gridy = 0;
+            JLabel peselLabel = new JLabel("Numer PESEL: ");
+            panel.add(peselLabel, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            nrRej = new JTextField();
+            panel.add(nrRej, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            name = new JTextField();
+            panel.add(name, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 2;
+            gbc.gridy = 1;
+            sname = new JTextField();
+            panel.add(sname, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 3;
+            gbc.gridy = 1;
+            pesel = new JTextField();
+            panel.add(pesel, gbc);
+        }else {
+            //Search for Pracownik
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 0;
+            gbc.gridy = 0;
+            JLabel IdWorkerLabel = new JLabel("Id Pracownika: ");
+            panel.add(IdWorkerLabel, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 1;
+            gbc.gridy = 0;
+            JLabel nameLabel = new JLabel("Imię: ");
+            panel.add(nameLabel, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 2;
+            gbc.gridy = 0;
+            JLabel snameLabel = new JLabel("Nazwisko: ");
+            panel.add(snameLabel, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.ipadx = smallXspacing;
+            gbc.gridx = 3;
+            gbc.gridy = 0;
+            JLabel officeLabel = new JLabel("Jednostka: ");
+            panel.add(officeLabel, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 0;
+            gbc.gridy = 1;
+            Id = new JTextField();
+            panel.add(Id, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 1;
+            gbc.gridy = 1;
+            name = new JTextField();
+            panel.add(name, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 2;
+            gbc.gridy = 1;
+            sname = new JTextField();
+            panel.add(sname, gbc);
+
+            gbc.fill = GridBagConstraints.HORIZONTAL;
+            gbc.ipady = smallYspacing;
+            gbc.gridx = 3;
+            gbc.gridy = 1;
+            office = new JTextField();
+            panel.add(office, gbc);
+
+        }
 
         gbc.fill = GridBagConstraints.HORIZONTAL;
         gbc.ipady = 20;
