@@ -359,12 +359,12 @@ public class StatementCreator {
     }
 
     public int getFieldId(String facultyCode, String fieldCode){
-        System.out.println(facultyCode + " " + fieldCode);
+        System.out.println(facultyCode + fieldCode);
         ArrayList<Field> templist = getFieldsInfo();
-        for(int i=0; i < templist.size(); i++){
-            Field f = templist.get(i);
-            System.out.println("Sprawdzam dla: " +f.getWydzialKod() + " " + f.getKod());
-            if(f.getWydzialKod().equals(facultyCode) && f.getKod().equals(fieldCode)){
+        String toCheck = facultyCode + fieldCode;
+        for (Field f : templist) {
+            System.out.println("Sprawdzam dla: " + f.getWydzialKod()+ f.getKod());
+            if ((f.getWydzialKod()+f.getKod()).equals(toCheck)) {
                 return f.getId();
             }
         }
@@ -400,6 +400,10 @@ public class StatementCreator {
     }
 
     public String[] generateCandidateList(String facultyCode, String fieldCode, boolean isRanking){
+        return generateCandidateList(getFieldId(facultyCode, fieldCode), isRanking);
+    }
+
+    public String[] generateCandidateList(int fieldId, boolean isRanking){
         String query = "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref1 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja1 = ?\n" +
                 "union\n" +
                 "select k.NrRejestracyjny, k.Imie, k.Nazwisko, w.WskaznikPref2 from kandydaci k join wskaznik w on k.NrRejestracyjny = w.IdKandydata join preferencjekandydata p on k.NrRejestracyjny = p.IdKandydata where Preferencja2 = ?\n" +
@@ -417,10 +421,9 @@ public class StatementCreator {
 
         PreparedStatement statement = datebase.prepareQuery(query);
 
-        int fieldInt = getFieldId(facultyCode, fieldCode);
-        for(int i=0; i<6; i++) {
+        for(int i=1; i<=6; i++) {
             try {
-                statement.setInt(i, fieldInt);
+                statement.setInt(i, fieldId);
             } catch (SQLException e) {
                 e.printStackTrace();
             }

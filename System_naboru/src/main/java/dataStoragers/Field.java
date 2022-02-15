@@ -6,8 +6,6 @@ public class Field {
     String kod;
     String wydzialKod;
 
-
-
     public Field(int id, String nazwa, String wydzial, String kod){
         this.id = id;
         this.nazwa = nazwa;
